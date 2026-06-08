@@ -1,8 +1,8 @@
 ## ER図のFigmaのURL
-https://www.figma.com/design/pWOsC4IeGHRfEaOLwnz1Lr/2026_6_4_%E3%83%89%E3%83%AD%E3%83%BC%E3%83%B3%E7%AE%A1%E7%90%86%E3%82%A2%E3%83%97%E3%83%AA_ER%E5%9B%B3?node-id=0-1&t=AJEWBIYJivBG3rEE-1
+https://www.figma.com/design/pWOsC4IeGHRfEaOLwnz1Lr/2026_6_8%E6%9B%B4%E6%96%B0_%E3%83%89%E3%83%AD%E3%83%BC%E3%83%B3%E7%AE%A1%E7%90%86%E3%82%A2%E3%83%97%E3%83%AA_ER%E5%9B%B3?node-id=125-1159&t=wdqX07DOyhTOOUmm-1
 
 ## ER図のスクリーンショット
-[![Image from Gyazo](https://i.gyazo.com/9078b7ff971389744ed71f2c0cf47a80.png)](https://gyazo.com/9078b7ff971389744ed71f2c0cf47a80)
+[![Image from Gyazo](https://i.gyazo.com/93e50422c9577be81c781661c3a6493e.png)](https://gyazo.com/93e50422c9577be81c781661c3a6493e)
 
 
 ## 画面遷移図の FigmaのURL 
