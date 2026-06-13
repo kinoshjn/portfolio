@@ -1,10 +1,11 @@
-  <div class="wrapper">
+<turbo-frame id="main_content"> 
+ <div class="wrapper">
 
     <div class="box1 overflow-x-auto">
     <!-- box1貼り付け部 -->
       <side_board>
         <ul class="side_board-nav font-english">
-          <li><a href="#">機体一覧</a></li>
+          <li><%= link_to "機体一覧", aircraft_list_path, data: { turbo_frame: "main_content" } %></li>
           <li><a href="#">飛行日誌一覧</a></li>
           <li><a href="#">日常点検一覧</a></li>
           <li><a href="#">点検整備一覧</a></li>
@@ -72,3 +73,4 @@
       </table>
     </div>
   </div>
+</turbo-frame>

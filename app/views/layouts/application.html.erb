@@ -9,7 +9,7 @@
     <!-- 未ログインの場合とログイン中の場合で表示する画面のcssを切り替えて使っている -->
     <!--  if current_user      実際はこのように修正必要-->
 
-    <% if false %>
+    <% if true %>
       <%= stylesheet_link_tag "static_pages", "data-turbo-track": "reload" %>
       <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <% else %>
@@ -34,9 +34,9 @@
 
   </head>
 
-  <body style="<%= false ? 'margin: 0 !important; padding: 0 !important; display: block !important; height: auto !important;' : 'margin: 0; padding: 0; min-height: 100vh;' %>">
+  <body style="<%=  true ? 'margin: 0 !important; padding: 0 !important; display: block !important; height: auto !important;' : 'margin: 0; padding: 0; min-height: 100vh;' %>">
 
-    <% if false %>
+    <% if true %>
 
       <div style="display: flow-root; width: 100%; margin: 0 !important; padding: 0 !important;">
         <%= render "layouts/header" %>

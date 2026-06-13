@@ -1,4 +1,4 @@
 class StaticPagesController < ApplicationController
-  def index
+  def aircraft_list_index
   end
 end

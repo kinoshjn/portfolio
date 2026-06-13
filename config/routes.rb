@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
+  root "static_pages#aircraft_list_index"
 
-  root "static_pages#index"
+  get "aircraft_list", to: "static_pages#aircraft_list_index"
+
 end
