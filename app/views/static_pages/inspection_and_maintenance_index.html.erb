@@ -1,5 +1,5 @@
 <turbo-frame id="main_content"> 
- <div class="wrapper">
+  <div class="wrapper">
 
     <div class="box1 overflow-x-auto">
     <!-- box1貼り付け部 -->
@@ -22,7 +22,8 @@
     <div class="box2 overflow-x-auto">
     <!-- box2貼り付け部 -->
         <ul class="main-nav font-english">
-          <li><span class="fs-3" style="margin-right: 150px;">機体一覧</span></li>
+
+          <li><span class="fs-3" style="margin-right: 150px;">点検整備一覧</span></li>
           <li>
             <label class="fs-5">開始日</label> 
             <input type="date" id="startDate">
@@ -37,34 +38,38 @@
           <li>
             <button type="button" class="btn btn-primary" style="margin-left: 30px;">新規作成</button>
           </li>
+          <li>
+            <select class="form-select border-0" aria-label="Default select example">
+              <option selected>機体選択</option>
+              <option value="1">DJI Mini3</option>
+            </select>
+          </li>
         </ul>
     </div>
- 
+
     <div class="box3 overflow-x-auto">
     <!-- box3貼り付け部 -->
 
-      <!--    <table class="table table-sm"> -->
       <table class="table table-bordered table-sm">
         <thead>
           <tr class="text-center">
             <th scope="col">ID</th>
-            <th scope="col">メーカ</th>
-            <th scope="col">型式</th>
-            <th scope="col">登録者</th>
-            <th scope="col">登録日</th>
+            <th scope="col">実施日</th>
+            <th scope="col">実施機体</th>
+            <th scope="col">点検、修理、改造及び整備の内容</th>
+            <th scope="col">実施理由</th>
             <th scope="col">操作</th>
           </tr>
         </thead>
-
-        <tbody class="table-group-divider text-center">
+        <tbody class="table-group-divider">
           <tr>
-            <th scope="row">1</th>
-            <td>DJI</td>
+            <th class="text-center" scope="row">1</th>
+            <td>2025/08/10</td>
             <td>DJI Mini3</td>
-            <td>山田太郎</td>
-            <td>2026/05/21</td>
-            <td class="d-flex gap-3 justify-content-left">
-              <button type="button" class="btn btn-info btn-sm ms-3">詳細</button>
+            <td>プロペラを新しいものに交換実施</td>
+            <td>プロペラに亀裂が確認したため</td>
+            <td class="d-flex gap-3">
+              <button type="button" class="btn btn-info btn-sm">詳細</button>
               <button type="button" class="btn btn-success btn-sm">編集</button>
               <button type="button" class="btn btn-danger btn-sm">削除</button>
             </td>
