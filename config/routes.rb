@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   root "static_pages#aircraft_list_index"
 
   get "aircraft_list_index", to: "static_pages#aircraft_list_index"
-  get "flight_log", to: "static_pages#flight_log_index"
-  get "daily_inspection", to: "static_pages#daily_inspection_index"
-  get "inspection_and_maintenance", to: "static_pages#inspection_and_maintenance_index"
+  get "flight_log_index", to: "static_pages#flight_log_index"
+  get "daily_inspection_index", to: "static_pages#daily_inspection_index"
+  get "inspection_and_maintenance_index", to: "static_pages#inspection_and_maintenance_index"
 
 end
