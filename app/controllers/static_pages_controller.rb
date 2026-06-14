@@ -2,6 +2,12 @@ class StaticPagesController < ApplicationController
   def aircraft_list_index
   end
 
+  def aircraft_show
+  end
+
+  def aircraft_new
+  end
+
   def flight_log_index
   end
 

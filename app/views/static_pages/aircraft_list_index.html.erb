@@ -35,7 +35,9 @@
             <button type="button" class="btn btn-secondary btn-sm">検索</button>
           </li>
           <li>
-            <button type="button" class="btn btn-primary" style="margin-left: 30px;">新規作成</button>
+            <%= button_to "新規作成", aircraft_new_path, method: :get,
+              class: "btn btn-primary btn-sm ms-3",
+              form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
           </li>
         </ul>
     </div>

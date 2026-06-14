@@ -1,0 +1,223 @@
+<turbo-frame id="main_content"> 
+  <div class="wrapper">
+
+    <div class="box1 overflow-x-auto">
+    <!-- box1貼り付け部 -->
+      <side_board>
+        <ul class="side_board-nav font-english">
+          <li><%= link_to "機体一覧", aircraft_list_index_path, data: { turbo_frame: "main_content" } %></li>
+          <li><%= link_to "飛行日誌一覧", flight_log_index_path, data: { turbo_frame: "main_content" } %></li>
+          <li><%= link_to "日常点検一覧", daily_inspection_index_path, data: { turbo_frame: "main_content" } %></li>
+          <li><%= link_to "点検整備一覧", inspection_and_maintenance_index_path, data: { turbo_frame: "main_content" } %></li>
+        </ul>
+
+        <div class="text-left">
+          <%= image_tag "logo2.png", class: "rounded", alt: "アバター", style: "margin-left: 20px; width: 150px; height: auto;" %>
+        </div>
+
+      </side_board>
+    <!-- box1貼り付け部 修了-->
+    </div>
+
+    <div class="box2 overflow-x-auto">
+    <!-- box2貼り付け部 -->
+        <ul class="main-nav font-english">
+          <li><span class="fs-3" style="margin-right: 10px;">機体作成</span></li>
+          <li><span class="fs-4" style="margin-right: 20px; visibility: hidden;">ID: 1</span></li>
+          <li>
+            <button type="button" class="btn btn-primary">作成する</button>
+          </li>
+          <li>
+            <button type="button" class="btn btn-secondary" style="margin-left: 100px;">前の画面に戻る</button>
+          </li>
+        </ul>
+    </div>
+ 
+    <div class="box3 overflow-x-auto box3--flex">
+    <!-- box3貼り付け部 -->
+      <div style="min-width: 600px;">
+
+        <span class="fs-5 text-center " style="margin-left: 20px;" >1.基本情報</span>   
+        <table class="table table-bordered table-sm w-100">
+          <thead>
+            <tr style="text-align: center;">
+              <th scope="col" >項目</th>
+              <th scope="col">設定</th>
+            </tr>
+          </thead>
+
+          <tbody class="table-group-divider">
+            <tr style="text-align: center;">
+              <th scope="col">登録番号(DIPS)</th>
+
+              <td style="text-align: center;">
+                <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="例:JU0123456" aria-label="登録番号" 
+                style="width: 100%; display: inline-block;">
+              </td>
+
+            </tr>
+
+            <tr style="text-align: center;">
+              <th scope="col">種類</th>
+              <td style="text-align: center;">
+                <select class="form-select form-select-sm border  border-secondary    text-center" aria-label="種類選択">
+                  <option selected>種類選択</option>
+                  <option value="1">回転翼航空機(マルチローター)</option>
+                  <option value="2">回転翼航空機(ヘリコプター)</option>
+                  <option value="3">飛行機</option>
+                  <option value="4">パワードリフト</option>
+                </select>
+              </td>
+            </tr>
+  
+            <tr style="text-align: center;">
+              <th scope="col">型式</th>
+              <td style="text-align: center;">
+                <select class="form-select form-select-sm border  border-secondary    text-center" aria-label="種類選択">
+                  <option selected>型式選択</option>
+                  <option value="1">なし(型式認証なし)</option>
+                  <option value="2"> </option>
+                </select>
+              </td>
+            </tr>
+  
+            <tr style="text-align: center;">
+              <th scope="col">型式認証番号</th>
+              <td style="text-align: center;">
+                <select class="form-select form-select-sm border  border-secondary    text-center" aria-label="種類選択">
+                  <option selected>型式選択</option>
+                  <option value="1">なし(型式認証なし)</option>
+                  <option value="2"> </option>
+                </select>
+              </td>
+            </tr>
+
+            <tr style="text-align: center;">
+              <th scope="col">機体認証の区分及び機体認証番号</th>
+              <td style="text-align: center;">
+                <select class="form-select form-select-sm border  border-secondary    text-center" aria-label="種類選択">
+                  <option selected>型式選択</option>
+                  <option value="1">なし(型式認証なし)</option>
+                  <option value="2"> </option>
+                </select>
+              </td>
+            </tr>
+
+            <tr style="text-align: center;">
+              <th scope="col">設計製造者</th>
+              <td style="text-align: center;">
+                <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="例:DJI" aria-label="設計製造者" 
+                style="width: 100%; display: inline-block;">
+              </td>
+            </tr>
+
+            <tr style="text-align: center;">
+              <th scope="col">シリアル番号</th>
+
+              <td style="text-align: center;">
+                <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="例:12345678" aria-label="シリアル番号" 
+                style="width: 100%; display: inline-block;">
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+      <div style="min-width: 600px;">
+
+        <span class="fs-5 text-center" style="margin-left: 20px;" >2.追加情報</span>   
+        <table class="table table-bordered table-sm w-100">
+          <thead>
+            <tr style="text-align: center;">
+              <th scope="col">項目</th>
+              <th scope="col">設定</th>
+            </tr>
+          </thead>
+
+          <tbody class="table-group-divider">
+            <tr style="text-align: center;">
+              <th scope="col">購入メーカ</th>
+
+              <td style="text-align: center;">
+                <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="例:DJI" aria-label="購入メーカ" 
+                style="width: 100%; display: inline-block;">
+              </td>
+            </tr>
+
+            <tr style="text-align: center;">
+              <th scope="col">購入型式</th>
+              <td style="text-align: center;">
+                <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="例:DJI Mini3" aria-label="購入型式" 
+                style="width: 100%; display: inline-block;">
+              </td>
+            </tr>
+
+            <tr style="text-align: center;">
+              <th scope="col">機体購入日</th>
+
+              <td style="text-align: center;">
+                <input class="form-control form-control-sm text-center border border-secondary" type="date" placeholder="" aria-label="機体購入日" 
+                style="width: 100%; display: inline-block; height: 28px;">
+              </td>
+            </tr>
+
+            <tr style="text-align: center;">
+              <th scope="col">登録者</th>
+              <td style="text-align: center;">
+                <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="名前" aria-label="登録者" 
+                style="width: 100%; display: inline-block;">
+              </td>
+            </tr>
+
+            <tr style="text-align: center;">
+              <th scope="col">リモートID登録番号</th>
+
+              <td style="text-align: center;">
+                <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="例:3456789" aria-label="リモートID登録番号" 
+                style="width: 100%; display: inline-block;">
+              </td>
+            </tr>
+
+            <tr style="text-align: center;">
+              <th scope="col">保険会社</th>
+              <td style="text-align: center;">
+                <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="例:損保ジャパン" aria-label="保険会社" 
+                style="width: 100%; display: inline-block;">
+              </td>
+            </tr>
+
+            <tr style="text-align: center;">
+              <th scope="col">保険証券番号</th>
+
+              <td style="text-align: center;">
+                <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="例:112050" aria-label="保険証券番号" 
+                style="width: 100%; display: inline-block;">
+              </td>
+            </tr>
+
+            <tr style="text-align: center;">
+              <th scope="col">保険加入日</th>
+              <td style="text-align: center;">
+                <input class="form-control form-control-sm text-center border border-secondary" type="date" placeholder="" aria-label="保険加入日" 
+                style="width: 100%; display: inline-block; height: 28px;">
+              </td>
+            </tr>
+
+            <tr style="text-align: center;">
+              <th scope="col">保険満了日</th>
+              <td style="text-align: center;">
+                <input class="form-control form-control-sm text-center border border-secondary" type="date" placeholder="" aria-label="保険満了日" 
+                style="width: 100%; display: inline-block; height: 28px;">
+              </td>
+
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+    <!-- box3貼り付け部 終了-->
+    </div>
+  </div>
+</turbo-frame>
