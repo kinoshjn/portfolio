@@ -40,7 +40,7 @@
         </ul>
     </div>
  
-    <div class="box3 overflow-x-auto">
+    <div class="box3 overflow-x-auto box3--plain">
     <!-- box3貼り付け部 -->
 
       <!--    <table class="table table-sm"> -->
@@ -64,7 +64,11 @@
             <td>山田太郎</td>
             <td>2026/05/21</td>
             <td class="d-flex gap-3 justify-content-left">
-              <button type="button" class="btn btn-info btn-sm ms-3">詳細</button>
+
+              <%= button_to "詳細", aircraft_show_path, method: :get,
+                class: "btn btn-info btn-sm ms-3",
+                form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
+
               <button type="button" class="btn btn-success btn-sm">編集</button>
               <button type="button" class="btn btn-danger btn-sm">削除</button>
             </td>

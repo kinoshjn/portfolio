@@ -70,8 +70,15 @@
     .box2 {
       background: #eef !important;
     }
-    .box3 {
+
+    .box3--plain {
       background: #eef !important;
+    }
+
+    .box3--flex {
+      background: #eef;
+      display: flex;
+      gap: 1rem;
     }
 
     /* 2026.5.20 date枠線が消えるの問題対応  */

@@ -1,0 +1,157 @@
+<turbo-frame id="main_content"> 
+  <div class="wrapper">
+
+    <div class="box1 overflow-x-auto">
+    <!-- box1貼り付け部 -->
+      <side_board>
+        <ul class="side_board-nav font-english">
+          <li><%= link_to "機体一覧", aircraft_list_index_path, data: { turbo_frame: "main_content" } %></li>
+          <li><%= link_to "飛行日誌一覧", flight_log_index_path, data: { turbo_frame: "main_content" } %></li>
+          <li><%= link_to "日常点検一覧", daily_inspection_index_path, data: { turbo_frame: "main_content" } %></li>
+          <li><%= link_to "点検整備一覧", inspection_and_maintenance_index_path, data: { turbo_frame: "main_content" } %></li>
+        </ul>
+
+        <div class="text-left">
+          <%= image_tag "logo2.png", class: "rounded", alt: "アバター", style: "margin-left: 20px; width: 150px; height: auto;" %>
+        </div>
+
+      </side_board>
+    <!-- box1貼り付け部 修了-->
+    </div>
+
+    <div class="box2 overflow-x-auto">
+    <!-- box2貼り付け部 -->
+        <ul class="main-nav font-english">
+          <li><span class="fs-3" style="margin-right: 10px;">機体詳細</span></li>
+
+          <li><span class="fs-4" style="margin-right: 20px;">ID: 1</span></li>
+
+          <li>
+            <button type="button" class="btn btn-success">編集</button>
+          </li>
+          <li>
+            <button type="button" class="btn btn-danger" style="margin-left: 3px;">削除</button>
+          </li>
+        </ul>
+    </div>
+ 
+    <div class="box3 overflow-x-auto box3--flex">
+
+    <!-- box3貼り付け部 -->
+
+      <div style="min-width: 600px;">
+ 
+        <span class="fs-5 text-center " style="margin-left: 20px;" >1.基本情報</span>   
+        <table class="table table-bordered table-sm w-100">
+          <thead>
+            <tr style="text-align: center;">
+              <th scope="col" >項目</th>
+              <th scope="col">設定</th>
+            </tr>
+          </thead>
+
+          <tbody class="table-group-divider">
+            <tr style="text-align: left;">
+              <th scope="col">登録番号(DIPS)</th>
+              <th scope="col">JUxxxxxxxxx</th>
+            </tr>
+
+            <tr style="text-align: left;">
+              <th scope="col">種類</th>
+              <th scope="col">回転翼航空機(マルチローター)</th>
+            </tr>
+
+            <tr style="text-align: left;">
+              <th scope="col">型式</th>
+              <th scope="col">なし(型式認証なし)</th>
+            </tr>
+
+            <tr style="text-align: left;">
+              <th scope="col">型式認証番号</th>
+              <th scope="col">なし(型式認証なし)</th>
+            </tr>
+
+            <tr style="text-align: left;">
+              <th scope="col">機体認証の区分及び機体認証番号</th>
+              <th scope="col">なし(型式認証なし)</th>
+
+            </tr>
+
+            <tr style="text-align: left;">
+              <th scope="col">設計製造者</th>
+              <th scope="col">DJI</th>
+            </tr>
+
+            <tr style="text-align: left;">
+              <th scope="col">シリアル番号</th>
+              <th scope="col">xxxxxxxxx</th>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+      <div style="min-width: 600px;">
+        <span class="fs-5 text-center" style="margin-left: 20px;" >2.追加情報</span>   
+        <table class="table table-bordered table-sm w-100">
+          <thead>
+            <tr style="text-align: center;">
+              <th scope="col">項目</th>
+              <th scope="col">設定</th>
+            </tr>
+          </thead>
+
+          <tbody class="table-group-divider">
+            <tr style="text-align: left;">
+              <th scope="col">購入メーカ</th>
+              <th scope="col">DJI</th>
+            </tr>
+
+            <tr style="text-align: left;">
+              <th scope="col">購入型式</th>
+              <th scope="col">DJI Mini3</th>
+            </tr>
+
+            <tr style="text-align: left;">
+              <th scope="col">機体購入日</th>
+              <th scope="col">2026/05/20</th>
+            </tr>
+
+            <tr style="text-align: left;">
+              <th scope="col">登録者</th>
+              <th scope="col">山田太郎</th>
+            </tr>
+
+            <tr style="text-align: left;">
+              <th scope="col">リモートID登録番号</th>
+              <th scope="col">XXXXXXX</th>
+            </tr>
+
+            <tr style="text-align: left;">
+              <th scope="col">保険会社</th>
+              <th scope="col">XXXXX</th>
+            </tr>
+
+            <tr style="text-align: left;">
+              <th scope="col">保険証券番号</th>
+              <th scope="col">XXXXXXXX</th>
+            </tr>
+
+            <tr style="text-align: left;">
+              <th scope="col">保険加入日</th>
+              <th scope="col">2026/05/24</th>
+            </tr>
+
+            <tr style="text-align: left;">
+              <th scope="col">保険満了日</th>
+              <th scope="col">2027/05/23</th>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+    <!-- box3貼り付け部 終了-->
+    </div>
+  </div>
+</turbo-frame>

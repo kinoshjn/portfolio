@@ -13,4 +13,7 @@ Rails.application.routes.draw do
   get "daily_inspection_index", to: "static_pages#daily_inspection_index"
   get "inspection_and_maintenance_index", to: "static_pages#inspection_and_maintenance_index"
 
+
+  get "aircraft_show", to: "static_pages#aircraft_show"
+
 end
