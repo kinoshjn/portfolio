@@ -15,5 +15,9 @@ Rails.application.routes.draw do
 
   get "aircraft_show", to: "static_pages#aircraft_show"
   get "aircraft_new", to: "static_pages#aircraft_new"
+  get "aircraft_edit", to: "static_pages#aircraft_edit"
+
+
+  get "delete_confirm_index", to: "static_pages#delete_confirm_index"
 
 end

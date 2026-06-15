@@ -1,6 +1,7 @@
 /* 画面全体のレイアウト */
 body {
-  background-color: #f5f5f5; /* 背景色（薄いグレー） */
+/*  background-color: #f5f5f5; */ /* 背景色（薄いグレー） */
+  background-color:#e5592a67;
   display: flex;             /* 画面中央に寄せるための設定 */
   align-items: center;
   justify-content: center;

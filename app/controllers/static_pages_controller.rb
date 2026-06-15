@@ -8,6 +8,10 @@ class StaticPagesController < ApplicationController
   def aircraft_new
   end
 
+  def aircraft_edit
+  end
+
+
   def flight_log_index
   end
 
@@ -16,4 +20,9 @@ class StaticPagesController < ApplicationController
 
   def inspection_and_maintenance_index
   end
+
+  def delete_confirm_index
+    render layout: "minimal"
+  end
+
 end
