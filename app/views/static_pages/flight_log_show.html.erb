@@ -1,0 +1,246 @@
+<turbo-frame id="main_content"> 
+  <div class="wrapper">
+
+    <div class="box1" style="overflow-x: auto;">
+    <!-- box1貼り付け部 -->
+      <side_board>
+        <ul class="side_board-nav font-english">
+          <li><%= link_to "機体一覧", aircraft_list_index_path, data: { turbo_frame: "main_content" } %></li>
+          <li><%= link_to "飛行日誌一覧", flight_log_index_path, data: { turbo_frame: "main_content" } %></li>
+          <li><%= link_to "日常点検一覧", daily_inspection_index_path, data: { turbo_frame: "main_content" } %></li>
+          <li><%= link_to "点検整備一覧", inspection_and_maintenance_index_path, data: { turbo_frame: "main_content" } %></li>
+        </ul>
+
+        <div class="text-left">
+          <%= image_tag "logo2.png", class: "rounded", alt: "アバター", style: "margin-left: 20px; width: 150px; height: auto;" %>
+        </div>
+
+      </side_board>
+
+    <!-- box1貼り付け部 修了-->
+    </div>
+
+    <div class="box2" style="overflow-x: auto;">
+    <!-- box2貼り付け部 -->
+        <ul class="main-nav font-english">
+          <li><span class="fs-3" style="margin-right: 10px;">飛行日誌詳細</span></li>
+          <li><span class="fs-4" style="margin-right: 20px;">ID: 1</span></li>
+          <li>
+            <%= button_to "編集", flight_log_edit_path, method: :get,
+              class: "btn btn-success btn-sm ms-3",
+              form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
+          </li>
+          <li>
+            <button type="button" class="btn btn-danger btn-sm ms-3"
+              onclick="window.open('<%= delete_confirm_index_path %>', '_blank', 'width=600,height=500,scrollbars=yes,resizable=yes')">削除
+            </button>
+          </li>
+        </ul>
+    </div>
+
+    <div class="box3 overflow-x-auto box3--plain">
+    <!-- box3貼り付け部 -->
+    <!-- 2026.5.23 修正必要 -->
+ <!-- <table class="table table-sm"> -->
+
+    <div class="d-flex flex-wrap gap-3 mb-1">
+      <h5>飛行日: 2026/5/20　　</h5>
+      <h5>飛行機体: DJI mini3　　</h5>
+      <h5>無人飛行機の登録番号: xxxxxxxx </h5>
+    </div>
+
+      <table class="table table-bordered table-sm">
+        <thead>
+          <tr style="text-align: center;">
+            <th scope="col">内訳</th>
+            <th scope="col">飛行者</th>
+            <th scope="col">離陸時刻</th>
+            <th scope="col">着陸時刻</th>
+            <th scope="col">飛行時間</th>
+            <th scope="col">総飛行時間</th>
+            <th scope="col">飛行離陸場所</th>
+            <th scope="col">飛行着陸場所</th>
+            <th scope="col">飛行概要</th>
+            <th scope="col">安全・影響事項</th>
+          </tr>
+        </thead>
+
+        <tbody class="table-group-divider">
+          <tr>
+            <th scope="row" style="text-align: center;">1</th>
+            <td style="text-align: center;">山田太郎</td>
+            <td style="text-align: center;">10:03</td>
+            <td style="text-align: center;">10:17</td>
+            <td style="text-align: center;">14分</td>
+            <td style="text-align: center;">14分</td>
+            <td>神奈川県相模原市中央区田名5835</td>
+            <td>神奈川県相模原市中央区田名5835</td>
+            <td style="text-align: center;">目視飛行</td>
+            <td style="text-align: center;">なし</td>
+          </tr>
+
+          <tr>
+            <th scope="row" style="text-align: center;">2</th>
+            <td style="text-align: center;"><label>鈴木次郎</label></td>
+            <td style="text-align: center;"><label>10:34</label></td>
+            <td style="text-align: center;"><label>11:02</label></td>
+            <td style="text-align: center;"><label>28分</label></td>
+            <td style="text-align: center;"><label>42分</label></td>
+            <td>神奈川県相模原市中央区田名5835</td>
+            <td>神奈川県相模原市中央区田名5835</td>
+            <td style="text-align: center;"><label>目視飛行</label></td>
+            <td style="text-align: center;"><label>あり</label></td>  
+          </tr>
+
+          <tr>
+            <th scope="row" style="text-align: center;">3</th>
+            <td style="text-align: center;"><label>山田太郎</label></td>
+            <td style="text-align: center;"><label>13:15</label></td>
+            <td style="text-align: center;"><label>13:53</label></td>
+            <td style="text-align: center;"><label>38分</label></td>
+            <td style="text-align: center;"><label>80分</label></td>
+            <td>神奈川県中郡二宮町</td>
+            <td>神奈川県中郡二宮町</td>
+            <td style="text-align: center;"><label>目視飛行</label></td>
+            <td style="text-align: center;"><label>なし</label></td>
+          </tr>
+
+          <tr>
+            <th scope="row" style="text-align: center;">4</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <th scope="row" style="text-align: center;">5</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>  
+        </tr>
+
+          <tr>
+            <th scope="row" style="text-align: center;">6</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <th scope="row" style="text-align: center;">7</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <th scope="row" style="text-align: center;">8</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <th scope="row" style="text-align: center;">9</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <th scope="row" style="text-align: center;">10</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+
+
+        </tbody>
+      </table>
+
+
+      <table class="table table-bordered table-sm">
+        <thead>
+          <tr style="text-align: center;">
+            <th scope="col">安全・影響事項</th>
+            <th scope="col">不具合事項</th>
+            <th scope="col">処置日</th>
+            <th scope="col">処置内容</th>
+            <th scope="col">確認者</th>
+          </tr>
+        </thead>
+
+        <tbody class="table-group-divider">
+          <tr>
+            <th scope="row" style="text-align: center;">2</th>
+            <td style="text-align: center;">プロペラガード亀裂</td>
+            <td style="text-align: center;">2026/5/21</td>
+            <td style="text-align: center;">部品交換</td>
+            <td style="text-align: center;">山田太郎</td>
+          </tr>
+
+          <tr>
+            <th scope="row" style="text-align: center;">　</th>
+            <td style="text-align: center;"></td>
+            <td style="text-align: center;"></td>
+            <td style="text-align: center;"></td>
+            <td style="text-align: center;"></td>
+          </tr>
+
+          <tr>
+            <th scope="row" style="text-align: center;">　</th>
+            <td style="text-align: center;"></td>
+            <td style="text-align: center;"></td>
+            <td style="text-align: center;"></td>
+            <td style="text-align: center;"></td>
+          </tr>
+
+        </tbody>
+      </table>
+
+    <!-- box3貼り付け部 終了  -->
+    </div>
+  </div>
+</turbo-frame>

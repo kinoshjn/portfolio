@@ -17,6 +17,17 @@ Rails.application.routes.draw do
   get "aircraft_new", to: "static_pages#aircraft_new"
   get "aircraft_edit", to: "static_pages#aircraft_edit"
 
+  get "flight_log_show", to: "static_pages#flight_log_show"
+  get "flight_log_new", to: "static_pages#flight_log_new"
+  get "flight_log_edit",  to: "static_pages#flight_log_edit"
+
+  get "daily_inspection_show", to: "static_pages#daily_inspection_show"
+  get "daily_inspection_new", to: "static_pages#daily_inspection_new"
+  get "daily_inspection_edit", to: "static_pages#daily_inspection_edit"
+
+  get "inspection_and_maintenance_show", to: "static_pages#inspection_and_maintenance_show"
+  get "inspection_and_maintenance_new", to: "static_pages#inspection_and_maintenance_new"
+  get "inspection_and_maintenance_edit", to: "static_pages#inspection_and_maintenance_edit"
 
   get "delete_confirm_index", to: "static_pages#delete_confirm_index"
 

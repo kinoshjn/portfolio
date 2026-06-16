@@ -34,9 +34,13 @@
           <li>
             <button type="button" class="btn btn-secondary btn-sm">検索</button>
           </li>
+
           <li>
-            <button type="button" class="btn btn-primary" style="margin-left: 30px;">新規作成</button>
+            <%= button_to "新規作成", flight_log_new_path, method: :get,
+              class: "btn btn-primary btn-sm ms-3",
+              form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
           </li>
+
           <li>
             <select class="form-select border-0" aria-label="機体選択">
               <option selected>機体選択</option>
@@ -69,9 +73,18 @@
 
             <td class="text-start">神奈川県相模原市中央区田名5835</td>
             <td class="d-flex gap-3 justify-content-left">
-              <button type="button" class="btn btn-info btn-sm ms-3">詳細</button>
-              <button type="button" class="btn btn-success btn-sm">編集</button>
-              <button type="button" class="btn btn-danger btn-sm">削除</button>
+              <%= button_to "詳細", flight_log_show_path, method: :get,
+                class: "btn btn-info btn-sm ms-3",
+                form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
+
+              <%= button_to "編集", flight_log_edit_path, method: :get,
+                class: "btn btn-success btn-sm ms-3",
+                form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
+
+              <button type="button" class="btn btn-danger btn-sm ms-3"
+                onclick="window.open('<%= delete_confirm_index_path %>', '_blank', 'width=600,height=500,scrollbars=yes,resizable=yes')">削除
+              </button>
+
             </td>
           </tr>
           <tr>
@@ -81,11 +94,19 @@
             <td>j.kino</td>
             <td style="text-align: left;">神奈川県中郡二宮町</td>
             <td class="d-flex gap-3 justify-content-left">
-              <button type="button" class="btn btn-info btn-sm ms-3">詳細</button>
-              <button type="button" class="btn btn-success btn-sm">編集</button>
-              <button type="button" class="btn btn-danger btn-sm">削除</button>
-            </td>
+              <%= button_to "詳細", flight_log_show_path, method: :get,
+                class: "btn btn-info btn-sm ms-3",
+                form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
 
+              <%= button_to "編集", flight_log_edit_path, method: :get,
+                class: "btn btn-success btn-sm ms-3",
+                form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
+
+              <button type="button" class="btn btn-danger btn-sm ms-3"
+                onclick="window.open('<%= delete_confirm_index_path %>', '_blank', 'width=600,height=500,scrollbars=yes,resizable=yes')">削除
+              </button>
+
+            </td>
           </tr>
 
           <tr>
@@ -95,9 +116,18 @@
             <td>j.kino</td>
             <td style="text-align: left;">神奈川県相模原市中央区田名5835</td>
             <td class="d-flex gap-3 justify-content-left">
-              <button type="button" class="btn btn-info btn-sm ms-3">詳細</button>
-              <button type="button" class="btn btn-success btn-sm">編集</button>
-              <button type="button" class="btn btn-danger btn-sm">削除</button>
+              <%= button_to "詳細", flight_log_show_path, method: :get,
+                class: "btn btn-info btn-sm ms-3",
+                form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
+
+              <%= button_to "編集", flight_log_edit_path, method: :get,
+                class: "btn btn-success btn-sm ms-3",
+                form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
+
+              <button type="button" class="btn btn-danger btn-sm ms-3"
+                onclick="window.open('<%= delete_confirm_index_path %>', '_blank', 'width=600,height=500,scrollbars=yes,resizable=yes')">削除
+              </button>
+
             </td>
           </tr>
         </tbody>

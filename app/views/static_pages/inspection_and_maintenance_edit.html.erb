@@ -1,0 +1,213 @@
+<turbo-frame id="main_content"> 
+  <div class="wrapper">
+
+    <div class="box1 overflow-x-auto">
+    <!-- box1貼り付け部 -->
+      <side_board>
+        <ul class="side_board-nav font-english">
+          <li><%= link_to "機体一覧", aircraft_list_index_path, data: { turbo_frame: "main_content" } %></li>
+          <li><%= link_to "飛行日誌一覧", flight_log_index_path, data: { turbo_frame: "main_content" } %></li>
+          <li><%= link_to "日常点検一覧", daily_inspection_index_path, data: { turbo_frame: "main_content" } %></li>
+          <li><%= link_to "点検整備一覧", inspection_and_maintenance_index_path, data: { turbo_frame: "main_content" } %></li>
+        </ul>
+
+        <div class="text-left">
+          <%= image_tag "logo2.png", class: "rounded", alt: "アバター", style: "margin-left: 20px; width: 150px; height: auto;" %>
+        </div>
+
+      </side_board>
+
+    <!-- box1貼り付け部 修了-->
+    </div>
+
+    <div class="box2 overflow-x-auto">
+    <!-- box2貼り付け部 -->
+        <ul class="main-nav font-english">
+          <li><span class="fs-3" style="margin-right: 10px;">点検整備編集</span></li>
+          <li><span class="fs-4" style="margin-right: 20px;">ID: 1</span></li>
+          <li>
+            <button type="button" class="btn btn-primary">更新する</button>
+          </li>
+          <li>
+            <button type="button" class="btn btn-secondary" style="margin-left: 100px;">前の画面に戻る</button>
+          </li>
+        </ul>
+    </div>
+
+    <div class="box3 overflow-x-auto box3--plain">
+    <!-- box3貼り付け部 -->
+    <!--    テーブル幅を固定にして幅を有効にする。
+      <table class="table table-bordered table-sm text-center" >
+     -->
+
+      <table class="table table-bordered table-sm text-center" style="table-layout: fixed; width: 1220px;">
+
+        <thead>
+          <tr class="text-center">
+            <th scope="col"; style="width: 135px; height: auto;" >実施日</th>
+            <th scope="col"; style="width: 100px; height: auto;">総飛行時間</th>
+            <th scope="col"; style="height: auto;">点検、修理、改造及び整備の内容</th>
+            <th scope="col"; style="width: 260px; height: auto;">実施理由</th>
+            <th scope="col"; style="width: 240px; height: auto;">実施場所</th>
+            <th scope="col"; style="width: 90px; height: auto;">実施者</th>
+            <th scope="col"; style="width: 160px; height: auto;">備考</th>
+          </tr>
+        </thead>
+
+        <tbody class="table-group-divider text-left">
+          <tr>
+            <td>
+              <input class="form-control text-center border border-secondary" type="date" aria-label="処置日" 
+              style="height: 31px; display: inline-block;">
+            </td>
+            <td></td>
+            <td style="text-align: center;">
+              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="整備の内容" aria-label="整備の内容" 
+              style="width: 100%; display: inline-block;">
+            </td>
+            <td style="text-align: center;">
+              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="実施理由" aria-label="実施理由" 
+              style="width: 100%; display: inline-block;">
+            </td>
+            <td style="text-align: center;">
+              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="住所" aria-label="住所" 
+              style="width: 100%; display: inline-block;">
+            </td>
+            <td style="text-align: center;">
+              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="名前" aria-label="名前" 
+              style="width: 100%; display: inline-block;">
+            </td>
+            <td style="text-align: center;">
+              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="備考" aria-label="備考" 
+              style="width: 100%; display: inline-block;">
+            </td>
+          </tr>
+
+          <tr>
+            <td>&nbsp;</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <td>&nbsp;</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <td>&nbsp;</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <td>&nbsp;</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <td>&nbsp;</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <td>&nbsp;</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <td>&nbsp;</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <td>&nbsp;</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <td>&nbsp;</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+
+       </tbody>
+      </table>
+
+    <!--    テーブル幅を固定にして幅を有効にする。
+      <table class="table table-bordered table-sm" >
+     -->
+
+      <table class="table table-bordered table-sm text-center" style="table-layout: fixed; width: 730px;">
+        <thead>
+          <tr class="text-center">
+            <th scope="col"; style="width: 235px; height: auto;" >項目</th>
+            <th scope="col"; style="height: auto;">内容</th>
+          </tr>
+        </thead>
+
+        <tbody class="table-group-divider text-start">
+          <tr>
+            <th scope="row">飛行機体</th>
+            <td>
+              <select class="form-select form-select-sm border border-secondary text-center" aria-label="機体選択" style="width: 150px;  height: 27px;">
+                <option selected>機体選択</option>
+                <option value="1">DJI Mini3</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">無人飛行機の登録番号</th>
+            <td>xxxxxxx</td>
+          </tr>
+          <tr>
+            <th scope="row">特記事項</th>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</turbo-frame>

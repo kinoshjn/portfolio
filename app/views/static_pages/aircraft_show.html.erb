@@ -27,10 +27,14 @@
           <li><span class="fs-4" style="margin-right: 20px;">ID: 1</span></li>
 
           <li>
-            <button type="button" class="btn btn-success">編集</button>
+            <%= button_to "編集", aircraft_edit_path, method: :get,
+              class: "btn btn-success btn-sm ms-3",
+              form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
           </li>
           <li>
-            <button type="button" class="btn btn-danger" style="margin-left: 3px;">削除</button>
+            <button type="button" class="btn btn-danger btn-sm ms-3"
+              onclick="window.open('<%= delete_confirm_index_path %>', '_blank', 'width=600,height=500,scrollbars=yes,resizable=yes')">削除
+            </button>
           </li>
         </ul>
     </div>
