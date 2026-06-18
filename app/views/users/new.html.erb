@@ -1,0 +1,42 @@
+  <main class="form-signin">
+
+    <%= form_with model: @user do |f| %>
+
+
+    <% if @user.errors.any? %>
+      <div class="alert alert-danger">
+        <% @user.errors.full_messages.each do |message| %>
+          <p><%= message %></p>
+        <% end %>
+      </div>
+    <% end %>
+
+
+      <h3 class="h3 mb-3 fw-normal text-center">ユーザ登録</h3>
+
+      <div class="form-floating mb-3">
+        <%= f.text_field :user_name, class: "form-control", placeholder: "例:山田太郎", id: "floatingName" %>
+        <label for="floatingName">名前</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <%= f.email_field :email, class: "form-control", placeholder: "name@example.com", id: "floatingEmail" %>
+        <label for="floatingEmail">メールアドレス (user@example.com)</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <%= f.password_field :password, class: "form-control", placeholder: "Password", id: "floatingPassword" %>
+        <label for="floatingPassword">パスワード</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <%= f.password_field :password_confirmation, class: "form-control", placeholder: "Password", id: "floatingPassword_confirmation" %>
+        <label for="floatingPassword_confirmation">パスワード確認</label>
+      </div>
+
+      <%= f.submit "登録", class: "mb-3 w-100 btn btn-lg btn-primary" %>
+      <%= link_to "前の画面に戻る", login_path %>
+
+      <p class="text-credit text-center">&copy; 2026 kino project</p>
+    <% end %>
+  </main>

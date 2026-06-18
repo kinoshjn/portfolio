@@ -53,5 +53,4 @@ class StaticPagesController < ApplicationController
   def delete_confirm_index
     render layout: "minimal"
   end
-
 end

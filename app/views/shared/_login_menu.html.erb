@@ -27,7 +27,9 @@
       <button class="mb-3 w-100 btn btn-lg btn-primary" type="submit">ログインする</button>
 
       <ul class="user-nav">
-        <li><a href="#">ユーザ登録</a></li>
+        <li>
+          <%= link_to "ユーザ登録", new_user_path, data: { turbo_frame: "_top" } %>
+        </li>
         <li><a href="#">パスワード忘れた方</a></li>
       </ul>
       <p class="text-credit text-center">&copy; 2026 kino project</p>

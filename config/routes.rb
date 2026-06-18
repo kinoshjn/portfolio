@@ -8,6 +8,12 @@ Rails.application.routes.draw do
 
   root "static_pages#aircraft_list_index"
 
+  resources :users, only: %i[new create]
+  get "login", to: "user_sessions#new"
+  post "login", to: "user_sessions#create"
+  delete "logout", to: "user_sessions#destroy"
+
+
   get "aircraft_list_index", to: "static_pages#aircraft_list_index"
   get "flight_log_index", to: "static_pages#flight_log_index"
   get "daily_inspection_index", to: "static_pages#daily_inspection_index"
@@ -30,5 +36,4 @@ Rails.application.routes.draw do
   get "inspection_and_maintenance_edit", to: "static_pages#inspection_and_maintenance_edit"
 
   get "delete_confirm_index", to: "static_pages#delete_confirm_index"
-
 end
