@@ -13,8 +13,9 @@
             <option value="">パスワード変更</option>
           </select>
         </li>
-
-        <li> <button type="button" class="btn btn-primary btn-sm">ログアウト</button> </li>
+        <li>
+          <%= button_to "ログアウト", logout_path, method: :delete, class: "btn btn-primary btn-sm" %>
+        </li>
       </ul>
     </nav>
   </header>
