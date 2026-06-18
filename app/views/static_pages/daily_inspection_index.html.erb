@@ -1,0 +1,135 @@
+<turbo-frame id="main_content"> 
+  <div class="wrapper">
+
+    <div class="box1 overflow-x-auto">
+    <!-- box1貼り付け部 -->
+      <side_board>
+        <ul class="side_board-nav font-english">
+          <li><%= link_to "機体一覧", aircraft_list_index_path, data: { turbo_frame: "main_content" } %></li>
+          <li><%= link_to "飛行日誌一覧", flight_log_index_path, data: { turbo_frame: "main_content" } %></li>
+          <li><%= link_to "日常点検一覧", daily_inspection_index_path, data: { turbo_frame: "main_content" } %></li>
+          <li><%= link_to "点検整備一覧", inspection_and_maintenance_index_path, data: { turbo_frame: "main_content" } %></li>
+        </ul>
+
+        <div class="text-left">
+          <%= image_tag "logo2.png", class: "rounded", alt: "アバター", style: "margin-left: 20px; width: 150px; height: auto;" %>
+        </div>
+
+      </side_board>
+    <!-- box1貼り付け部 修了-->
+    </div>
+
+    <div class="box2 overflow-x-auto">
+    <!-- box2貼り付け部 -->
+        <ul class="main-nav font-english">
+          <li><span class="fs-3" style="margin-right: 150px;">日常点検一覧</span></li>
+          <li>
+            <label class="fs-5">開始日</label> 
+            <input type="date" id="startDate">
+          </li>
+          <li>
+            <label class="fs-5" style="margin-left: 10px;">終了日</label>
+            <input type="date" id="endDate" style="margin-right: 20px;">
+          </li>
+          <li>
+            <button type="button" class="btn btn-secondary btn-sm">検索</button>
+          </li>
+
+          <li>
+            <%= button_to "新規作成", daily_inspection_new_path, method: :get,
+              class: "btn btn-primary btn-sm ms-3",
+              form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
+          </li>
+
+          <li>
+            <select class="form-select border-0" aria-label="Default select example">
+              <option selected>機体選択</option>
+              <option value="1">DJI Mini3</option>
+            </select>
+          </li>
+        </ul>
+    </div>
+
+    <div class="box3 overflow-x-auto box3--plain">
+    <!-- box3貼り付け部 -->
+
+      <table class="table table-bordered table-sm">
+        <thead>
+          <tr class="text-center">
+            <th scope="col">ID</th>
+            <th scope="col">実施日</th>
+            <th scope="col">飛行機体</th>
+            <th scope="col">実施者</th>
+            <th scope="col">実施場所</th>
+            <th scope="col">操作</th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider text-center">
+          <tr>
+            <th scope="row">1</th>
+            <td>2025/08/10</td>
+            <td>DJI Mini3</td>
+            <td>j.kino</td>
+            <td class="text-start">神奈川県相模原市中央区田名5835</td>
+            <td class="d-flex gap-3 justify-content-left">
+              <%= button_to "詳細", daily_inspection_show_path, method: :get,
+                class: "btn btn-info btn-sm ms-3",
+                form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
+
+              <%= button_to "編集", daily_inspection_edit_path, method: :get,
+                class: "btn btn-success btn-sm ms-3",
+                form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
+
+              <button type="button" class="btn btn-danger btn-sm ms-3"
+                onclick="window.open('<%= delete_confirm_index_path %>', '_blank', 'width=600,height=500,scrollbars=yes,resizable=yes')">削除
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>2026/02/10</td>
+            <td>DJI Mini3</td>
+            <td>j.kino</td>
+           <td class="text-start">神奈川県中郡二宮町</td>
+            <td class="d-flex gap-3">
+              <%= button_to "詳細", daily_inspection_show_path, method: :get,
+                class: "btn btn-info btn-sm ms-3",
+                form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
+
+              <%= button_to "編集", daily_inspection_edit_path, method: :get,
+                class: "btn btn-success btn-sm ms-3",
+                form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
+
+              <button type="button" class="btn btn-danger btn-sm ms-3"
+                onclick="window.open('<%= delete_confirm_index_path %>', '_blank', 'width=600,height=500,scrollbars=yes,resizable=yes')">削除
+              </button>
+
+            </td>
+          </tr>
+
+          <tr>
+            <th scope="row">3</th>
+            <td>2026/03/04</td>
+            <td>DJI Mini3</td>
+            <td>j.kino</td>
+             <td class="text-start">神奈川県相模原市中央区田名5835</td>
+            <td class="d-flex gap-3">
+              <%= button_to "詳細", daily_inspection_show_path, method: :get,
+                class: "btn btn-info btn-sm ms-3",
+                form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
+
+              <%= button_to "編集", daily_inspection_edit_path, method: :get,
+                class: "btn btn-success btn-sm ms-3",
+                form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
+
+              <button type="button" class="btn btn-danger btn-sm ms-3"
+                onclick="window.open('<%= delete_confirm_index_path %>', '_blank', 'width=600,height=500,scrollbars=yes,resizable=yes')">削除
+              </button>
+
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</turbo-frame>

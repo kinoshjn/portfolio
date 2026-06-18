@@ -1,0 +1,253 @@
+<turbo-frame id="main_content"> 
+  <div class="wrapper">
+
+    <div class="box1 overflow-x-auto">
+    <!-- box1貼り付け部 -->
+      <side_board>
+        <ul class="side_board-nav font-english">
+          <li><%= link_to "機体一覧", aircraft_list_index_path, data: { turbo_frame: "main_content" } %></li>
+          <li><%= link_to "飛行日誌一覧", flight_log_index_path, data: { turbo_frame: "main_content" } %></li>
+          <li><%= link_to "日常点検一覧", daily_inspection_index_path, data: { turbo_frame: "main_content" } %></li>
+          <li><%= link_to "点検整備一覧", inspection_and_maintenance_index_path, data: { turbo_frame: "main_content" } %></li>
+        </ul>
+
+        <div class="text-left">
+          <%= image_tag "logo2.png", class: "rounded", alt: "アバター", style: "margin-left: 20px; width: 150px; height: auto;" %>
+        </div>
+
+      </side_board>
+    <!-- box1貼り付け部 修了-->
+    </div>
+
+    <div class="box2 overflow-x-auto">
+    <!-- box2貼り付け部 -->
+        <ul class="main-nav font-english">
+          <li><span class="fs-3" style="margin-right: 10px;">日常点検編集</span></li>
+          <li><span class="fs-4" style="margin-right: 20px;">ID: 1</span></li>
+          <li>
+            <button type="button" class="btn btn-primary">更新する</button>
+          </li>
+          <li>
+            <button type="button" class="btn btn-secondary" style="margin-left: 100px;">前の画面に戻る</button>
+          </li>
+        </ul>
+    </div>
+
+    <div class="box3 overflow-x-auto box3--plain">
+    <!-- box3貼り付け部 -->
+      <table class="table table-bordered table-sm" >
+        <thead>
+          <tr class="text-center">
+            <th scope="col"; style="width: 150px; height: auto;" >項目</th>
+            <th scope="col"; style="width: 400px; height: auto;">確認内容</th>
+            <th scope="col"; style="width: 150px; height: auto;">結果</th>
+            <th scope="col">備考</th>
+          </tr>
+        </thead>
+
+        <tbody class="table-group-divider text-left">
+          <tr>
+            <th scope="row">機体全般</th>
+            <td>機器の取り付け状態（ネジ、コネクタ、ケーブル等）</td>
+            <td>
+              <select class="form-select form-select-sm border  border-secondary    text-center" aria-label="機体全般結果">
+                <option selected>機体全般結果</option>
+                <option value="1">合格</option>
+                <option value="2">不合格</option>
+              </select>
+            </td>
+
+            <td style="text-align: center;">
+              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="" aria-label="備考" 
+              style="width: 100%; display: inline-block;">
+            </td>
+          </tr>
+
+          <tr>
+            <th scope="row">プロペラ</th>
+            <td>外観、損傷、ゆがみ</td>
+            <td>
+              <select class="form-select form-select-sm border  border-secondary    text-center" aria-label="プロペラ結果">
+                <option selected>プロペラ結果</option>
+                <option value="1">合格</option>
+                <option value="2">不合格</option>
+              </select>
+            </td>
+            <td style="text-align: center;">
+              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="" aria-label="備考" 
+              style="width: 100%; display: inline-block;">
+            </td>
+          </tr>
+
+          <tr>
+            <th scope="row">フレーム</th>
+            <td>外観、損傷、ゆがみ</td>
+            <td>
+              <select class="form-select form-select-sm border  border-secondary    text-center" aria-label="フレーム結果">
+                <option selected>フレーム結果</option>
+                <option value="1">合格</option>
+                <option value="2">不合格</option>
+              </select>
+            </td>
+            <td style="text-align: center;">
+              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="" aria-label="備考" 
+              style="width: 100%; display: inline-block;">
+            </td>
+          </tr>
+
+          <tr>
+            <th scope="row">通信系統</th>
+            <td>機体と操縦装置の通信品質の健全性</td>
+            <td>
+              <select class="form-select form-select-sm border  border-secondary    text-center" aria-label="通信系統結果">
+                <option selected>通信系統結果</option>
+                <option value="1">合格</option>
+                <option value="2">不合格</option>
+              </select>
+            </td>
+            <td style="text-align: center;">
+              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="" aria-label="備考" 
+              style="width: 100%; display: inline-block;">
+            </td>
+          </tr>
+
+          <tr>
+            <th scope="row">推進系統</th>
+            <td>モーター又は発動機の健全性</td>
+            <td>
+              <select class="form-select form-select-sm border  border-secondary    text-center" aria-label="推進系統結果">
+                <option selected>推進系統結果</option>
+                <option value="1">合格</option>
+                <option value="2">不合格</option>
+              </select>
+            </td>
+            <td style="text-align: center;">
+              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="" aria-label="備考" 
+              style="width: 100%; display: inline-block;">
+            </td>
+          </tr>
+
+          <tr>
+            <th scope="row">電源系統</th>
+            <td>機体及び操縦装置の電源の健全性</td>
+            <td>
+              <select class="form-select form-select-sm border  border-secondary    text-center" aria-label="電源系統結果">
+                <option selected>電源系統結果</option>
+                <option value="1">合格</option>
+                <option value="2">不合格</option>
+              </select>
+            </td>
+            <td style="text-align: center;">
+              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="" aria-label="備考" 
+              style="width: 100%; display: inline-block;">
+            </td>
+          </tr>
+
+          <tr>
+            <th scope="row">自動制御系統</th>
+            <td>飛行制御装置の健全性</td>
+            <td>
+              <select class="form-select form-select-sm border  border-secondary    text-center" aria-label="自動制御結果">
+                <option selected>自動制御結果</option>
+                <option value="1">合格</option>
+                <option value="2">不合格</option>
+              </select>
+            </td>
+            <td style="text-align: center;">
+              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="" aria-label="備考" 
+              style="width: 100%; display: inline-block;">
+            </td>
+          </tr>
+
+          <tr>
+            <th scope="row">操作装置</th>
+            <td>外観、スティックの健全性、スイッチの健全性</td>
+            <td>
+              <select class="form-select form-select-sm border  border-secondary    text-center" aria-label="操作装置結果">
+                <option selected>操作装置結果</option>
+                <option value="1">合格</option>
+                <option value="2">不合格</option>
+              </select>
+            </td>
+            <td style="text-align: center;">
+              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="" aria-label="備考" 
+              style="width: 100%; display: inline-block;">
+            </td>
+          </tr>
+
+          <tr>
+            <th scope="row">バッテリー・燃料</th>
+            <td>バッテリーの充電状況、残燃料表示機能の健全性</td>
+
+            <td>
+              <select class="form-select form-select-sm border  border-secondary    text-center" aria-label="バッテリー系結果">
+                <option selected>バッテリー系結果</option>
+                <option value="1">合格</option>
+                <option value="2">不合格</option>
+              </select>
+            </td>
+            <td style="text-align: center;">
+              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="" aria-label="備考" 
+              style="width: 100%; display: inline-block;">
+            </td>
+          </tr>
+
+       </tbody>
+      </table>
+
+      <table class="table table-bordered table-sm" >
+        <thead>
+          <tr class="text-center">
+            <th scope="col"; style="width: 100px; height: auto;" >項目</th>
+            <th scope="col"; style="width: 400px; height: auto;">内容</th>
+          </tr>
+        </thead>
+
+        <tbody class="table-group-divider text-left">
+          <tr>
+            <th scope="row">飛行機体</th>
+
+
+            <td>
+              <select class="form-select form-select-sm border  border-secondary    text-left" aria-label="機体選択">
+                <option selected>機体選択</option>
+                <option value="1">DJI Mini3</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">無人飛行機の登録番号</th>
+            <td>xxxxxxx</td>
+          </tr>
+          <tr>
+            <th scope="row">点検日</th>
+            <td style="text-align: center;">    
+              <input class="form-control form-control-sm text-left border border-secondary" type="date" value="" aria-label="点検日" style="width: 100%; height: 31px; display: inline-block;">
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">点検場所</th>
+            <td style="text-align: center;">
+              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="住所" aria-label="点検場所" 
+              style="width: 100%; display: inline-block;">
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">点検者</th>
+            <td style="text-align: center;">
+              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="名前" aria-label="点検者" 
+              style="width: 100%; display: inline-block;">
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">特記事項</th>
+            <td style="text-align: center;">
+              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="" aria-label="特記事項" 
+              style="width: 100%; display: inline-block;">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</turbo-frame>

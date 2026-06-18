@@ -1,0 +1,162 @@
+<turbo-frame id="main_content"> 
+  <div class="wrapper">
+
+    <div class="box1 overflow-x-auto">
+    <!-- box1貼り付け部 -->
+      <side_board>
+        <ul class="side_board-nav font-english">
+          <li><%= link_to "機体一覧", aircraft_list_index_path, data: { turbo_frame: "main_content" } %></li>
+          <li><%= link_to "飛行日誌一覧", flight_log_index_path, data: { turbo_frame: "main_content" } %></li>
+          <li><%= link_to "日常点検一覧", daily_inspection_index_path, data: { turbo_frame: "main_content" } %></li>
+          <li><%= link_to "点検整備一覧", inspection_and_maintenance_index_path, data: { turbo_frame: "main_content" } %></li>
+        </ul>
+
+        <div class="text-left">
+          <%= image_tag "logo2.png", class: "rounded", alt: "アバター", style: "margin-left: 20px; width: 150px; height: auto;" %>
+        </div>
+
+      </side_board>
+    <!-- box1貼り付け部 修了-->
+    </div>
+
+    <div class="box2 overflow-x-auto">
+    <!-- box2貼り付け部 -->
+        <ul class="main-nav font-english">
+          <li><span class="fs-3" style="margin-right: 10px;">日常点検詳細</span></li>
+          <li><span class="fs-4" style="margin-right: 20px;">ID: 1</span></li>
+
+          <li>
+              <%= button_to "編集", daily_inspection_edit_path, method: :get,
+                class: "btn btn-success btn-sm ms-3",
+                form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
+          </li>
+          <li>
+              <button type="button" class="btn btn-danger btn-sm ms-3"
+                onclick="window.open('<%= delete_confirm_index_path %>', '_blank', 'width=600,height=500,scrollbars=yes,resizable=yes')">削除
+              </button>
+          </li>
+        </ul>
+    </div>
+
+    <div class="box3 overflow-x-auto box3--plain">
+    <!-- box3貼り付け部 -->
+      <table class="table table-bordered table-sm" >
+        <thead>
+          <tr class="text-center">
+            <th scope="col"; style="width: 150px; height: auto;" >項目</th>
+            <th scope="col"; style="width: 400px; height: auto;">確認内容</th>
+            <th scope="col"; style="width: 150px; height: auto;">結果</th>
+            <th scope="col">備考</th>
+          </tr>
+        </thead>
+
+        <tbody class="table-group-divider text-left">
+          <tr>
+            <th scope="row">機体全般</th>
+            <td>機器の取り付け状態（ネジ、コネクタ、ケーブル等）</td>
+            <td class="text-center">合格</td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <th scope="row">プロペラ</th>
+            <td>外観、損傷、ゆがみ</td>
+            <td class="text-center">合格</td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <th scope="row">フレーム</th>
+            <td>外観、損傷、ゆがみ</td>
+            <td class="text-center">合格</td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <th scope="row">通信系統</th>
+            <td>機体と操縦装置の通信品質の健全性</td>
+            <td class="text-center">合格</td>
+            <td></td>
+          </tr>
+          <tr>
+
+          <tr>
+            <th scope="row">推進系統</th>
+            <td>モーター又は発動機の健全性</td>
+            <td class="text-center">合格</td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <th scope="row">電源系統</th>
+            <td>機体及び操縦装置の電源の健全性</td>
+            <td class="text-center">合格</td>
+            <td></td>
+          </tr>
+ 
+
+          <tr>
+            <th scope="row">自動制御系統</th>
+            <td>飛行制御装置の健全性</td>
+            <td class="text-center">合格</td>
+            <td></td>
+          </tr>
+          <tr>
+
+          <tr>
+            <th scope="row">操作装置</th>
+            <td>外観、スティックの健全性、スイッチの健全性</td>
+            <td class="text-center">合格</td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <th scope="row">バッテリー・燃料</th>
+            <td>バッテリーの充電状況、残燃料表示機能の健全性</td>
+            <td class="text-center">合格</td>
+            <td></td>
+          </tr>
+
+       </tbody>
+      </table>
+
+
+      <table class="table table-bordered table-sm" >
+        <thead>
+          <tr class="text-center">
+            <th scope="col"; style="width: 100px; height: auto;" >項目</th>
+            <th scope="col"; style="width: 400px; height: auto;">内容</th>
+          </tr>
+        </thead>
+
+        <tbody class="table-group-divider text-left">
+          <tr>
+            <th scope="row">飛行機体</th>
+            <td>DJI mini3</td>
+          </tr>
+          <tr>
+            <th scope="row">無人飛行機の登録番号</th>
+            <td>xxxxxxx</td>
+          </tr>
+          <tr>
+            <th scope="row">点検日</th>
+            <td>2026/05/31</td>
+          </tr>
+          <tr>
+            <th scope="row">点検場所</th>
+            <td>神奈川県相模原市中央区田名5835</td>
+          </tr>
+          <tr>
+            <th scope="row">点検者</th>
+            <td>山田太郎</td>
+          </tr>
+          <tr>
+            <th scope="row">特記事項</th>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</turbo-frame>
