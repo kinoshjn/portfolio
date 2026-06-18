@@ -37,6 +37,9 @@ gem "bootsnap", require: false
 # 2026.6/17 ユーザ登録実装用に追加
 gem "bcrypt"
 
+# 2026.6/19 github test実行エラー対応(6.06対応しないのでダウングレード)
+gem "minitest", "~> 5.1"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
