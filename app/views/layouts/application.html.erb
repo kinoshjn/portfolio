@@ -42,6 +42,13 @@
       <div style="display: flow-root; width: 100%; margin: 0 !important; padding: 0 !important;">
         <%= render "layouts/header" %>
 
+        <!-- flash表示追加 2026.6/19 -->
+        <% flash.each do |message_type, message| %>
+          <div class="alert alert-<%= message_type %>">
+            <%= message %>
+          </div>
+        <% end %>
+
         <turbo-frame id="main_content">
           <%= yield %>
         </turbo-frame>
@@ -52,7 +59,16 @@
     <% else %>
 
       <div style="display: flex; align-items: center; justify-content: center; min-height: 100vh; width: 100%; background-color: #f5f5f5;">
+
         <turbo-frame id="main_content">
+
+        <!-- flash表示追加 2026.6/19 -->
+        <% flash.each do |message_type, message| %>
+          <div class="alert alert-<%= message_type %>">
+            <%= message %>
+          </div>
+        <% end %>
+
           <%= render 'shared/login_menu' %>
         </turbo-frame>
       </div>
