@@ -1,5 +1,7 @@
 class StaticPagesController < ApplicationController
   def aircraft_list_index
+#    @aircrafts = Aircraft.includes(:user)
+    @aircrafts = [current_user.aircraft].compact
   end
 
   def aircraft_show
@@ -25,7 +27,7 @@ class StaticPagesController < ApplicationController
   end
 
 
-  def daily_inspection_index
+  def daily_inspection_indexsais
   end
 
   def daily_inspection_show
