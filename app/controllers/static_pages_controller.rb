@@ -29,7 +29,9 @@ class StaticPagesController < ApplicationController
   end
 
 
-  def daily_inspection_indexsais
+  def daily_inspection_index
+    @aircrafts = [current_user.aircraft].compact   # view側アソシエーション対応とした。box2 renderで必要。2026.6/24
+    @daily_inspections = current_user.aircraft.daily_inspections
   end
 
   def daily_inspection_show

@@ -1,3 +1,4 @@
+DailyInspection.destroy_all
 FlightRecord.destroy_all
 FlightLog.destroy_all
 Aircraft.destroy_all
@@ -78,5 +79,16 @@ fixed_aircraft = fixed_user.aircraft
     landing_location: locations[1],
     flight_summary: Faker::Lorem.sentence,
     has_safety_incident: false
+  )
+end
+
+# fixed_aircraftの作成以降に追加
+3.times do
+  DailyInspection.create!(
+    aircraft_id: fixed_aircraft.id,
+    inspection_date: Faker::Date.backward(days: 365),
+    inspection_location: ["神奈川県相模原市中央区田名5835", "神奈川県中郡二宮町", "東京都千代田区"].sample,
+    inspector: Faker::Name.name,
+    special_notes: Faker::Lorem.sentence
   )
 end
