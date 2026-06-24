@@ -1,7 +1,21 @@
-User.destroy_all
+FlightRecord.destroy_all
+FlightLog.destroy_all
 Aircraft.destroy_all
+User.destroy_all
 
-10.times do
+# 固定ユーザー作成
+fixed_user = User.create!(
+  user_name: "test_user",
+  email: "test@example.com",
+  password: "test",
+  password_confirmation: "test",
+  login_count: 0,
+  last_login_date: Date.today,
+  avatar_id: 1
+)
+
+# ランダムユーザー作成（9名）
+9.times do
   User.create!(
     user_name: Faker::Internet.unique.username,
     email: Faker::Internet.unique.email,
@@ -37,3 +51,32 @@ user_ids.each do |user_id|
   )
 end
 
+# 固定ユーザーのflight_log 3件作成
+fixed_aircraft = fixed_user.aircraft
+
+3.times do
+  flight_log = FlightLog.create!(
+    aircraft_id: fixed_aircraft.id,
+    flight_date: Faker::Date.backward(days: 365)
+  )
+
+  takeoff_hour = rand(6..16)
+  flight_hour = rand(1..3)
+  takeoff_time = format("%02d:00:00", takeoff_hour)
+  landing_time = format("%02d:00:00", takeoff_hour + flight_hour)
+  flight_time  = format("00:%02d:00", flight_hour * 60)
+
+  locations = ["神奈川県相模原市中央区田名5835", "神奈川県中郡二宮町", "東京都千代田区"].sample(2)
+
+  FlightRecord.create!(
+    flight_log_id: flight_log.id,
+    pilot_name: Faker::Name.name,
+    takeoff_time: takeoff_time,
+    landing_time: landing_time,
+    flight_time: flight_time,
+    takeoff_location: locations[0],
+    landing_location: locations[1],
+    flight_summary: Faker::Lorem.sentence,
+    has_safety_incident: false
+  )
+end

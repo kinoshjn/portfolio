@@ -1,6 +1,6 @@
 class StaticPagesController < ApplicationController
   def aircraft_list_index
-#    @aircrafts = Aircraft.includes(:user)
+#   @aircrafts = Aircraft.includes(:user)
     @aircrafts = [current_user.aircraft].compact
   end
 
@@ -15,6 +15,8 @@ class StaticPagesController < ApplicationController
 
 
   def flight_log_index
+    @aircrafts = [current_user.aircraft].compact   # view側アソシエーション対応とした。box2 renderで必要。2026.6/24
+    @flight_logs = current_user.aircraft.flight_logs
   end
 
   def flight_log_show

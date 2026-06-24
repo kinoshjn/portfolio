@@ -4,7 +4,8 @@ class ApplicationController < ActionController::Base
 
   helper_method :logged_in?, :current_user
 
-  # before_action :require_login  ← 今回はログインページに飛ぶので不要。
+  # 2026.6/23     入れるとエラー
+#  before_action :require_login 
 
   def logged_in?
     !!current_user
