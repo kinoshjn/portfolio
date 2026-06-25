@@ -6,9 +6,9 @@ class UserSessionsController < ApplicationController
 
     if @user
       session[:user_id] = @user.id
-      redirect_to root_path, success: 'ログインしました', status: :see_other
+      redirect_to root_path, success: "ログインしました", status: :see_other
     else
-      flash[:danger] = 'ログインに失敗しました'
+      flash[:danger] = "ログインに失敗しました"
       redirect_to login_path, status: :see_other
     end
   end

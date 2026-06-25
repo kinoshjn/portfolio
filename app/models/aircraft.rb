@@ -13,7 +13,7 @@ class Aircraft < ApplicationRecord
 
   belongs_to :user
 
-  has_many :flight_logs, dependent: :destroy 
-  has_many :daily_inspections, dependent: :destroy 
-  has_one :inspection_maintenance, dependent: :destroy 
+  has_many :flight_logs, dependent: :destroy
+  has_many :daily_inspections, dependent: :destroy
+  has_one :inspection_maintenance, dependent: :destroy
 end

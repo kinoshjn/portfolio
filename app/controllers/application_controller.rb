@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   helper_method :logged_in?, :current_user
 
   # 2026.6/23     入れるとエラー
-#  before_action :require_login 
+  #  before_action :require_login
 
   def logged_in?
     !!current_user

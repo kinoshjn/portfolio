@@ -1,11 +1,14 @@
+
+InspectionMaintenanceItem.destroy_all
+InspectionMaintenance.destroy_all
 DailyInspection.destroy_all
 FlightRecord.destroy_all
 FlightLog.destroy_all
 Aircraft.destroy_all
 User.destroy_all
 
-# 固定ユーザー作成
-fixed_user = User.create!(
+# 固定ユーザー作成1
+test_user = User.create!(
   user_name: "test_user",
   email: "test@example.com",
   password: "test",
@@ -15,8 +18,19 @@ fixed_user = User.create!(
   avatar_id: 1
 )
 
-# ランダムユーザー作成（9名）
-9.times do
+# 固定ユーザー作成2
+guest_user = User.create!(
+  user_name: "guest_user",
+  email: "guest@example.com",
+  password: "guest",
+  password_confirmation: "guest",
+  login_count: 0,
+  last_login_date: Date.today,
+  avatar_id: 2
+)
+
+# ランダムユーザー作成（8名）
+8.times do
   User.create!(
     user_name: Faker::Internet.unique.username,
     email: Faker::Internet.unique.email,
@@ -28,16 +42,15 @@ fixed_user = User.create!(
   )
 end
 
-user_ids = User.ids
-
-user_ids.each do |user_id|
+# 全ユーザーにAircraft作成
+User.ids.each do |user_id|
   Aircraft.create!(
     user_id: user_id,
     dips_registration_number: "JA#{rand(1000..9999)}",
     dips_type: Faker::Vehicle.make,
     dips_model: Faker::Vehicle.model,
     dips_type_approval_number: "TA-#{rand(10000..99999)}",
-    dips_aircraft_registration_category: ["第一種", "第二種", "第三種"].sample,
+    dips_aircraft_registration_category: [ "第一種", "第二種", "第三種" ].sample,
     dips_designer_and_manufacturer: Faker::Company.name,
     dips_serial_number: Faker::Alphanumeric.unique.alphanumeric(number: 10).upcase,
     owner_manufacturer: Faker::Company.name,
@@ -52,43 +65,63 @@ user_ids.each do |user_id|
   )
 end
 
-# 固定ユーザーのflight_log 3件作成
-fixed_aircraft = fixed_user.aircraft
+# 固定ユーザー2名のFlightLog・FlightRecord・DailyInspection・InspectionMaintenanceを作成
+[ test_user, guest_user ].each do |user|
+  aircraft = user.aircraft
 
-3.times do
-  flight_log = FlightLog.create!(
-    aircraft_id: fixed_aircraft.id,
-    flight_date: Faker::Date.backward(days: 365)
-  )
+  3.times do
+    flight_log = FlightLog.create!(
+      aircraft_id: aircraft.id,
+      flight_date: Faker::Date.backward(days: 365)
+    )
 
-  takeoff_hour = rand(6..16)
-  flight_hour = rand(1..3)
-  takeoff_time = format("%02d:00:00", takeoff_hour)
-  landing_time = format("%02d:00:00", takeoff_hour + flight_hour)
-  flight_time  = format("00:%02d:00", flight_hour * 60)
+    takeoff_hour = rand(6..16)
+    flight_hour  = rand(1..3)
+    takeoff_time = format("%02d:00:00", takeoff_hour)
+    landing_time = format("%02d:00:00", takeoff_hour + flight_hour)
+    flight_time  = format("00:%02d:00", flight_hour * 60)
+    locations    = [ "神奈川県相模原市中央区田名5835", "神奈川県中郡二宮町", "東京都千代田区" ].sample(2)
 
-  locations = ["神奈川県相模原市中央区田名5835", "神奈川県中郡二宮町", "東京都千代田区"].sample(2)
+    FlightRecord.create!(
+      flight_log_id: flight_log.id,
+      pilot_name: Faker::Name.name,
+      takeoff_time: takeoff_time,
+      landing_time: landing_time,
+      flight_time: flight_time,
+      takeoff_location: locations[0],
+      landing_location: locations[1],
+      flight_summary: Faker::Lorem.sentence,
+      has_safety_incident: false
+    )
+  end
 
-  FlightRecord.create!(
-    flight_log_id: flight_log.id,
-    pilot_name: Faker::Name.name,
-    takeoff_time: takeoff_time,
-    landing_time: landing_time,
-    flight_time: flight_time,
-    takeoff_location: locations[0],
-    landing_location: locations[1],
-    flight_summary: Faker::Lorem.sentence,
-    has_safety_incident: false
-  )
-end
+  3.times do
+    DailyInspection.create!(
+      aircraft_id: aircraft.id,
+      inspection_date: Faker::Date.backward(days: 365),
+      inspection_location: [ "神奈川県相模原市中央区田名5835", "神奈川県中郡二宮町", "東京都千代田区" ].sample,
+      inspector: Faker::Name.name,
+      special_notes: Faker::Lorem.sentence
+    )
+  end
 
-# fixed_aircraftの作成以降に追加
-3.times do
-  DailyInspection.create!(
-    aircraft_id: fixed_aircraft.id,
-    inspection_date: Faker::Date.backward(days: 365),
-    inspection_location: ["神奈川県相模原市中央区田名5835", "神奈川県中郡二宮町", "東京都千代田区"].sample,
-    inspector: Faker::Name.name,
-    special_notes: Faker::Lorem.sentence
-  )
+  3.times do
+    inspection_maintenance = InspectionMaintenance.create!(
+      aircraft_id: aircraft.id,
+      special_notes: Faker::Lorem.sentence
+    )
+
+    rand(1..3).times do
+      InspectionMaintenanceItem.create!(
+        inspection_maintenance_id: inspection_maintenance.id,
+        item_date: Faker::Date.backward(days: 365),
+        item_total_flight_time: format("%02d:%02d:00", rand(0..99), rand(0..59)),
+        item_maintenance_details: [ "定期点検", "バッテリー交換", "モーター点検", "プロペラ交換" ].sample,
+        item_reson_implementation: [ "定期メンテナンス", "不具合発生", "飛行時間超過", "外観異常" ].sample,
+        item_location: [ "神奈川県相模原市中央区田名5835", "神奈川県中郡二宮町", "東京都千代田区" ].sample,
+        item_organizer: Faker::Name.name,
+        item_note: Faker::Lorem.sentence
+      )
+    end
+  end
 end
