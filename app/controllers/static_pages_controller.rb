@@ -1,5 +1,7 @@
 class StaticPagesController < ApplicationController
   def aircraft_list_index
+    #   @aircrafts = Aircraft.includes(:user)
+    @aircrafts = [ current_user.aircraft ].compact
   end
 
   def aircraft_show
@@ -13,6 +15,8 @@ class StaticPagesController < ApplicationController
 
 
   def flight_log_index
+    @aircrafts = [ current_user.aircraft ].compact   # view側アソシエーション対応とした。box2 renderで必要。2026.6/24
+    @flight_logs = current_user.aircraft.flight_logs
   end
 
   def flight_log_show
@@ -26,6 +30,8 @@ class StaticPagesController < ApplicationController
 
 
   def daily_inspection_index
+    @aircrafts = [ current_user.aircraft ].compact   # view側アソシエーション対応とした。box2 renderで必要。2026.6/24
+    @daily_inspections = current_user.aircraft.daily_inspections
   end
 
   def daily_inspection_show
@@ -38,16 +44,18 @@ class StaticPagesController < ApplicationController
   end
 
 
-  def inspection_and_maintenance_index
+  def inspection_maintenance_index
+    @aircrafts = [ current_user.aircraft ].compact
+    @inspection_maintenances = current_user.aircraft.inspection_maintenance
   end
 
-  def inspection_and_maintenance_show
+  def inspection_maintenance_show
   end
 
-  def inspection_and_maintenance_new
+  def inspection_maintenance_new
   end
 
-  def inspection_and_maintenance_edit
+  def inspection_maintenance_edit
   end
 
   def delete_confirm_index

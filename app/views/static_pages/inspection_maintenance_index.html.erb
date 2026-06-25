@@ -1,0 +1,89 @@
+<turbo-frame id="main_content"> 
+  <div class="wrapper">
+
+    <div class="box1 overflow-x-auto">
+      <%= render 'shared/side_menu' %> 
+    </div>
+
+    <div class="box2 overflow-x-auto">
+    <!-- box2貼り付け部 -->
+        <ul class="main-nav font-english">
+
+          <li><span class="fs-3" style="margin-right: 150px;">点検整備一覧</span></li>
+          <li>
+            <label class="fs-5">開始日</label> 
+            <input type="date" id="startDate">
+          </li>
+          <li>
+            <label class="fs-5" style="margin-left: 10px;">終了日</label>
+            <input type="date" id="endDate" style="margin-right: 20px;">
+          </li>
+          <li>
+            <button type="button" class="btn btn-secondary btn-sm">検索</button>
+          </li>
+          <li>
+
+            <%= button_to "新規作成", inspection_maintenance_new_path, method: :get,
+              class: "btn btn-primary btn-sm ms-3",
+              form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
+          </li>
+
+          <li>
+            <%= render 'shared/aircraft_menu' %> 
+          </li>
+
+        </ul>
+    </div>
+
+    <div class="box3 overflow-x-auto box3--plain">
+    <!-- box3貼り付け部 -->
+
+    <!-- 点検装備一覧 2026.6/24 dbデータ表示 -->
+
+    <% if @inspection_maintenances.present? %> 
+      <table class="table table-bordered table-sm">
+        <thead>
+          <tr class="text-center">
+            <th scope="col">ID</th>
+            <th scope="col">実施日</th>
+            <th scope="col">実施機体</th>
+            <th scope="col">点検、修理、改造及び整備の内容</th>
+            <th scope="col">実施理由</th>
+            <th scope="col">操作</th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+          <% @inspection_maintenances.inspection_maintenance_items.each do |inspection_maintenance_item| %>
+              <tr>
+                <th class="text-center" scope="row"> <%= @inspection_maintenances.id %>   </th>
+                <td>  <%= inspection_maintenance_item.item_date %>                        </td>
+
+                <td>  <%= @inspection_maintenances.aircraft.model_purchased %>            </td>
+                <td>  <%= inspection_maintenance_item.item_maintenance_details %>         </td>
+                <td>  <%= inspection_maintenance_item.item_reson_implementation %>        </td>
+
+                <td class="d-flex gap-3">
+                  <%= button_to "詳細", inspection_maintenance_show_path(@inspection_maintenances.id), method: :get,
+                    class: "btn btn-info btn-sm ms-3",
+                    form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
+
+                  <%= button_to "編集", inspection_maintenance_edit_path(@inspection_maintenances.id), method: :get,
+                    class: "btn btn-success btn-sm ms-3",
+                    form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
+
+                  <button type="button" class="btn btn-danger btn-sm ms-3"
+                    onclick="window.open('<%= delete_confirm_index_path(@inspection_maintenances.id) %>', '_blank', 'width=600,height=500,scrollbars=yes,resizable=yes')">削除
+                  </button>
+                </td>
+              </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+    <% else %>
+      <div class="mb-3">データがありません。(機体登録を先に実施ください)</div>
+    <% end %>
+
+    </div>
+  </div>
+</turbo-frame>

@@ -1,0 +1,6 @@
+            <select class="form-select border-0" aria-label="機体選択">
+              <option selected>飛行機体選択</option>
+              <% @aircrafts.each do |aircraft| %>
+                <option value="<%= aircraft.id %>"><%= aircraft.model_purchased %></option>
+              <% end %>
+            </select>

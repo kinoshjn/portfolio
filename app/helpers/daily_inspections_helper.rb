@@ -1,0 +1,2 @@
+module DailyInspectionsHelper
+end

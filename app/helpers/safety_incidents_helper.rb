@@ -1,0 +1,2 @@
+module SafetyIncidentsHelper
+end
