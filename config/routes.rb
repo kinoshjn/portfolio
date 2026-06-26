@@ -14,13 +14,13 @@ Rails.application.routes.draw do
   post "login", to: "user_sessions#create"
   delete "logout", to: "user_sessions#destroy"
 
-  resources :aircrafts, only: %i[index]
-  resources :flight_logs, only: %i[index]
+  resources :aircrafts, only: %i[index show]
+  resources :flight_logs, only: %i[index show]
   resources :flight_records, only: %i[index]
   resources :safety_incidents, only: %i[index]
-  resources :daily_inspections, only: %i[index]
+  resources :daily_inspections, only: %i[index show]
   resources :daily_inspection_items, only: %i[index]
-  resources :inspection_maintenances, only: %i[index]
+  resources :inspection_maintenances, only: %i[index show]
   resources :inspection_maintenance_items, only: %i[index]
 
   get "aircraft_list_index", to: "static_pages#aircraft_list_index"

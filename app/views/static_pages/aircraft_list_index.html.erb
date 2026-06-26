@@ -57,7 +57,7 @@
                   <td>  <%= aircraft.owner_date_purchased %>  </td>
                   <td class="d-flex gap-3 justify-content-left">
 
-                    <%= button_to "詳細", aircraft_show_path(aircraft.id), method: :get,
+                    <%= button_to "詳細", aircraft_path(aircraft.id), method: :get,
                       class: "btn btn-info btn-sm ms-3",
                       form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
 

@@ -5,6 +5,7 @@ class StaticPagesController < ApplicationController
   end
 
   def aircraft_show
+    @aircrafts =  Aircraft.find(params[:id])
   end
 
   def aircraft_new

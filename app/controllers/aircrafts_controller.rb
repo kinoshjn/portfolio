@@ -6,4 +6,10 @@ class AircraftsController < ApplicationController
     #    @aircrafts = Aircraft.includes(:user)
     render "static_pages/aircraft_list_index"
   end
+
+  def show
+    @aircraft = Aircraft.find(params[:id])
+    render "static_pages/aircraft_show"
+  end
+
 end
