@@ -15,15 +15,16 @@
 
 .main-nav {
     display: flex;                /* メニュー項目を横に並べる */
-    align-items: center;        /* ← これを追加 */
-    gap: 1rem;                  /* 項目同士の隙間を空ける */
+    align-items: center;          /* 中央揃え */
+    gap: 0.5rem;                  /* 項目同士の隙間を空ける */
     list-style: none;             /* リセットCSSがある場合も念のため記述 */
     font-size: 1rem;              /* PC版の大きなサイズに固定 */
+    padding-left: 0;              /* 2026.6/26 左文字隙間うめ */
 }
 
 .main-nav a {
     color: white;
-    transition: color 0.3s;       /* ふわっと色を変えるための隠し味 */
+    transition: color 0.3s;       /* ふわっと色を変えるための隠し味 *
 }
 
 .main-nav a:hover {
@@ -42,7 +43,8 @@
       /* grid-template-rows:    1fr  4fr; */
 
       /*        長さ指定          */
-      grid-template-columns: 1fr  4fr;
+/*      grid-template-columns: 1fr  4fr;  */  
+      grid-template-columns: 1fr  5fr;  
 /*    grid-template-rows:    60px  400px;   */
       grid-template-rows:    60px  auto;
 
