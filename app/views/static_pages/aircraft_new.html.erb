@@ -14,7 +14,9 @@
             <button type="button" class="btn btn-primary">作成する</button>
           </li>
           <li>
-            <button type="button" class="btn btn-secondary" style="margin-left: 100px;">前の画面に戻る</button>
+            <%= button_to "前の画面に戻る", aircraft_list_index_path, method: :get,
+              class: "btn btn-secondary",style: "margin-left: 100px;",
+              form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
           </li>
         </ul>
     </div>
