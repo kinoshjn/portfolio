@@ -11,5 +11,4 @@ class AircraftsController < ApplicationController
     @aircraft = Aircraft.find(params[:id])
     render "static_pages/aircraft_show"
   end
-
 end
