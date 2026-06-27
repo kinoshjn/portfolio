@@ -5,4 +5,9 @@ class DailyInspectionsController < ApplicationController
     #    @daily_inspections = Daily_inspection.includes(:aircraft)
     render "static_pages/daily_inspection_index"
   end
+
+  def show
+    @daily_inspection = DailyInspection.find(params[:id])
+    render "static_pages/daily_inspection_show"
+  end
 end

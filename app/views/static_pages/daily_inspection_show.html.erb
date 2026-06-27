@@ -36,76 +36,77 @@
           </tr>
         </thead>
 
+        <!-- 日常点検詳細 2026.6/27 dbデータ表示 -->
+        <!-- ループ記述だとdb順固定なので個別パラメータ定義にした(カラム指定不足もある) -->
+
         <tbody class="table-group-divider text-left">
           <tr>
             <th scope="row">機体全般</th>
             <td>機器の取り付け状態（ネジ、コネクタ、ケーブル等）</td>
-            <td class="text-center">合格</td>
-            <td></td>
+            <td class="text-center"> <%= @daily_inspection.daily_inspection_items.find_by(item_name: "機体全般")&.result %>   </td>
+            <td>  <%= @daily_inspection.daily_inspection_items.find_by(item_name: "機体全般")&.note %>                        </td>
           </tr>
 
           <tr>
             <th scope="row">プロペラ</th>
             <td>外観、損傷、ゆがみ</td>
-            <td class="text-center">合格</td>
-            <td></td>
+            <td class="text-center"> <%= @daily_inspection.daily_inspection_items.find_by(item_name: "プロペラ")&.result %>    </td>
+            <td><%= @daily_inspection.daily_inspection_items.find_by(item_name: "プロペラ")&.note %>                           </td>
           </tr>
 
           <tr>
             <th scope="row">フレーム</th>
             <td>外観、損傷、ゆがみ</td>
-            <td class="text-center">合格</td>
-            <td></td>
+            <td class="text-center"><%= @daily_inspection.daily_inspection_items.find_by(item_name: "フレーム")&.result %>      </td>
+            <td><%= @daily_inspection.daily_inspection_items.find_by(item_name: "フレーム")&.note %>                            </td>
           </tr>
 
           <tr>
             <th scope="row">通信系統</th>
             <td>機体と操縦装置の通信品質の健全性</td>
-            <td class="text-center">合格</td>
-            <td></td>
+            <td class="text-center"><%= @daily_inspection.daily_inspection_items.find_by(item_name: "通信系統")&.result %>      </td>
+            <td><%= @daily_inspection.daily_inspection_items.find_by(item_name: "通信系統")&.note %>                            </td>
           </tr>
           <tr>
 
           <tr>
             <th scope="row">推進系統</th>
             <td>モーター又は発動機の健全性</td>
-            <td class="text-center">合格</td>
-            <td></td>
+            <td class="text-center"><%= @daily_inspection.daily_inspection_items.find_by(item_name: "推進系統")&.result %>      </td>
+            <td><%= @daily_inspection.daily_inspection_items.find_by(item_name: "推進系統")&.note %>                            </td>
           </tr>
 
           <tr>
             <th scope="row">電源系統</th>
             <td>機体及び操縦装置の電源の健全性</td>
-            <td class="text-center">合格</td>
-            <td></td>
+            <td class="text-center"><%= @daily_inspection.daily_inspection_items.find_by(item_name: "電源系統")&.result %>      </td>
+            <td><%= @daily_inspection.daily_inspection_items.find_by(item_name: "電源系統")&.note %>                            </td>
           </tr>
  
-
           <tr>
             <th scope="row">自動制御系統</th>
             <td>飛行制御装置の健全性</td>
-            <td class="text-center">合格</td>
-            <td></td>
+            <td class="text-center"><%= @daily_inspection.daily_inspection_items.find_by(item_name: "自動制御系統")&.result %>  </td>
+            <td><%= @daily_inspection.daily_inspection_items.find_by(item_name: "自動制御系統")&.note %>                        </td>
           </tr>
           <tr>
 
           <tr>
             <th scope="row">操作装置</th>
             <td>外観、スティックの健全性、スイッチの健全性</td>
-            <td class="text-center">合格</td>
-            <td></td>
+            <td class="text-center"><%= @daily_inspection.daily_inspection_items.find_by(item_name: "操作装置")&.result %>      </td>
+            <td><%= @daily_inspection.daily_inspection_items.find_by(item_name: "操作装置")&.note %>                            </td>
           </tr>
 
           <tr>
             <th scope="row">バッテリー・燃料</th>
             <td>バッテリーの充電状況、残燃料表示機能の健全性</td>
-            <td class="text-center">合格</td>
-            <td></td>
+            <td class="text-center"><%= @daily_inspection.daily_inspection_items.find_by(item_name: "バッテリー・燃料")&.result %> </td>
+            <td><%= @daily_inspection.daily_inspection_items.find_by(item_name: "バッテリー・燃料")&.note %>                </td>
           </tr>
 
        </tbody>
       </table>
-
 
       <table class="table table-bordered table-sm" >
         <thead>
@@ -118,27 +119,28 @@
         <tbody class="table-group-divider text-left">
           <tr>
             <th scope="row">飛行機体</th>
-            <td>DJI mini3</td>
+            <td scope="col">   <%= @daily_inspection.aircraft.model_purchased %>  </td>
           </tr>
+
           <tr>
             <th scope="row">無人飛行機の登録番号</th>
-            <td>xxxxxxx</td>
+            <td>  <%= @daily_inspection.aircraft.dips_registration_number %>      </td>
           </tr>
           <tr>
-            <th scope="row">点検日</th>
-            <td>2026/05/31</td>
+            <th scope="row">点検実施日</th>
+            <td>  <%= @daily_inspection.inspection_date %>                  </td>
           </tr>
           <tr>
             <th scope="row">点検場所</th>
-            <td>神奈川県相模原市中央区田名5835</td>
+            <td>  <%= @daily_inspection.inspection_location %>              </td>
           </tr>
           <tr>
             <th scope="row">点検者</th>
-            <td>山田太郎</td>
+            <td>  <%= @daily_inspection.inspector %>                        </td>
           </tr>
           <tr>
             <th scope="row">特記事項</th>
-            <td></td>
+            <td>  <%= @daily_inspection.special_notes  %>                   </td>
           </tr>
         </tbody>
       </table>

@@ -62,7 +62,7 @@
               <td class="text-start">  <%= daily_inspection.inspection_location %>  </td>
 
               <td class="d-flex gap-3 justify-content-left">
-                <%= button_to "詳細", daily_inspection_show_path(daily_inspection.id), method: :get,
+                <%= button_to "詳細", daily_inspection_path(daily_inspection.id), method: :get,
                   class: "btn btn-info btn-sm ms-3",
                   form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
 

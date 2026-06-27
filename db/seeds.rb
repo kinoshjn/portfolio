@@ -1,6 +1,6 @@
-
 InspectionMaintenanceItem.destroy_all
 InspectionMaintenance.destroy_all
+DailyInspectionItem.destroy_all
 DailyInspection.destroy_all
 FlightRecord.destroy_all
 FlightLog.destroy_all
@@ -96,13 +96,25 @@ end
   end
 
   3.times do
-    DailyInspection.create!(
+    daily_inspection = DailyInspection.create!(
       aircraft_id: aircraft.id,
       inspection_date: Faker::Date.backward(days: 365),
       inspection_location: [ "神奈川県相模原市中央区田名5835", "神奈川県中郡二宮町", "東京都千代田区" ].sample,
       inspector: Faker::Name.name,
       special_notes: Faker::Lorem.sentence
     )
+
+    [
+      "機体全般", "プロペラ", "フレーム", "通信系統",
+      "推進系統", "電源系統", "自動制御系統", "操作装置", "バッテリー・燃料"
+    ].each do |item_name|
+      DailyInspectionItem.create!(
+        daily_inspection_id: daily_inspection.id,
+        item_name: item_name,
+        result: [ "合格", "不合格" ].sample,
+        note: Faker::Lorem.sentence
+      )
+    end
   end
 
   3.times do

@@ -29,13 +29,15 @@ class StaticPagesController < ApplicationController
   def flight_log_edit
   end
 
-
   def daily_inspection_index
     @aircrafts = [ current_user.aircraft ].compact   # view側アソシエーション対応とした。box2 renderで必要。2026.6/24
     @daily_inspections = current_user.aircraft.daily_inspections
   end
 
   def daily_inspection_show
+    @aircrafts = [ current_user.aircraft ].compact   # view側アソシエーション対応とした。box2 renderで必要。2026.6/24
+    @daily_inspection = Daily_inspection.find(params[:id])
+    # daily_inspection_itemsはview側でアソシエーションで記述した。
   end
 
   def daily_inspection_new
