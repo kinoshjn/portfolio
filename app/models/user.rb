@@ -15,4 +15,20 @@ class User < ApplicationRecord
       last_login_date: Date.today
     )
   end
+
+  # ユーザログイン数によって画像変更 2026.6/27追記
+  def avatar_icon_path
+    case login_count
+    when  0     then  "avatars/avatar_LV0.png"
+    when  1     then  "avatars/avatar_LV1.png"
+    when  2     then  "avatars/avatar_LV2.png"
+    when  3     then  "avatars/avatar_LV3.png"
+    when  4     then  "avatars/avatar_LV4.png"
+    when  5     then  "avatars/avatar_LV5.png"
+    when  6     then  "avatars/avatar_LV6.png"
+    when  7     then  "avatars/avatar_LV7.png"
+    when  8     then  "avatars/avatar_LV8.png"
+    else              "avatars/avatar_LV9.png"
+    end
+  end
 end
