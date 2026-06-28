@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_06_20_095513) do
+ActiveRecord::Schema[7.2].define(version: 2026_06_28_114202) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -77,8 +77,8 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_20_095513) do
     t.string "pilot_name", null: false
     t.time "takeoff_time", null: false
     t.time "landing_time", null: false
-    t.time "flight_time"
-    t.time "total_flight_time"
+    t.integer "flight_time"
+    t.integer "total_flight_time"
     t.string "takeoff_location", null: false
     t.string "landing_location", null: false
     t.string "flight_summary", null: false
@@ -91,7 +91,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_20_095513) do
 
   create_table "inspection_maintenance_items", force: :cascade do |t|
     t.date "item_date", null: false
-    t.time "item_total_flight_time"
+    t.integer "item_total_flight_time"
     t.string "item_maintenance_details", null: false
     t.string "item_reson_implementation", null: false
     t.string "item_location", null: false

@@ -9,8 +9,7 @@
     <!-- box2貼り付け部 -->
         <ul class="main-nav font-english">
           <li><span class="fs-3" style="margin-right: 10px;">日常点検詳細</span></li>
-          <li><span class="fs-4" style="margin-right: 20px;">ID: 1</span></li>
-
+          <li><span class="fs-4" style="margin-right: 20px;">ID: <%= @daily_inspection.id %> </span></li>
           <li>
               <%= button_to "編集", daily_inspection_edit_path, method: :get,
                 class: "btn btn-success btn-sm ms-3",

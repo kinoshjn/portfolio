@@ -53,29 +53,31 @@
           </tr>
         </thead>
         <tbody class="table-group-divider">
-          <% @inspection_maintenances.inspection_maintenance_items.each do |inspection_maintenance_item| %>
-              <tr>
-                <th class="text-center" scope="row"> <%= @inspection_maintenances.id %>   </th>
-                <td>  <%= inspection_maintenance_item.item_date %>                        </td>
 
-                <td>  <%= @inspection_maintenances.aircraft.model_purchased %>            </td>
+        <%# 各機体の点検整備の明細を最初の1件のみ表示 %>
+          <% @aircrafts.each do |aircraft| %>
+            <% aircraft.inspection_maintenance.inspection_maintenance_items.first(1).each do |inspection_maintenance_item| %>
+              <tr>
+                <th class="text-center" scope="row"> <%= aircraft.inspection_maintenance.id %></th>
+                <td>  <%= inspection_maintenance_item.item_date %>                        </td>
+                <td>  <%= aircraft.model_purchased %>                                     </td>
                 <td>  <%= inspection_maintenance_item.item_maintenance_details %>         </td>
                 <td>  <%= inspection_maintenance_item.item_reson_implementation %>        </td>
-
                 <td class="d-flex gap-3">
-                  <%= button_to "詳細", inspection_maintenance_show_path(@inspection_maintenances.id), method: :get,
+                  <%= button_to "詳細", inspection_maintenance_path(aircraft.inspection_maintenance.id), method: :get,
                     class: "btn btn-info btn-sm ms-3",
                     form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
 
-                  <%= button_to "編集", inspection_maintenance_edit_path(@inspection_maintenances.id), method: :get,
+                  <%= button_to "編集", inspection_maintenance_edit_path(aircraft.inspection_maintenance.id), method: :get,
                     class: "btn btn-success btn-sm ms-3",
                     form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
 
                   <button type="button" class="btn btn-danger btn-sm ms-3"
-                    onclick="window.open('<%= delete_confirm_index_path(@inspection_maintenances.id) %>', '_blank', 'width=600,height=500,scrollbars=yes,resizable=yes')">削除
+                    onclick="window.open('<%= delete_confirm_index_path(aircraft.inspection_maintenance.id) %>', '_blank', 'width=600,height=500,scrollbars=yes,resizable=yes')">削除
                   </button>
                 </td>
               </tr>
+            <% end %>
           <% end %>
         </tbody>
       </table>

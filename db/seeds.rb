@@ -79,7 +79,6 @@ end
     flight_hour  = rand(1..3)
     takeoff_time = format("%02d:00:00", takeoff_hour)
     landing_time = format("%02d:00:00", takeoff_hour + flight_hour)
-    flight_time  = format("00:%02d:00", flight_hour * 60)
     locations    = [ "神奈川県相模原市中央区田名5835", "神奈川県中郡二宮町", "東京都千代田区" ].sample(2)
 
     FlightRecord.create!(
@@ -87,7 +86,7 @@ end
       pilot_name: Faker::Name.name,
       takeoff_time: takeoff_time,
       landing_time: landing_time,
-      flight_time: flight_time,
+      flight_time: rand(30..180),
       takeoff_location: locations[0],
       landing_location: locations[1],
       flight_summary: Faker::Lorem.sentence,
@@ -117,17 +116,16 @@ end
     end
   end
 
-  3.times do
     inspection_maintenance = InspectionMaintenance.create!(
       aircraft_id: aircraft.id,
       special_notes: Faker::Lorem.sentence
     )
 
-    rand(1..3).times do
+    3.times do
       InspectionMaintenanceItem.create!(
         inspection_maintenance_id: inspection_maintenance.id,
         item_date: Faker::Date.backward(days: 365),
-        item_total_flight_time: format("%02d:%02d:00", rand(0..99), rand(0..59)),
+        item_total_flight_time: rand(0..9999),
         item_maintenance_details: [ "定期点検", "バッテリー交換", "モーター点検", "プロペラ交換" ].sample,
         item_reson_implementation: [ "定期メンテナンス", "不具合発生", "飛行時間超過", "外観異常" ].sample,
         item_location: [ "神奈川県相模原市中央区田名5835", "神奈川県中郡二宮町", "東京都千代田区" ].sample,
@@ -135,5 +133,4 @@ end
         item_note: Faker::Lorem.sentence
       )
     end
-  end
 end

@@ -53,6 +53,8 @@ class StaticPagesController < ApplicationController
   end
 
   def inspection_maintenance_show
+    @aircrafts = [ current_user.aircraft ].compact
+    @inspection_maintenance = InspectionMaintenance.find(params[:id])
   end
 
   def inspection_maintenance_new
