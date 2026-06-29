@@ -1,0 +1,38 @@
+<tr style="text-align: center;">
+  <th scope="col">型式</th>
+  <td style="text-align: center;">
+    <div style="display: flex; align-items: center;">
+      <select id="dips_type_select" class="form-select form-select-sm border border-secondary text-center" aria-label="種類選択">
+        <option value="">型式選択</option>
+        <option value="1">なし(型式認証なし)</option>
+        <option value="2">その他</option>
+      </select>
+      <div id="dips_type_input_wrapper" style="display: none; width: 100%;">
+        <input type="text" id="dips_type_input" class="form-control form-control-sm border border-secondary text-center" placeholder="型式を入力" style="width: calc(100% - 30px); display: inline-block;">
+        <span id="dips_type_reset" style="cursor: pointer; font-size: 12px;">▽</span>
+      </div>
+    </div>
+  </td>
+</tr>
+
+<script>
+  const select = document.getElementById('dips_type_select');
+  const input = document.getElementById('dips_type_input');
+  const wrapper = document.getElementById('dips_type_input_wrapper');
+  const reset = document.getElementById('dips_type_reset');
+
+  select.addEventListener('change', function() {
+    if (this.value === '2') {
+      select.style.display = 'none';
+      wrapper.style.display = 'block';
+      input.focus();
+    }
+  });
+
+  reset.addEventListener('click', function() {
+    wrapper.style.display = 'none';
+    input.value = '';
+    select.style.display = 'block';
+    select.value = '';
+  });
+</script>

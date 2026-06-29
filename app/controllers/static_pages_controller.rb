@@ -21,6 +21,8 @@ class StaticPagesController < ApplicationController
   end
 
   def flight_log_show
+    @aircrafts = [ current_user.aircraft ].compact   # view側アソシエーション対応とした。box2 renderで必要。2026.6/24
+    @flight_log = Flight_lo.find(params[:id])
   end
 
   def flight_log_new

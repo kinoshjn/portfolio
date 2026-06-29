@@ -75,23 +75,36 @@ end
       flight_date: Faker::Date.backward(days: 365)
     )
 
-    takeoff_hour = rand(6..16)
-    flight_hour  = rand(1..3)
-    takeoff_time = format("%02d:00:00", takeoff_hour)
-    landing_time = format("%02d:00:00", takeoff_hour + flight_hour)
-    locations    = [ "神奈川県相模原市中央区田名5835", "神奈川県中郡二宮町", "東京都千代田区" ].sample(2)
+    rand(2..4).times do
+      takeoff_hour = rand(6..16)
+      flight_hour  = rand(1..3)
+      takeoff_time = format("%02d:00:00", takeoff_hour)
+      landing_time = format("%02d:00:00", takeoff_hour + flight_hour)
+      locations    = [ "神奈川県相模原市中央区田名5835", "神奈川県中郡二宮町", "東京都千代田区" ].sample(2)
 
-    FlightRecord.create!(
-      flight_log_id: flight_log.id,
-      pilot_name: Faker::Name.name,
-      takeoff_time: takeoff_time,
-      landing_time: landing_time,
-      flight_time: rand(30..180),
-      takeoff_location: locations[0],
-      landing_location: locations[1],
-      flight_summary: Faker::Lorem.sentence,
-      has_safety_incident: false
-    )
+      flight_record = FlightRecord.create!(
+        flight_log_id: flight_log.id,
+        pilot_name: Faker::Name.name,
+        takeoff_time: takeoff_time,
+        landing_time: landing_time,
+        flight_time: rand(30..180),
+        total_flight_time: rand(100..300),
+        takeoff_location: locations[0],
+        landing_location: locations[1],
+        flight_summary: Faker::Lorem.sentence,
+        has_safety_incident: [ false, true ].sample
+      )
+
+      if flight_record.has_safety_incident
+        SafetyIncident.create!(
+          flight_record_id: flight_record.id,
+          details_issues: [ "プロペラガード亀裂", "モーター異音", "バッテリー膨張", "フレーム破損", "通信断絶" ].sample,
+          details_date_resolution: Faker::Date.backward(days: 30),
+          details_processing: [ "部品交換", "修理", "経過観察", "飛行停止" ].sample,
+          details_verifier: Faker::Name.name
+        )
+      end
+    end
   end
 
   3.times do
@@ -116,21 +129,21 @@ end
     end
   end
 
-    inspection_maintenance = InspectionMaintenance.create!(
-      aircraft_id: aircraft.id,
-      special_notes: Faker::Lorem.sentence
-    )
+  inspection_maintenance = InspectionMaintenance.create!(
+    aircraft_id: aircraft.id,
+    special_notes: Faker::Lorem.sentence
+  )
 
-    3.times do
-      InspectionMaintenanceItem.create!(
-        inspection_maintenance_id: inspection_maintenance.id,
-        item_date: Faker::Date.backward(days: 365),
-        item_total_flight_time: rand(0..9999),
-        item_maintenance_details: [ "定期点検", "バッテリー交換", "モーター点検", "プロペラ交換" ].sample,
-        item_reson_implementation: [ "定期メンテナンス", "不具合発生", "飛行時間超過", "外観異常" ].sample,
-        item_location: [ "神奈川県相模原市中央区田名5835", "神奈川県中郡二宮町", "東京都千代田区" ].sample,
-        item_organizer: Faker::Name.name,
-        item_note: Faker::Lorem.sentence
-      )
-    end
+  3.times do
+    InspectionMaintenanceItem.create!(
+      inspection_maintenance_id: inspection_maintenance.id,
+      item_date: Faker::Date.backward(days: 365),
+      item_total_flight_time: rand(0..9999),
+      item_maintenance_details: [ "定期点検", "バッテリー交換", "モーター点検", "プロペラ交換" ].sample,
+      item_reson_implementation: [ "定期メンテナンス", "不具合発生", "飛行時間超過", "外観異常" ].sample,
+      item_location: [ "神奈川県相模原市中央区田名5835", "神奈川県中郡二宮町", "東京都千代田区" ].sample,
+      item_organizer: Faker::Name.name,
+      item_note: Faker::Lorem.sentence
+    )
+  end
 end

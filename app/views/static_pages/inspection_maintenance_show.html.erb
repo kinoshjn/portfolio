@@ -8,8 +8,8 @@
     <div class="box2 overflow-x-auto">
     <!-- box2貼り付け部 -->
         <ul class="main-nav font-english">
-          <li><span class="fs-3" style="margin-right: 10px;">点検整備詳細</span></li>
-          <li><span class="fs-4" style="margin-right: 20px;">ID: <%= @inspection_maintenance.id %> </span></li>
+          <li><span class="fs-3" style="margin-right: 10px;">点検装備詳細</span></li>
+          <li><span class="fs-4" style="margin-right: 20px;">点検装備ID: <%= @inspection_maintenance.id %> </span></li>
           <li>
             <%= button_to "編集", inspection_maintenance_edit_path, method: :get,
               class: "btn btn-success btn-sm ms-3",
@@ -35,8 +35,8 @@
 
         <thead>
           <tr class="text-center">
-            <th scope="col"; style="width: 135px; height: auto;" >実施日</th>
-            <th scope="col"; style="width: 100px; height: auto;">総飛行時間</th>
+            <th scope="col"; style="width: 110px; height: auto;" >実施日</th>
+            <th scope="col"; style="width: 120px; height: auto;">総飛行時間</th>
             <th scope="col"; style="height: auto;">点検、修理、改造及び整備の内容</th>
             <th scope="col"; style="width: 260px; height: auto;">実施理由</th>
             <th scope="col"; style="width: 240px; height: auto;">実施場所</th>
@@ -52,7 +52,7 @@
           <tbody class="table-group-divider text-left">
             <tr>
               <td> <%= inspection_maintenance_item.item_date %>                 </td>
-              <td> <%= inspection_maintenance_item.item_total_flight_time %>    </td>
+              <td> <%= inspection_maintenance_item.item_total_flight_time %>分  </td>
               <td> <%= inspection_maintenance_item.item_maintenance_details %>  </td>
               <td> <%= inspection_maintenance_item.item_reson_implementation %> </td>
               <td> <%= inspection_maintenance_item.item_location %>             </td>

@@ -58,17 +58,10 @@
               </td>
             </tr>
   
-            <tr style="text-align: center;">
-              <th scope="col">型式</th>
-              <td style="text-align: center;">
-                <select class="form-select form-select-sm border  border-secondary    text-center" aria-label="種類選択">
-                  <option selected>型式選択</option>
-                  <option value="1">なし(型式認証なし)</option>
-                  <option value="2"> </option>
-                </select>
-              </td>
-            </tr>
+            <%= render 'shared/dips_model_select' %> 
   
+            <%= render 'shared/dips_type_approval_number_select' %> 
+            <!--    プルダウンメニューの修正前
             <tr style="text-align: center;">
               <th scope="col">型式認証番号</th>
               <td style="text-align: center;">
@@ -79,7 +72,10 @@
                 </select>
               </td>
             </tr>
+             -->
 
+            <%= render 'shared/dips_aircraft_registration_category_select' %> 
+            <!--    プルダウンメニューの修正前
             <tr style="text-align: center;">
               <th scope="col">機体認証の区分及び機体認証番号</th>
               <td style="text-align: center;">
@@ -90,6 +86,7 @@
                 </select>
               </td>
             </tr>
+             -->
 
             <tr style="text-align: center;">
               <th scope="col">設計製造者</th>

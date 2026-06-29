@@ -1,0 +1,38 @@
+<tr style="text-align: center;">
+  <th scope="col">機体認証の区分及び機体認証番号</th>
+  <td style="text-align: center;">
+    <div style="display: flex; align-items: center;">
+      <select id="dips_aircraft_registration_select" class="form-select form-select-sm border border-secondary text-center" aria-label="種類選択">
+        <option value="">機体認証の区分選択</option>
+        <option value="1">なし(型式認証なし)</option>
+        <option value="2">その他</option>
+      </select>
+      <div id="dips_aircraft_registration_input_wrapper" style="display: none; width: 100%;">
+        <input type="text" id="dips_aircraft_registration_input" class="form-control form-control-sm border border-secondary text-center" placeholder="機体認証番号を入力" style="width: calc(100% - 30px); display: inline-block;">
+        <span id="dips_aircraft_registration_reset" style="cursor: pointer; font-size: 12px;">▽</span>
+      </div>
+    </div>
+  </td>
+</tr>
+
+<script>
+  const selectRegistration = document.getElementById('dips_aircraft_registration_select');
+  const inputRegistration = document.getElementById('dips_aircraft_registration_input');
+  const wrapperRegistration = document.getElementById('dips_aircraft_registration_input_wrapper');
+  const resetRegistration = document.getElementById('dips_aircraft_registration_reset');
+
+  selectRegistration.addEventListener('change', function() {
+    if (this.value === '2') {
+      selectRegistration.style.display = 'none';
+      wrapperRegistration.style.display = 'block';
+      inputRegistration.focus();
+    }
+  });
+
+  resetRegistration.addEventListener('click', function() {
+    wrapperRegistration.style.display = 'none';
+    inputRegistration.value = '';
+    selectRegistration.style.display = 'block';
+    selectRegistration.value = '';
+  });
+</script>

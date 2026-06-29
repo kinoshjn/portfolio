@@ -9,7 +9,7 @@
     <!-- box2貼り付け部 -->
         <ul class="main-nav font-english">
           <li><span class="fs-3" style="margin-right: 10px;">飛行日誌詳細</span></li>
-          <li><span class="fs-4" style="margin-right: 20px;">ID: 1</span></li>
+          <li><span class="fs-4" style="margin-right: 20px;">飛行日誌ID: <%= @flight_log.id %> </span></li>
           <li>
             <%= button_to "編集", flight_log_edit_path, method: :get,
               class: "btn btn-success btn-sm ms-3",
@@ -25,20 +25,20 @@
 
     <div class="box3 overflow-x-auto box3--plain">
     <!-- box3貼り付け部 -->
-    <!-- 2026.5.23 修正必要 -->
- <!-- <table class="table table-sm"> -->
 
+
+ <!-- <table class="table table-sm"> -->
     <div class="d-flex flex-wrap gap-3 mb-1">
-      <h5>飛行日: 2026/5/20　　</h5>
-      <h5>飛行機体: DJI mini3　　</h5>
-      <h5>無人飛行機の登録番号: xxxxxxxx </h5>
+      <h5>飛行日: <%= @flight_log.flight_date  %> </h5>
+      <h5>飛行機体: <%= @flight_log.aircraft.model_purchased %> </h5>        
+      <h5>無人飛行機の登録番号: <%= @flight_log.aircraft.dips_registration_number %> </h5>
     </div>
 
       <table class="table table-bordered table-sm">
         <thead>
           <tr style="text-align: center;">
-            <th scope="col">内訳</th>
-            <th scope="col">飛行者</th>
+            <th scope="col">RecordID</th>
+            <th scope="col">操縦者</th>
             <th scope="col">離陸時刻</th>
             <th scope="col">着陸時刻</th>
             <th scope="col">飛行時間</th>
@@ -51,137 +51,21 @@
         </thead>
 
         <tbody class="table-group-divider">
+
+        <% @flight_log.flight_records.each do |flight_record| %>
           <tr>
-            <th scope="row" style="text-align: center;">1</th>
-            <td style="text-align: center;">山田太郎</td>
-            <td style="text-align: center;">10:03</td>
-            <td style="text-align: center;">10:17</td>
-            <td style="text-align: center;">14分</td>
-            <td style="text-align: center;">14分</td>
-            <td>神奈川県相模原市中央区田名5835</td>
-            <td>神奈川県相模原市中央区田名5835</td>
-            <td style="text-align: center;">目視飛行</td>
-            <td style="text-align: center;">なし</td>
+            <th scope="row" style="text-align: center;">  <%= flight_record.id %>                   </th>
+            <td>  <%= flight_record.pilot_name %>                       </td>
+            <td style="text-align: center;">  <%= flight_record.takeoff_time.strftime("%H:%M") %>   </td>
+            <td style="text-align: center;">  <%= flight_record.landing_time.strftime("%H:%M") %>   </td>
+            <td style="text-align: center;">  <%= flight_record.flight_time %>分                    </td>
+            <td style="text-align: center;">  <%= flight_record.total_flight_time %>分              </td>
+            <td>  <%= flight_record.takeoff_location %>                       </td>
+            <td>  <%= flight_record.landing_location %>                       </td>
+            <td style="text-align: center;">  <%= flight_record.flight_summary %>                   </td>
+            <td style="text-align: center;">  <%= flight_record.has_safety_incident ? "あり" : "なし" %> </td>
           </tr>
-
-          <tr>
-            <th scope="row" style="text-align: center;">2</th>
-            <td style="text-align: center;"><label>鈴木次郎</label></td>
-            <td style="text-align: center;"><label>10:34</label></td>
-            <td style="text-align: center;"><label>11:02</label></td>
-            <td style="text-align: center;"><label>28分</label></td>
-            <td style="text-align: center;"><label>42分</label></td>
-            <td>神奈川県相模原市中央区田名5835</td>
-            <td>神奈川県相模原市中央区田名5835</td>
-            <td style="text-align: center;"><label>目視飛行</label></td>
-            <td style="text-align: center;"><label>あり</label></td>  
-          </tr>
-
-          <tr>
-            <th scope="row" style="text-align: center;">3</th>
-            <td style="text-align: center;"><label>山田太郎</label></td>
-            <td style="text-align: center;"><label>13:15</label></td>
-            <td style="text-align: center;"><label>13:53</label></td>
-            <td style="text-align: center;"><label>38分</label></td>
-            <td style="text-align: center;"><label>80分</label></td>
-            <td>神奈川県中郡二宮町</td>
-            <td>神奈川県中郡二宮町</td>
-            <td style="text-align: center;"><label>目視飛行</label></td>
-            <td style="text-align: center;"><label>なし</label></td>
-          </tr>
-
-          <tr>
-            <th scope="row" style="text-align: center;">4</th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-
-          <tr>
-            <th scope="row" style="text-align: center;">5</th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>  
-        </tr>
-
-          <tr>
-            <th scope="row" style="text-align: center;">6</th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-
-          <tr>
-            <th scope="row" style="text-align: center;">7</th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-
-          <tr>
-            <th scope="row" style="text-align: center;">8</th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-
-          <tr>
-            <th scope="row" style="text-align: center;">9</th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-
-          <tr>
-            <th scope="row" style="text-align: center;">10</th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-
-
+        <% end %>
         </tbody>
       </table>
 
@@ -198,30 +82,19 @@
         </thead>
 
         <tbody class="table-group-divider">
-          <tr>
-            <th scope="row" style="text-align: center;">2</th>
-            <td style="text-align: center;">プロペラガード亀裂</td>
-            <td style="text-align: center;">2026/5/21</td>
-            <td style="text-align: center;">部品交換</td>
-            <td style="text-align: center;">山田太郎</td>
-          </tr>
 
-          <tr>
-            <th scope="row" style="text-align: center;">　</th>
-            <td style="text-align: center;"></td>
-            <td style="text-align: center;"></td>
-            <td style="text-align: center;"></td>
-            <td style="text-align: center;"></td>
-          </tr>
-
-          <tr>
-            <th scope="row" style="text-align: center;">　</th>
-            <td style="text-align: center;"></td>
-            <td style="text-align: center;"></td>
-            <td style="text-align: center;"></td>
-            <td style="text-align: center;"></td>
-          </tr>
-
+        <% @flight_log.flight_records.each do |flight_record| %>
+          <% if flight_record.has_safety_incident %>
+            <% incident = flight_record.safety_incident %>
+            <tr>
+              <th scope="row" style="text-align: center;"><%= flight_record.id %></th>
+              <td style="text-align: center;"><%= incident.details_issues %></td>
+              <td style="text-align: center;"><%= incident.details_date_resolution.strftime("%Y/%-m/%-d") %></td>
+              <td style="text-align: center;"><%= incident.details_processing %></td>
+              <td style="text-align: center;"><%= incident.details_verifier %></td>
+            </tr>
+          <% end %>
+        <% end %>
         </tbody>
       </table>
 

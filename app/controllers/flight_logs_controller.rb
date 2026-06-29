@@ -7,4 +7,9 @@ class FlightLogsController < ApplicationController
     #    @aircrafts = [current_user.aircraft].compact  # ← 機体選択用について
     render "static_pages/flight_log_index"
   end
+
+  def show
+    @flight_log =FlightLog.find(params[:id])
+    render "static_pages/flight_log_show"
+  end
 end
