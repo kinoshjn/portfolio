@@ -79,12 +79,12 @@
             </tr>
 
             <tr style="text-align: left;">
-              <th scope="col">型式認証番号</th>
+              <th scope="col">機体認証の区分及び機体認証番号</th>
               <th scope="col">
-                <% if @aircraft.dips_type_approval_number == "1" %>
+                <% if @aircraft.dips_aircraft_registration_category == "1" %>
                   なし(型式認証なし)
-                <% elsif @aircraft.dips_type_approval_number == "2" %>
-                  <%= @aircraft.dips_type_approval_number_other %>
+                <% elsif @aircraft.dips_aircraft_registration_category == "2" %>
+                  <%= @aircraft.dips_aircraft_registration_category_other %>
                 <% end %>
               </th>
             </tr>
