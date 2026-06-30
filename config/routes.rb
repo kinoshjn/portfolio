@@ -14,14 +14,15 @@ Rails.application.routes.draw do
   post "login", to: "user_sessions#create"
   delete "logout", to: "user_sessions#destroy"
 
-  resources :aircrafts, only: %i[index show]
+  resources :aircrafts, only: %i[index show new create]
   resources :flight_logs, only: %i[index show]
-  resources :flight_records, only: %i[index]
-  resources :safety_incidents, only: %i[index]
+  # resources :flight_records, only: %i[index]
+  # resources :safety_incidents, only: %i[index]
+
   resources :daily_inspections, only: %i[index show]
-  resources :daily_inspection_items, only: %i[index]
-  resources :inspection_maintenances, only: %i[index show]
-  resources :inspection_maintenance_items, only: %i[index]
+  # resources :daily_inspection_items, only: %i[index]
+  # resources :inspection_maintenances, only: %i[index show]
+  # resources :inspection_maintenance_items, only: %i[index]
 
   get "aircraft_list_index", to: "static_pages#aircraft_list_index"
   get "flight_log_index", to: "static_pages#flight_log_index"
@@ -31,6 +32,9 @@ Rails.application.routes.draw do
   get "aircraft_show", to: "static_pages#aircraft_show"
   get "aircraft_new", to: "static_pages#aircraft_new"
   get "aircraft_edit", to: "static_pages#aircraft_edit"
+  patch "aircraft_update", to: "static_pages#aircraft_update"
+  delete "aircraft_destroy", to: "static_pages#aircraft_destroy"
+
 
   get "flight_log_show", to: "static_pages#flight_log_show"
   get "flight_log_new", to: "static_pages#flight_log_new"

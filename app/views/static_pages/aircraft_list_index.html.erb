@@ -1,5 +1,4 @@
 <turbo-frame id="main_content"> 
-
  <div class="wrapper">
 
     <div class="box1 overflow-x-auto">
@@ -8,6 +7,12 @@
 
     <div class="box2 overflow-x-auto">
     <!-- box2貼り付け部 -->
+        <% if flash[:danger] %>
+          <div class="alert alert-danger">
+            <%= flash[:danger] %>
+          </div>
+        <% end %>
+
         <ul class="main-nav font-english">
           <li><span class="fs-3" style="margin-right: 20px;">機体一覧</span></li>
           <li>

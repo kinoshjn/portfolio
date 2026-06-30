@@ -1,10 +1,10 @@
-  <main class="form-signin" style="max-width: 300px; margin: auto; padding: 15px;">
-    <form>
-      <h3 class="h4 mb-3 fw-normal text-center">削除しますか？</h3>
-      <div class="d-flex gap-2 mb-3">
-          <button type="button" class="w-100 btn btn-primary">OK</button>
-          <button type="button" class="w-100 btn btn-outline-dark" onclick="window.close();">キャンセル</button>
-      </div>
-      <p class="text-credit text-center">&copy; 2026 kino project</p>
-    </form>
-  </main>
+<main class="form-signin" style="max-width: 300px; margin: auto; padding: 15px;">
+  <h3 class="h4 mb-3 fw-normal text-center">削除しますか？</h3>
+  <div class="d-flex gap-2 mb-3">
+    <%= button_to "OK", aircraft_destroy_path, method: :delete,
+          class: "w-100 btn btn-primary",
+          form: { class: "w-100" } %>
+    <button type="button" class="w-100 btn btn-outline-dark" onclick="window.close();">キャンセル</button>
+  </div>
+  <p class="text-credit text-center">&copy; 2026 kino project</p>
+</main>

@@ -2,37 +2,49 @@
   <th scope="col">型式認証番号</th>
   <td style="text-align: center;">
     <div style="display: flex; align-items: center;">
-      <select id="dips_type_approval_select" class="form-select form-select-sm border border-secondary text-center" aria-label="種類選択">
-        <option value="">型式選択</option>
-        <option value="1">なし(型式認証なし)</option>
-        <option value="2">その他</option>
-      </select>
-      <div id="dips_type_approval_input_wrapper" style="display: none; width: 100%;">
-        <input type="text" id="dips_type_approval_input" class="form-control form-control-sm border border-secondary text-center" placeholder="型式認証番号を入力" style="width: calc(100% - 30px); display: inline-block;">
-        <span id="dips_type_approval_reset" style="cursor: pointer; font-size: 12px;">▽</span>
+      <%= f.select :dips_type_approval_number,
+            options_for_select(
+              [["型式選択", ""], ["なし(型式認証なし)", "1"], ["その他", "2"]],
+              f.object.dips_type_approval_number
+            ),
+            {},
+            { id: "dips_type_approval_number_select", class: "form-select form-select-sm border border-secondary text-center" } %>
+      <div id="dips_type_approval_number_input_wrapper" style="<%= f.object.dips_type_approval_number == '2' ? 'display: flex;' : 'display: none;' %> width: 100%; align-items: center;">
+        <%= f.text_field :dips_type_approval_number_other,
+              id: "dips_type_approval_number_input",
+              class: "form-control form-control-sm border border-secondary text-center",
+              placeholder: "型式認証番号を入力",
+              style: "width: calc(100% - 30px); display: inline-block;" %>
+        <span id="dips_type_approval_number_reset" style="cursor: pointer; font-size: 12px;">▽</span>
       </div>
     </div>
   </td>
 </tr>
 
 <script>
-  const selectApproval = document.getElementById('dips_type_approval_select');
-  const inputApproval = document.getElementById('dips_type_approval_input');
-  const wrapperApproval = document.getElementById('dips_type_approval_input_wrapper');
-  const resetApproval = document.getElementById('dips_type_approval_reset');
+  (function() {
+    const select = document.getElementById('dips_type_approval_number_select');
+    const input = document.getElementById('dips_type_approval_number_input');
+    const wrapper = document.getElementById('dips_type_approval_number_input_wrapper');
+    const reset = document.getElementById('dips_type_approval_number_reset');
 
-  selectApproval.addEventListener('change', function() {
-    if (this.value === '2') {
-      selectApproval.style.display = 'none';
-      wrapperApproval.style.display = 'block';
-      inputApproval.focus();
+    if (select.value === '2') {
+      select.style.display = 'none';
     }
-  });
 
-  resetApproval.addEventListener('click', function() {
-    wrapperApproval.style.display = 'none';
-    inputApproval.value = '';
-    selectApproval.style.display = 'block';
-    selectApproval.value = '';
-  });
+    select.addEventListener('change', function() {
+      if (this.value === '2') {
+        select.style.display = 'none';
+        wrapper.style.display = 'flex';
+        input.focus();
+      }
+    });
+
+    reset.addEventListener('click', function() {
+      wrapper.style.display = 'none';
+      input.value = '';
+      select.style.display = 'block';
+      select.value = '';
+    });
+  })();
 </script>

@@ -48,22 +48,45 @@
 
             <tr style="text-align: left;"> 
               <th scope="col">種類</th>
-              <th scope="col"> <%= @aircraft.dips_type %>                       </th>
+              <th scope="col">
+              <%= { "1" => "回転翼航空機(マルチローター)",
+                    "2" => "回転翼航空機(ヘリコプター)",
+                    "3" => "飛行機",
+                    "4" => "パワードリフト" }[@aircraft.dips_type] %>
+              </th>
             </tr>
 
             <tr style="text-align: left;">
               <th scope="col">型式</th>
-              <th scope="col"> <%= @aircraft.dips_model %>                      </th>
+              <th scope="col">
+                <% if @aircraft.dips_model == "1" %>
+                    なし(型式認証なし)
+                <% elsif @aircraft.dips_model == "2" %>
+                    <%= @aircraft.dips_model_other %>
+                <% end %>
+              </th>
             </tr>
 
             <tr style="text-align: left;">
               <th scope="col">型式認証番号</th>
-              <th scope="col"> <%= @aircraft.dips_type_approval_number %>       </th>
+              <th scope="col">
+                <% if @aircraft.dips_type_approval_number == "1" %>
+                  なし(型式認証なし)
+                <% elsif @aircraft.dips_type_approval_number == "2" %>
+                <%= @aircraft.dips_type_approval_number_other %>
+                <% end %>
+              </th>
             </tr>
 
             <tr style="text-align: left;">
-              <th scope="col">機体認証の区分及び機体認証番号</th>
-              <th scope="col"> <%= @aircraft.dips_aircraft_registration_category %> </th>
+              <th scope="col">型式認証番号</th>
+              <th scope="col">
+                <% if @aircraft.dips_type_approval_number == "1" %>
+                  なし(型式認証なし)
+                <% elsif @aircraft.dips_type_approval_number == "2" %>
+                  <%= @aircraft.dips_type_approval_number_other %>
+                <% end %>
+              </th>
             </tr>
 
             <tr style="text-align: left;">

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_06_28_114202) do
+ActiveRecord::Schema[7.2].define(version: 2026_06_30_070856) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -34,6 +34,9 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_28_114202) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "dips_model_other"
+    t.string "dips_type_approval_number_other"
+    t.string "dips_aircraft_registration_category_other"
     t.index ["user_id"], name: "index_aircrafts_on_user_id"
   end
 
