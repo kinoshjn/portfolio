@@ -6,48 +6,43 @@
     </div>
 
     <div class="box2" style="overflow-x: auto;">
-    <!-- box2貼り付け部 -->
-        <ul class="main-nav font-english">
-          <li><span class="fs-3" style="margin-right: 10px;">飛行日誌作成</span></li>
-          <li><span class="fs-4" style="margin-right: 20px; visibility: hidden;">ID: 1</span></li>
-          <li>
-            <button type="button" class="btn btn-primary">作成する</button>
-          </li>
-          <li>
-            <%= button_to "前の画面に戻る",   flight_log_index_path  , method: :get,
-              class: "btn btn-secondary",style: "margin-left: 100px;",
-              form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
-          </li>
-        </ul>
+      <ul class="main-nav font-english">
+        <li><span class="fs-3" style="margin-right: 10px;">飛行日誌作成</span></li>
+        <li><span class="fs-4" style="margin-right: 20px; visibility: hidden;">ID: 1</span></li>
+        <li>
+          <button type="submit" form="flight_log_new_form" class="btn btn-primary">作成する</button>
+        </li>
+        <li>
+          <%= button_to "前の画面に戻る", flight_log_index_path, method: :get,
+            class: "btn btn-secondary", style: "margin-left: 100px;",
+            form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
+        </li>
+      </ul>
     </div>
+
+    <%= form_with model: @flight_log, url: flight_logs_path, local: true, html: { id: "flight_log_new_form" } do |f| %>
 
     <div class="box3 overflow-x-auto box3--plain">
-    <!-- box3貼り付け部 -->
-    <!-- 2026.5.23 修正必要 -->
- <!-- <table class="table table-sm"> -->
 
-    <div class="d-flex flex-wrap gap-3 mb-1">
+      <div class="d-flex flex-wrap gap-3 mb-1">
+        <label style="margin-left: 70px;" class="d-inline-flex align-items-center gap-2">
+          <span class="fs-4">飛行日:</span>
+          <%= f.date_field :flight_date,
+                class: "form-control text-center border border-secondary",
+                style: "width: 150px; height: 40px; display: inline-block;" %>
+        </label>
 
-   <!--    <label style="margin-left: 70px; ">     -->
-      
-      <label style="margin-left: 70px;" class="d-inline-flex align-items-center gap-2"></label> 
-        <span class="fs-4">飛行日:</span>
-        <input class="form-control text-center border border-secondary" type="date" aria-label="処置日" 
-          style="width: 150px; height: 40px; display: inline-block;">
-      </label>
+        <label style="margin-left: 70px;" class="d-inline-flex align-items-center gap-2">
+          <span class="fs-4">飛行機体:</span>
+          <span class="fs-5"><%= current_user.aircraft&.model_purchased %></span>
+          <%= f.hidden_field :aircraft_id, value: current_user.aircraft&.id %>
+        </label>
 
-     <label style="margin-left: 70px;" class="d-inline-flex align-items-center gap-2"></label> 
-        <span class="fs-4">飛行機体:</span>
-            
-        <select class="form-select border border-secondary text-center" aria-label="機体選択" style="width: 150px;  height: 40px;">
-          <option selected>機体選択</option>
-          <option value="1">DJI Mini3</option>
-        </select>
-      </label>
+        <button type="button" class="btn btn-secondary btn-sm" id="add_flight_record_btn">行追加</button>
+        <button type="button" class="btn btn-danger btn-sm" id="remove_flight_record_btn">行削除</button>
+      </div>
 
-
-    </div>
-
+      <%# 上段テーブル(FlightRecord) %>
       <table class="table table-bordered table-sm">
         <thead>
           <tr style="text-align: center;">
@@ -63,474 +58,116 @@
             <th scope="col">安全・影響</th>
           </tr>
         </thead>
-
-        <tbody class="table-group-divider">
-
-          <tr>
-            <th scope="row" style="text-align: center;">1</th>
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="名前" aria-label="default input example" style="width: 90px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">    
-              <input class="form-control form-control-sm text-center border border-secondary" type="time"  aria-label="離陸時刻" style="width: 80px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">    
-              <input class="form-control form-control-sm text-center border border-secondary" type="time"  aria-label="着陸時刻" style="width: 80px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;"></td>
-            <td style="text-align: center;"></td>
-
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="住所1" aria-label="default input example" style="width: 240px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="住所2" aria-label="default input example" style="width: 240px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="概要" aria-label="default input example" style="width: 130px; display: inline-block;">
-            </td>
-            <td style="text-align: center;">
-              <select class="form-select form-select-sm border  border-secondary text-center" aria-label="機体選択">
-                <option selected>選択</option>
-                <option value="1">なし</option>
-                <option value="2">あり</option>
-              </select>
-            </td>
-          </tr>
-
-          <tr>
-            <th scope="row" style="text-align: center;">2</th>
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="名前" aria-label="default input example" style="width: 90px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">    
-              <input class="form-control form-control-sm text-center border border-secondary" type="time"  aria-label="離陸時刻" style="width: 80px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">    
-              <input class="form-control form-control-sm text-center border border-secondary" type="time"  aria-label="着陸時刻" style="width: 80px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;"></td>
-            <td style="text-align: center;"></td>
-
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="住所1" aria-label="default input example" style="width: 240px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="住所2" aria-label="default input example" style="width: 240px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="概要" aria-label="default input example" style="width: 130px; display: inline-block;">
-            </td>
-            <td style="text-align: center;">
-              <select class="form-select form-select-sm border  border-secondary text-center" aria-label="機体選択">
-                <option selected>選択</option>
-                <option value="1">なし</option>
-                <option value="2">あり</option>
-              </select>
-            </td>
-          </tr>
-
-          <tr>
-            <th scope="row" style="text-align: center;">3</th>
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="名前" aria-label="default input example" style="width: 90px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">    
-              <input class="form-control form-control-sm text-center border border-secondary" type="time"  aria-label="離陸時刻" style="width: 80px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">    
-              <input class="form-control form-control-sm text-center border border-secondary" type="time"  aria-label="着陸時刻" style="width: 80px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;"></td>
-            <td style="text-align: center;"></td>
-
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="住所1" aria-label="default input example" style="width: 240px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="住所2" aria-label="default input example" style="width: 240px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="概要" aria-label="default input example" style="width: 130px; display: inline-block;">
-            </td>
-            <td style="text-align: center;">
-              <select class="form-select form-select-sm border  border-secondary text-center" aria-label="機体選択">
-                <option selected>選択</option>
-                <option value="1">なし</option>
-                <option value="2">あり</option>
-              </select>
-            </td>
-          </tr>
-
-          <tr>
-            <th scope="row" style="text-align: center;">4</th>
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="名前" aria-label="default input example" style="width: 90px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">    
-              <input class="form-control form-control-sm text-center border border-secondary" type="time"  aria-label="離陸時刻" style="width: 80px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">    
-              <input class="form-control form-control-sm text-center border border-secondary" type="time"  aria-label="着陸時刻" style="width: 80px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;"></td>
-            <td style="text-align: center;"></td>
-
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="住所1" aria-label="default input example" style="width: 240px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="住所2" aria-label="default input example" style="width: 240px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="概要" aria-label="default input example" style="width: 130px; display: inline-block;">
-            </td>
-            <td style="text-align: center;">
-              <select class="form-select form-select-sm border  border-secondary text-center" aria-label="機体選択">
-                <option selected>選択</option>
-                <option value="1">なし</option>
-                <option value="2">あり</option>
-              </select>
-            </td>
-          </tr>
-
-          <tr>
-            <th scope="row" style="text-align: center;">5</th>
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="名前" aria-label="default input example" style="width: 90px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">    
-              <input class="form-control form-control-sm text-center border border-secondary" type="time"  aria-label="離陸時刻" style="width: 80px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">    
-              <input class="form-control form-control-sm text-center border border-secondary" type="time"  aria-label="着陸時刻" style="width: 80px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;"></td>
-            <td style="text-align: center;"></td>
-
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="住所1" aria-label="default input example" style="width: 240px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="住所2" aria-label="default input example" style="width: 240px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="概要" aria-label="default input example" style="width: 130px; display: inline-block;">
-            </td>
-            <td style="text-align: center;">
-              <select class="form-select form-select-sm border  border-secondary text-center" aria-label="機体選択">
-                <option selected>選択</option>
-                <option value="1">なし</option>
-                <option value="2">あり</option>
-              </select>
-            </td>
-          </tr>
-
-          <tr>
-            <th scope="row" style="text-align: center;">6</th>
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="名前" aria-label="default input example" style="width: 90px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">    
-              <input class="form-control form-control-sm text-center border border-secondary" type="time"  aria-label="離陸時刻" style="width: 80px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">    
-              <input class="form-control form-control-sm text-center border border-secondary" type="time"  aria-label="着陸時刻" style="width: 80px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;"></td>
-            <td style="text-align: center;"></td>
-
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="住所1" aria-label="default input example" style="width: 240px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="住所2" aria-label="default input example" style="width: 240px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="概要" aria-label="default input example" style="width: 130px; display: inline-block;">
-            </td>
-            <td style="text-align: center;">
-              <select class="form-select form-select-sm border  border-secondary text-center" aria-label="機体選択">
-                <option selected>選択</option>
-                <option value="1">なし</option>
-                <option value="2">あり</option>
-              </select>
-            </td>
-          </tr>
-
-          <tr>
-            <th scope="row" style="text-align: center;">7</th>
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="名前" aria-label="default input example" style="width: 90px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">    
-              <input class="form-control form-control-sm text-center border border-secondary" type="time"  aria-label="離陸時刻" style="width: 80px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">    
-              <input class="form-control form-control-sm text-center border border-secondary" type="time"  aria-label="着陸時刻" style="width: 80px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;"></td>
-            <td style="text-align: center;"></td>
-
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="住所1" aria-label="default input example" style="width: 240px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="住所2" aria-label="default input example" style="width: 240px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="概要" aria-label="default input example" style="width: 130px; display: inline-block;">
-            </td>
-            <td style="text-align: center;">
-              <select class="form-select form-select-sm border  border-secondary text-center" aria-label="機体選択">
-                <option selected>選択</option>
-                <option value="1">なし</option>
-                <option value="2">あり</option>
-              </select>
-            </td>
-          </tr>
-
-          <tr>
-            <th scope="row" style="text-align: center;">8</th>
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="名前" aria-label="default input example" style="width: 90px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">    
-              <input class="form-control form-control-sm text-center border border-secondary" type="time"  aria-label="離陸時刻" style="width: 80px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">    
-              <input class="form-control form-control-sm text-center border border-secondary" type="time"  aria-label="着陸時刻" style="width: 80px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;"></td>
-            <td style="text-align: center;"></td>
-
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="住所1" aria-label="default input example" style="width: 240px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="住所2" aria-label="default input example" style="width: 240px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="概要" aria-label="default input example" style="width: 130px; display: inline-block;">
-            </td>
-            <td style="text-align: center;">
-              <select class="form-select form-select-sm border  border-secondary text-center" aria-label="機体選択">
-                <option selected>選択</option>
-                <option value="1">なし</option>
-                <option value="2">あり</option>
-              </select>
-            </td>
-          </tr>
-
-          <tr>
-            <th scope="row" style="text-align: center;">9</th>
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="名前" aria-label="default input example" style="width: 90px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">    
-              <input class="form-control form-control-sm text-center border border-secondary" type="time"  aria-label="離陸時刻" style="width: 80px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">    
-              <input class="form-control form-control-sm text-center border border-secondary" type="time"  aria-label="着陸時刻" style="width: 80px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;"></td>
-            <td style="text-align: center;"></td>
-
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="住所1" aria-label="default input example" style="width: 240px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="住所2" aria-label="default input example" style="width: 240px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="概要" aria-label="default input example" style="width: 130px; display: inline-block;">
-            </td>
-            <td style="text-align: center;">
-              <select class="form-select form-select-sm border  border-secondary text-center" aria-label="機体選択">
-                <option selected>選択</option>
-                <option value="1">なし</option>
-                <option value="2">あり</option>
-              </select>
-            </td>
-          </tr>
-
-          <tr>
-            <th scope="row" style="text-align: center;">10</th>
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="名前" aria-label="default input example" style="width: 90px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">    
-              <input class="form-control form-control-sm text-center border border-secondary" type="time"  aria-label="離陸時刻" style="width: 80px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">    
-              <input class="form-control form-control-sm text-center border border-secondary" type="time"  aria-label="着陸時刻" style="width: 80px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;"></td>
-            <td style="text-align: center;"></td>
-
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="住所1" aria-label="default input example" style="width: 240px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="住所2" aria-label="default input example" style="width: 240px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="概要" aria-label="default input example" style="width: 130px; display: inline-block;">
-            </td>
-            <td style="text-align: center;">
-              <select class="form-select form-select-sm border  border-secondary text-center" aria-label="機体選択">
-                <option selected>選択</option>
-                <option value="1">なし</option>
-                <option value="2">あり</option>
-              </select>
-            </td>
-          </tr>
-
+        <tbody class="table-group-divider" id="flight_records_body">
         </tbody>
       </table>
 
-
+      <%# 下段テーブル(SafetyIncident) %>
       <table class="table table-bordered table-sm">
         <thead>
           <tr style="text-align: center;">
-            <th scope="col">安全・影響</th>
+            <th scope="col">内訳</th>
             <th scope="col">不具合事項</th>
             <th scope="col">処置日</th>
             <th scope="col">処置内容</th>
             <th scope="col">確認者</th>
           </tr>
         </thead>
-
-        <tbody class="table-group-divider">
-          <tr>
-            <th scope="row" style="text-align: center;">
-              <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="内訳番号" aria-label="default input example" style="width: 90px; display: inline-block;">
-            </th>
-
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="不具合内容" aria-label="不具合事項" 
-              style="width: 100%; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-center border border-secondary" type="date" aria-label="処置日" 
-              style="width: 150px; height: 31px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="処置内容" aria-label="処置内容" 
-              style="width: 100%; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="名前" aria-label="default input example" style="width: 90px; display: inline-block;">
-            </td>
-          </tr>
-
-          <tr>
-            <th scope="row" style="text-align: center;">
-              <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="内訳番号" aria-label="default input example" style="width: 90px; display: inline-block;">
-            </th>
-
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="不具合内容" aria-label="不具合事項" 
-              style="width: 100%; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-center border border-secondary" type="date" aria-label="処置日" 
-              style="width: 150px; height: 31px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="処置内容" aria-label="処置内容" 
-              style="width: 100%; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="名前" aria-label="default input example" style="width: 90px; display: inline-block;">
-            </td>
-          </tr>
-
-          <tr>
-            <th scope="row" style="text-align: center;">
-              <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="内訳番号" aria-label="default input example" style="width: 90px; display: inline-block;">
-            </th>
-
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="不具合内容" aria-label="不具合事項" 
-              style="width: 100%; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-center border border-secondary" type="date" aria-label="処置日" 
-              style="width: 150px; height: 31px; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="処置内容" aria-label="処置内容" 
-              style="width: 100%; display: inline-block;">
-            </td>
-
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="名前" aria-label="default input example" style="width: 90px; display: inline-block;">
-            </td>
-          </tr>
-
+        <tbody class="table-group-divider" id="safety_incidents_body">
         </tbody>
       </table>
 
-    <!-- box3貼り付け部 終了  -->
     </div>
+    <% end %>
+
+    <script>
+    (function() {
+      function addFlightRecord() {
+        const tbody = document.getElementById('flight_records_body');
+        const rowCount = tbody.querySelectorAll('tr').length;
+        const newIndex = rowCount;
+        const rowNum = rowCount + 1;
+
+        if (rowNum > 10) {
+          alert('最大10行まで追加できます');
+          return;
+        }
+
+        const newRow = `
+          <tr>
+            <th scope="row" style="text-align: center;">${rowNum}</th>
+            <td style="text-align: center;">
+              <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="名前" name="flight_log[flight_records_attributes][${newIndex}][pilot_name]" style="width: 90px; display: inline-block;">
+            </td>
+            <td style="text-align: center;">
+              <input class="form-control form-control-sm text-center border border-secondary" type="time" name="flight_log[flight_records_attributes][${newIndex}][takeoff_time]" style="width: 80px; display: inline-block;">
+            </td>
+            <td style="text-align: center;">
+              <input class="form-control form-control-sm text-center border border-secondary" type="time" name="flight_log[flight_records_attributes][${newIndex}][landing_time]" style="width: 80px; display: inline-block;">
+            </td>
+            <td style="text-align: center;"></td>
+            <td style="text-align: center;"></td>
+            <td style="text-align: center;">
+              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="住所1" name="flight_log[flight_records_attributes][${newIndex}][takeoff_location]" style="width: 240px; display: inline-block;">
+            </td>
+            <td style="text-align: center;">
+              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="住所2" name="flight_log[flight_records_attributes][${newIndex}][landing_location]" style="width: 240px; display: inline-block;">
+            </td>
+            <td style="text-align: center;">
+              <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="概要" name="flight_log[flight_records_attributes][${newIndex}][flight_summary]" style="width: 130px; display: inline-block;">
+            </td>
+            <td style="text-align: center;">
+              <select class="form-select form-select-sm border border-secondary text-center" name="flight_log[flight_records_attributes][${newIndex}][has_safety_incident]">
+                <option value="">選択</option>
+                <option value="false">なし</option>
+                <option value="true">あり</option>
+              </select>
+            </td>
+          </tr>`;
+
+        tbody.insertAdjacentHTML('beforeend', newRow);
+
+        const siTbody = document.getElementById('safety_incidents_body');
+        const siRow = `
+          <tr>
+            <th scope="row" style="text-align: center;">${rowNum}</th>
+            <td style="text-align: center;">
+              <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="不具合内容" name="flight_log[flight_records_attributes][${newIndex}][safety_incident_attributes][details_issues]" style="width: 100%; display: inline-block;">
+            </td>
+            <td style="text-align: center;">
+              <input class="form-control form-control-sm text-center border border-secondary" type="date" name="flight_log[flight_records_attributes][${newIndex}][safety_incident_attributes][details_date_resolution]" style="width: 150px; height: 31px; display: inline-block;">
+            </td>
+            <td style="text-align: center;">
+              <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="処置内容" name="flight_log[flight_records_attributes][${newIndex}][safety_incident_attributes][details_processing]" style="width: 100%; display: inline-block;">
+            </td>
+            <td style="text-align: center;">
+              <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="名前" name="flight_log[flight_records_attributes][${newIndex}][safety_incident_attributes][details_verifier]" style="width: 90px; display: inline-block;">
+            </td>
+          </tr>`;
+        siTbody.insertAdjacentHTML('beforeend', siRow);
+      }
+
+      function removeFlightRecord() {
+        const tbody = document.getElementById('flight_records_body');
+        const rows = tbody.querySelectorAll('tr');
+        if (rows.length <= 1) {
+          alert('最低1行は必要です');
+          return;
+        }
+        tbody.removeChild(rows[rows.length - 1]);
+
+        const siTbody = document.getElementById('safety_incidents_body');
+        const siRows = siTbody.querySelectorAll('tr');
+        if (siRows.length > 0) {
+          siTbody.removeChild(siRows[siRows.length - 1]);
+        }
+      }
+
+      document.getElementById('add_flight_record_btn').addEventListener('click', addFlightRecord);
+      document.getElementById('remove_flight_record_btn').addEventListener('click', removeFlightRecord);
+      addFlightRecord();
+    })();
+    </script>
+
   </div>
 </turbo-frame>

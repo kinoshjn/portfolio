@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_06_30_070856) do
+ActiveRecord::Schema[7.2].define(version: 2026_07_01_231908) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -116,9 +116,9 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_30_070856) do
 
   create_table "safety_incidents", force: :cascade do |t|
     t.string "details_issues", null: false
-    t.date "details_date_resolution", null: false
-    t.string "details_processing", null: false
-    t.string "details_verifier", null: false
+    t.date "details_date_resolution"
+    t.string "details_processing"
+    t.string "details_verifier"
     t.bigint "flight_record_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

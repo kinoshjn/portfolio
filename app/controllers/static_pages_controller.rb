@@ -44,9 +44,45 @@ class StaticPagesController < ApplicationController
   end
 
   def flight_log_new
+    if current_user.aircraft.blank?
+      flash.now[:danger] = "先に機体登録してください。(サイドメニュー押すと戻ります)"
+      @aircrafts = [ current_user.aircraft ].compact
+      render "static_pages/flight_log_index", status: :ok
+      return
+    end
+    @aircrafts = [ current_user.aircraft ].compact
+    @flight_log = current_user.aircraft.flight_logs.build
+    @flight_log.flight_records.build
   end
 
   def flight_log_edit
+    @aircrafts = [ current_user.aircraft ].compact
+    @flight_log = FlightLog.find(params[:id])
+    render "static_pages/flight_log_edit"
+  end
+
+  def flight_log_update
+    @flight_log = FlightLog.find(params[:id])
+
+    flight_log_data = flight_log_params
+    flight_log_data[:flight_records_attributes]&.each do |_, record|
+      if record[:has_safety_incident] != "true"
+        record.delete(:safety_incident_attributes)
+      end
+    end
+
+    if @flight_log.update(flight_log_data)
+      render "static_pages/flight_log_show", status: :ok
+    else
+      flash.now[:danger] = @flight_log.errors.full_messages.join("、")
+      render "static_pages/flight_log_edit", status: :unprocessable_entity
+    end
+  end
+
+  def flight_log_destroy
+    @flight_log = FlightLog.find(params[:id])
+    @flight_log.destroy
+    render html: "<script>window.opener.location.reload(); window.close();</script>".html_safe, layout: false
   end
 
   def daily_inspection_index
@@ -97,6 +133,21 @@ class StaticPagesController < ApplicationController
       :owner_manufacturer, :model_purchased, :owner_date_purchased, :owner_name,
       :remote_id_registration_number, :owner_insurance_company, :owner_policy_number,
       :owner_insurance_start_date, :owner_insurance_expiration_date
+    )
+  end
+
+  def flight_log_params
+    params.require(:flight_log).permit(
+      :flight_date, :aircraft_id,
+      flight_records_attributes: [
+        :id, :pilot_name, :takeoff_time, :landing_time,
+        :takeoff_location, :landing_location,
+        :flight_summary, :has_safety_incident,
+        safety_incident_attributes: [
+          :id, :details_issues, :details_date_resolution,
+          :details_processing, :details_verifier
+        ]
+      ]
     )
   end
 end

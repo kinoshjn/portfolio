@@ -15,13 +15,13 @@ Rails.application.routes.draw do
   delete "logout", to: "user_sessions#destroy"
 
   resources :aircrafts, only: %i[index show new create]
-  resources :flight_logs, only: %i[index show]
+  resources :flight_logs, only: %i[index show new create]
   # resources :flight_records, only: %i[index]
   # resources :safety_incidents, only: %i[index]
 
   resources :daily_inspections, only: %i[index show]
   # resources :daily_inspection_items, only: %i[index]
-  # resources :inspection_maintenances, only: %i[index show]
+  resources :inspection_maintenances, only: %i[index show]
   # resources :inspection_maintenance_items, only: %i[index]
 
   get "aircraft_list_index", to: "static_pages#aircraft_list_index"
@@ -35,10 +35,12 @@ Rails.application.routes.draw do
   patch "aircraft_update", to: "static_pages#aircraft_update"
   delete "aircraft_destroy", to: "static_pages#aircraft_destroy"
 
-
   get "flight_log_show", to: "static_pages#flight_log_show"
   get "flight_log_new", to: "static_pages#flight_log_new"
-  get "flight_log_edit",  to: "static_pages#flight_log_edit"
+  get "flight_log_edit/:id", to: "static_pages#flight_log_edit", as: "flight_log_edit"
+  patch "flight_log_update/:id", to: "static_pages#flight_log_update", as: "flight_log_update"
+
+  delete "flight_log_destroy", to: "static_pages#flight_log_destroy"
 
   get "daily_inspection_show", to: "static_pages#daily_inspection_show"
   get "daily_inspection_new", to: "static_pages#daily_inspection_new"

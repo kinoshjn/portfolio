@@ -27,10 +27,7 @@
               form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
           </li>
 
-          <li>
-            <%= render 'shared/aircraft_menu' %> 
-          </li>
-
+   
         </ul>
     </div>
 
@@ -73,8 +70,8 @@
                   class: "btn btn-success btn-sm ms-3",
                   form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
 
-               <button type="button" class="btn btn-danger btn-sm ms-3"
-                  onclick="window.open('<%= delete_confirm_index_path(flight_log.id) %>', '_blank', 'width=600,height=500,scrollbars=yes,resizable=yes')">削除
+                <button type="button" class="btn btn-danger btn-sm ms-3"
+                  onclick="window.open('<%= delete_confirm_index_path(id: flight_log.id, type: :flight_log) %>', '_blank', 'width=600,height=500,scrollbars=yes,resizable=yes')">削除
                 </button>
               </td>
             </tr>
