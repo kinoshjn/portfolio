@@ -13,26 +13,12 @@
             </div>
           <% end %>
           <ul class="main-nav font-english">
-
           <li><span class="fs-3" style="margin-right: 20px;">点検整備一覧</span></li>
           <li>
-            <label class="fs-5">開始日</label> 
-            <input type="date" id="startDate">
-          </li>
-          <li>
-            <label class="fs-5" style="margin-left: 10px;">終了日</label>
-            <input type="date" id="endDate" style="margin-right: 20px;">
-          </li>
-          <li>
-            <button type="button" class="btn btn-secondary btn-sm">検索</button>
-          </li>
-          <li>
-
             <%= button_to "新規作成", inspection_maintenance_new_path, method: :get,
               class: "btn btn-primary btn-sm ms-3",
               form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
           </li>
-
         </ul>
     </div>
 
