@@ -11,7 +11,13 @@
           <li><span class="fs-3" style="margin-right: 10px;">点検整備作成</span></li>
           <li><span class="fs-4" style="margin-right: 20px; visibility: hidden;">ID: 1</span></li>
           <li>
-            <button type="button" class="btn btn-primary">作成する</button>
+            <button type="submit" form="inspection_maintenance_new_form" class="btn btn-primary">作成する</button>
+          </li>
+          <li>
+            <button type="button" class="btn btn-secondary btn-sm" id="add_item_btn">行追加</button>
+          </li>
+          <li>
+            <button type="button" class="btn btn-danger btn-sm" id="remove_item_btn">行削除</button>
           </li>
           <li>
             <%= button_to "前の画面に戻る",     inspection_maintenance_index_path    , method: :get,
@@ -21,157 +27,33 @@
         </ul>
     </div>
 
+    <%= form_with model: @inspection_maintenance, url: inspection_maintenances_path, local: true, html: { id: "inspection_maintenance_new_form" } do |f| %>
+
     <div class="box3 overflow-x-auto box3--plain">
-    <!-- box3貼り付け部 -->
-    <!--    テーブル幅を固定にして幅を有効にする。
-      <table class="table table-bordered table-sm text-center" >
-     -->
 
       <table class="table table-bordered table-sm text-center" style="table-layout: fixed; width: 1220px;">
 
         <thead>
           <tr class="text-center">
-            <th scope="col"; style="width: 135px; height: auto;" >実施日</th>
-            <th scope="col"; style="width: 100px; height: auto;">総飛行時間</th>
-            <th scope="col"; style="height: auto;">点検、修理、改造及び整備の内容</th>
-            <th scope="col"; style="width: 260px; height: auto;">実施理由</th>
-            <th scope="col"; style="width: 240px; height: auto;">実施場所</th>
-            <th scope="col"; style="width: 90px; height: auto;">実施者</th>
-            <th scope="col"; style="width: 160px; height: auto;">備考</th>
+            <th scope="col" style="width: 135px; height: auto;">実施日</th>
+            <th scope="col" style="width: 100px; height: auto;">総飛行時間</th>
+            <th scope="col" style="height: auto;">点検、修理、改造及び整備の内容</th>
+            <th scope="col" style="width: 260px; height: auto;">実施理由</th>
+            <th scope="col" style="width: 240px; height: auto;">実施場所</th>
+            <th scope="col" style="width: 90px; height: auto;">実施者</th>
+            <th scope="col" style="width: 160px; height: auto;">備考</th>
           </tr>
         </thead>
 
-        <tbody class="table-group-divider text-left">
-          <tr>
-            <td>
-              <input class="form-control text-center border border-secondary" type="date" aria-label="処置日" 
-              style="height: 31px; display: inline-block;">
-            </td>
-            <td></td>
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="整備の内容" aria-label="整備の内容" 
-              style="width: 100%; display: inline-block;">
-            </td>
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="実施理由" aria-label="実施理由" 
-              style="width: 100%; display: inline-block;">
-            </td>
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="住所" aria-label="住所" 
-              style="width: 100%; display: inline-block;">
-            </td>
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="名前" aria-label="名前" 
-              style="width: 100%; display: inline-block;">
-            </td>
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="備考" aria-label="備考" 
-              style="width: 100%; display: inline-block;">
-            </td>
-          </tr>
-
-          <tr>
-            <td>&nbsp;</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-
-          <tr>
-            <td>&nbsp;</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-
-          <tr>
-            <td>&nbsp;</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-
-          <tr>
-            <td>&nbsp;</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-
-          <tr>
-            <td>&nbsp;</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-
-          <tr>
-            <td>&nbsp;</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-
-          <tr>
-            <td>&nbsp;</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-
-          <tr>
-            <td>&nbsp;</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-
-          <tr>
-            <td>&nbsp;</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-
-       </tbody>
+        <tbody class="table-group-divider text-left" id="inspection_items_body">
+        </tbody>
       </table>
-
-    <!--    テーブル幅を固定にして幅を有効にする。
-      <table class="table table-bordered table-sm" >
-     -->
 
       <table class="table table-bordered table-sm text-center" style="table-layout: fixed; width: 730px;">
         <thead>
           <tr class="text-center">
-            <th scope="col"; style="width: 235px; height: auto;" >項目</th>
-            <th scope="col"; style="height: auto;">内容</th>
+            <th scope="col" style="width: 235px; height: auto;">項目</th>
+            <th scope="col" style="height: auto;">内容</th>
           </tr>
         </thead>
 
@@ -179,22 +61,81 @@
           <tr>
             <th scope="row">飛行機体</th>
             <td>
-              <select class="form-select form-select-sm border border-secondary text-center" aria-label="機体選択" style="width: 150px;  height: 27px;">
-                <option selected>機体選択</option>
-                <option value="1">DJI Mini3</option>
-              </select>
+              <span class="fs-6"><%= current_user.aircraft&.model_purchased %></span>
+              <%= f.hidden_field :aircraft_id, value: current_user.aircraft&.id %>
             </td>
           </tr>
           <tr>
             <th scope="row">無人飛行機の登録番号</th>
-            <td>xxxxxxx</td>
+            <td><%= current_user.aircraft&.dips_registration_number %></td>
           </tr>
           <tr>
             <th scope="row">特記事項</th>
-            <td></td>
+            <td>
+              <%= f.text_area :special_notes,
+                    class: "form-control form-control-sm border border-secondary",
+                    rows: 3 %>
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
+    <% end %>
+
+    <script>
+    (function() {
+      function addItem() {
+        const tbody = document.getElementById('inspection_items_body');
+        const rowCount = tbody.querySelectorAll('tr').length;
+        const newIndex = rowCount;
+        const rowNum = rowCount + 1;
+
+        if (rowNum > 10) {
+          alert('最大10行まで追加できます');
+          return;
+        }
+
+        const newRow = `
+          <tr>
+            <td>
+              <input class="form-control text-center border border-secondary" type="date" name="inspection_maintenance[inspection_maintenance_items_attributes][${newIndex}][item_date]" style="height: 31px; display: inline-block;">
+            </td>
+            <td></td>
+            <td style="text-align: center;">
+              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="整備の内容" name="inspection_maintenance[inspection_maintenance_items_attributes][${newIndex}][item_maintenance_details]" style="width: 100%; display: inline-block;">
+            </td>
+            <td style="text-align: center;">
+              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="実施理由" name="inspection_maintenance[inspection_maintenance_items_attributes][${newIndex}][item_reson_implementation]" style="width: 100%; display: inline-block;">
+            </td>
+            <td style="text-align: center;">
+              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="住所" name="inspection_maintenance[inspection_maintenance_items_attributes][${newIndex}][item_location]" style="width: 100%; display: inline-block;">
+            </td>
+            <td style="text-align: center;">
+              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="名前" name="inspection_maintenance[inspection_maintenance_items_attributes][${newIndex}][item_organizer]" style="width: 100%; display: inline-block;">
+            </td>
+            <td style="text-align: center;">
+              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="備考" name="inspection_maintenance[inspection_maintenance_items_attributes][${newIndex}][item_note]" style="width: 100%; display: inline-block;">
+            </td>
+          </tr>`;
+
+        tbody.insertAdjacentHTML('beforeend', newRow);
+      }
+
+      function removeItem() {
+        const tbody = document.getElementById('inspection_items_body');
+        const rows = tbody.querySelectorAll('tr');
+        if (rows.length <= 1) {
+          alert('最低1行は必要です');
+          return;
+        }
+        tbody.removeChild(rows[rows.length - 1]);
+      }
+
+      document.getElementById('add_item_btn').addEventListener('click', addItem);
+      document.getElementById('remove_item_btn').addEventListener('click', removeItem);
+      addItem();
+    })();
+    </script>
+
   </div>
 </turbo-frame>

@@ -1,14 +1,20 @@
 <main class="form-signin" style="max-width: 300px; margin: auto; padding: 15px;">
   <h3 class="h4 mb-3 fw-normal text-center">削除しますか？</h3>
   <div class="d-flex gap-2 mb-3">
-    <% if params[:type] == 'flight_log' %>
-      <%= button_to "OK", flight_log_destroy_path(id: params[:id]), method: :delete,
-            class: "w-100 btn btn-primary",
-            form: { class: "w-100" } %>
-    <% else %>
+    <% if params[:type] == 'aircraft' %>
       <%= button_to "OK", aircraft_destroy_path, method: :delete,
             class: "w-100 btn btn-primary",
             form: { class: "w-100" } %>
+    <% elsif params[:type] == 'flight_log' %>
+      <%= button_to "OK", flight_log_destroy_path(id: params[:id]), method: :delete,
+            class: "w-100 btn btn-primary",
+            form: { class: "w-100" } %>
+    <% elsif params[:type] == 'inspection_maintenance' %>
+      <%= button_to "OK", inspection_maintenance_destroy_path(id: params[:id]), method: :delete,
+            class: "w-100 btn btn-primary",
+            form: { class: "w-100" } %>
+    <% else %>
+      <p class="text-danger text-center">削除対象が不明です。</p>
     <% end %>
     <button type="button" class="w-100 btn btn-outline-dark" onclick="window.close();">キャンセル</button>
   </div>

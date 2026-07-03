@@ -7,7 +7,12 @@
 
     <div class="box2 overflow-x-auto">
     <!-- box2貼り付け部 -->
-        <ul class="main-nav font-english">
+          <% if flash[:danger] %>
+            <div class="alert alert-danger">
+              <%= flash[:danger] %>
+            </div>
+          <% end %>
+          <ul class="main-nav font-english">
 
           <li><span class="fs-3" style="margin-right: 20px;">点検整備一覧</span></li>
           <li>
@@ -63,14 +68,11 @@
                   <%= button_to "詳細", inspection_maintenance_path(aircraft.inspection_maintenance.id), method: :get,
                     class: "btn btn-info btn-sm ms-3",
                     form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
-
-                  <%= button_to "編集", inspection_maintenance_edit_path(aircraft.inspection_maintenance.id), method: :get,
-                    class: "btn btn-success btn-sm ms-3",
-                    form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
-
+     
                   <button type="button" class="btn btn-danger btn-sm ms-3"
-                    onclick="window.open('<%= delete_confirm_index_path(aircraft.inspection_maintenance.id) %>', '_blank', 'width=600,height=500,scrollbars=yes,resizable=yes')">削除
-                  </button>
+                    onclick="window.open('<%= delete_confirm_index_path(id: aircraft.inspection_maintenance.id, type: :inspection_maintenance) %>', '_blank', 'width=600,height=500,scrollbars=yes,resizable=yes')">削除
+                 </button>
+
                 </td>
               </tr>
             <% end %>

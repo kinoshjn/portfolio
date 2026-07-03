@@ -107,9 +107,30 @@ class StaticPagesController < ApplicationController
   end
 
   def inspection_maintenance_new
+    if current_user.aircraft.blank?
+      flash.now[:danger] = "先に機体登録してください。(サイドメニュー押すと戻ります)"
+      @aircrafts = [ current_user.aircraft ].compact
+      render "static_pages/inspection_maintenance_index", status: :ok
+      return
+    end
+    if current_user.aircraft.inspection_maintenance.present?
+      flash.now[:danger] = "既に点検整備記録が登録されています。編集画面をご利用ください。(サイドメニュー押すと戻ります)"
+      @aircrafts = [ current_user.aircraft ].compact
+      @inspection_maintenances = current_user.aircraft.inspection_maintenance
+      render "static_pages/inspection_maintenance_index", status: :ok
+      return
+    end
+    @aircrafts = [ current_user.aircraft ].compact
+    @inspection_maintenance = current_user.aircraft.build_inspection_maintenance
   end
 
   def inspection_maintenance_edit
+  end
+
+  def inspection_maintenance_destroy
+    @inspection_maintenance = InspectionMaintenance.find(params[:id])
+    @inspection_maintenance.destroy
+    render html: "<script>window.opener.location.reload(); window.close();</script>".html_safe, layout: false
   end
 
   def delete_confirm_index
