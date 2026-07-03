@@ -125,6 +125,19 @@ class StaticPagesController < ApplicationController
   end
 
   def inspection_maintenance_edit
+    @aircrafts = [ current_user.aircraft ].compact
+    @inspection_maintenance = InspectionMaintenance.find(params[:id])
+    render "static_pages/inspection_maintenance_edit"
+  end
+
+  def inspection_maintenance_update
+    @inspection_maintenance = InspectionMaintenance.find(params[:id])
+    if @inspection_maintenance.update(inspection_maintenance_params)
+      render "static_pages/inspection_maintenance_show", status: :ok
+    else
+      flash.now[:danger] = @inspection_maintenance.errors.full_messages.join("、")
+      render "static_pages/inspection_maintenance_edit", status: :unprocessable_entity
+    end
   end
 
   def inspection_maintenance_destroy
@@ -168,6 +181,16 @@ class StaticPagesController < ApplicationController
           :id, :details_issues, :details_date_resolution,
           :details_processing, :details_verifier
         ]
+      ]
+    )
+  end
+
+  def inspection_maintenance_params
+    params.require(:inspection_maintenance).permit(
+      :special_notes, :aircraft_id,
+      inspection_maintenance_items_attributes: [
+        :id, :item_date, :item_total_flight_time, :item_maintenance_details,
+        :item_reson_implementation, :item_location, :item_organizer, :item_note
       ]
     )
   end

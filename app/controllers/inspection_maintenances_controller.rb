@@ -39,5 +39,4 @@ class InspectionMaintenancesController < ApplicationController
       ]
     )
   end
-
 end
