@@ -13,6 +13,10 @@
       <%= button_to "OK", inspection_maintenance_destroy_path(id: params[:id]), method: :delete,
             class: "w-100 btn btn-primary",
             form: { class: "w-100" } %>
+    <% elsif params[:type] == 'daily_inspection' %>
+      <%= button_to "OK", daily_inspection_destroy_path(id: params[:id]), method: :delete,
+            class: "w-100 btn btn-primary",
+            form: { class: "w-100" } %>
     <% else %>
       <p class="text-danger text-center">削除対象が不明です。</p>
     <% end %>

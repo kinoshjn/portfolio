@@ -38,13 +38,13 @@ Rails.application.routes.draw do
 
   get "daily_inspection_show", to: "static_pages#daily_inspection_show"
   get "daily_inspection_new", to: "static_pages#daily_inspection_new"
-  get "daily_inspection_edit", to: "static_pages#daily_inspection_edit"
+  get "daily_inspection_edit/:id", to: "static_pages#daily_inspection_edit", as: "daily_inspection_edit"
+  patch "daily_inspection_update/:id", to: "static_pages#daily_inspection_update", as: "daily_inspection_update"
   delete "daily_inspection_destroy", to: "static_pages#daily_inspection_destroy"
 
   get "inspection_maintenance_show", to: "static_pages#inspection_maintenance_show"
   get "inspection_maintenance_new", to: "static_pages#inspection_maintenance_new"
   get "inspection_maintenance_edit/:id", to: "static_pages#inspection_maintenance_edit", as: "inspection_maintenance_edit"
-
   patch "inspection_maintenance_update/:id", to: "static_pages#inspection_maintenance_update", as: "inspection_maintenance_update"
   delete "inspection_maintenance_destroy", to: "static_pages#inspection_maintenance_destroy"
 

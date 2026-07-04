@@ -123,7 +123,7 @@ end
       DailyInspectionItem.create!(
         daily_inspection_id: daily_inspection.id,
         item_name: item_name,
-        result: [ "合格", "不合格" ].sample,
+        result: [ "1", "2" ].sample,
         note: Faker::Lorem.sentence
       )
     end

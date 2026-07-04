@@ -19,7 +19,15 @@ class InspectionMaintenancesController < ApplicationController
         render "static_pages/inspection_maintenance_index", status: :ok
       return
     end
-    @inspection_maintenance = current_user.aircraft.build_inspection_maintenance(inspection_maintenance_params)
+
+    data = inspection_maintenance_params
+    data[:inspection_maintenance_items_attributes]&.each do |_, item|
+      if item[:item_date].present?
+        item[:item_total_flight_time] = calculate_total_flight_time(item[:item_date])
+      end
+    end
+
+    @inspection_maintenance = current_user.aircraft.build_inspection_maintenance(data)
     if @inspection_maintenance.save
       render "static_pages/inspection_maintenance_show", status: :ok
     else

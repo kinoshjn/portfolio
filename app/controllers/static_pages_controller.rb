@@ -85,15 +85,51 @@ class StaticPagesController < ApplicationController
     render html: "<script>window.opener.location.reload(); window.close();</script>".html_safe, layout: false
   end
 
+
   def daily_inspection_index
     @aircrafts = [ current_user.aircraft ].compact
     @daily_inspections = current_user.aircraft.present? ? current_user.aircraft.daily_inspections : []
   end
 
+  def daily_inspection_show
+    @aircrafts = [ current_user.aircraft ].compact
+    @daily_inspection = DailyInspection.find(params[:id])
+  end
+
   def daily_inspection_new
+    if current_user.aircraft.blank?
+      flash.now[:danger] = "先に機体登録してください。(サイドメニュー押すと戻ります)"
+      @aircrafts = [ current_user.aircraft ].compact
+      render "static_pages/daily_inspection_index", status: :ok
+      return
+    end
+    @aircrafts = [ current_user.aircraft ].compact
+    @daily_inspection = current_user.aircraft.daily_inspections.build
+    [ "機体全般", "プロペラ", "フレーム", "通信系統", "推進系統", "電源系統", "自動制御系統", "操作装置", "バッテリー・燃料" ].each do |name|
+    @daily_inspection.daily_inspection_items.build(item_name: name)
+    end
   end
 
   def daily_inspection_edit
+    @aircrafts = [ current_user.aircraft ].compact
+    @daily_inspection = DailyInspection.find(params[:id])
+    render "static_pages/daily_inspection_edit"
+  end
+
+  def daily_inspection_update
+    @daily_inspection = DailyInspection.find(params[:id])
+    if @daily_inspection.update(daily_inspection_params)
+      render "static_pages/daily_inspection_show", status: :ok
+    else
+      flash.now[:danger] = @daily_inspection.errors.full_messages.join("、")
+      render "static_pages/daily_inspection_edit", status: :unprocessable_entity
+    end
+  end
+
+  def daily_inspection_destroy
+    @daily_inspection = DailyInspection.find(params[:id])
+    @daily_inspection.destroy
+    render html: "<script>window.opener.location.reload(); window.close();</script>".html_safe, layout: false
   end
 
   def inspection_maintenance_index
@@ -132,7 +168,15 @@ class StaticPagesController < ApplicationController
 
   def inspection_maintenance_update
     @inspection_maintenance = InspectionMaintenance.find(params[:id])
-    if @inspection_maintenance.update(inspection_maintenance_params)
+
+    data = inspection_maintenance_params
+    data[:inspection_maintenance_items_attributes]&.each do |_, item|
+      if item[:item_date].present?
+        item[:item_total_flight_time] = calculate_total_flight_time(item[:item_date])
+      end
+    end
+
+    if @inspection_maintenance.update(data)
       render "static_pages/inspection_maintenance_show", status: :ok
     else
       flash.now[:danger] = @inspection_maintenance.errors.full_messages.join("、")
@@ -191,6 +235,22 @@ class StaticPagesController < ApplicationController
       inspection_maintenance_items_attributes: [
         :id, :item_date, :item_total_flight_time, :item_maintenance_details,
         :item_reson_implementation, :item_location, :item_organizer, :item_note
+      ]
+    )
+  end
+
+  def daily_inspection_params
+    params.require(:daily_inspection).permit(
+      :aircraft_id,
+      :inspection_date,
+      :inspection_location,
+      :inspector,
+      :special_notes,
+      daily_inspection_items_attributes: [
+        :id,
+        :item_name,
+        :result,
+        :note
       ]
     )
   end
