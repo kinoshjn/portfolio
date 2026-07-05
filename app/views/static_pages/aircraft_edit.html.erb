@@ -9,21 +9,38 @@
     <!-- box2貼り付け部 -->
         <ul class="main-nav font-english">
           <li><span class="fs-3" style="margin-right: 10px;">機体編集</span></li>
-          <li><span class="fs-4" style="margin-right: 20px;">ID: 1</span></li>
+          <li><span class="fs-4" style="margin-right: 20px;">ID: <%= @aircraft.id %></span></li>
           <li>
-            <button type="button" class="btn btn-primary">更新する</button>
+            <button type="submit" form="aircraft_edit_form" class="btn btn-primary">更新する</button>
           </li>
           <li>
-            <button type="button" class="btn btn-secondary" style="margin-left: 100px;">前の画面に戻る</button>
+            <%= button_to "前の画面に戻る", aircraft_list_index_path, method: :get,
+              class: "btn btn-secondary",style: "margin-left: 100px;",
+              form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
           </li>
         </ul>
     </div>
- 
+
+    <%= form_with model: @aircraft, url: aircraft_update_path, method: :patch, local: true, html: { id: "aircraft_edit_form" } do |f| %>
+
+  <!-- アラート表示 -->
+    <% if @aircraft.errors.any? %>
+      <div class="alert alert-danger">
+        <ul class="mb-0">
+          <% @aircraft.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+
+
     <div class="box3 overflow-x-auto box3--flex">
     <!-- box3貼り付け部 -->
       <div style="min-width: 600px;">
 
-        <span class="fs-5 text-center " style="margin-left: 20px;" >1.基本情報</span>   
+        <span class="fs-5 text-center " style="margin-left: 20px;" >1.DIPS情報</span>   
         <table class="table table-bordered table-sm w-100">
           <thead>
             <tr style="text-align: center;">
@@ -37,8 +54,9 @@
               <th scope="col">登録番号(DIPS)</th>
 
               <td style="text-align: center;">
-                <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="JU0123456" aria-label="登録番号" 
-                style="width: 100%; display: inline-block;">
+                <%= f.text_field :dips_registration_number,
+                      class: "form-control form-control-sm text-center border border-secondary",
+                      placeholder: "例:JU0123456" %>
               </td>
 
             </tr>
@@ -46,54 +64,32 @@
             <tr style="text-align: center;">
               <th scope="col">種類</th>
               <td style="text-align: center;">
-                <select class="form-select form-select-sm border  border-secondary    text-center" aria-label="種類選択">
-                  <option selected>種類選択</option>
-                  <option value="1">回転翼航空機(マルチローター)</option>
-                  <option value="2">回転翼航空機(ヘリコプター)</option>
-                  <option value="3">飛行機</option>
-                  <option value="4">パワードリフト</option>
-                </select>
-              </td>
-            </tr>
-  
-            <tr style="text-align: center;">
-              <th scope="col">型式</th>
-              <td style="text-align: center;">
-                <select class="form-select form-select-sm border  border-secondary    text-center" aria-label="種類選択">
-                  <option selected>型式選択</option>
-                  <option value="1">なし(型式認証なし)</option>
-                  <option value="2"> </option>
-                </select>
-              </td>
-            </tr>
-  
-            <tr style="text-align: center;">
-              <th scope="col">型式認証番号</th>
-              <td style="text-align: center;">
-                <select class="form-select form-select-sm border  border-secondary    text-center" aria-label="種類選択">
-                  <option selected>型式選択</option>
-                  <option value="1">なし(型式認証なし)</option>
-                  <option value="2"> </option>
-                </select>
+                <%= f.select :dips_type,
+                      options_for_select(
+                        [["種類選択", ""],
+                         ["回転翼航空機(マルチローター)", "1"],
+                         ["回転翼航空機(ヘリコプター)", "2"],
+                         ["飛行機", "3"],
+                         ["パワードリフト", "4"]],
+                        f.object.dips_type
+                      ),
+                      {},
+                      { class: "form-select form-select-sm border border-secondary text-center" } %>
               </td>
             </tr>
 
-            <tr style="text-align: center;">
-              <th scope="col">機体認証の区分及び機体認証番号</th>
-              <td style="text-align: center;">
-                <select class="form-select form-select-sm border  border-secondary    text-center" aria-label="種類選択">
-                  <option selected>型式選択</option>
-                  <option value="1">なし(型式認証なし)</option>
-                  <option value="2"> </option>
-                </select>
-              </td>
-            </tr>
+            <%= render 'shared/dips_model_select', f: f %>
+
+            <%= render 'shared/dips_type_approval_number_select', f: f %>
+
+            <%= render 'shared/dips_aircraft_registration_category_select', f: f %>
 
             <tr style="text-align: center;">
               <th scope="col">設計製造者</th>
               <td style="text-align: center;">
-                <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="DJI" aria-label="設計製造者" 
-                style="width: 100%; display: inline-block;">
+                <%= f.text_field :dips_designer_and_manufacturer,
+                      class: "form-control form-control-sm text-center border border-secondary",
+                      placeholder: "例:DJI" %>
               </td>
             </tr>
 
@@ -101,8 +97,9 @@
               <th scope="col">シリアル番号</th>
 
               <td style="text-align: center;">
-                <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="12345678" aria-label="シリアル番号" 
-                style="width: 100%; display: inline-block;">
+                <%= f.text_field :dips_serial_number,
+                      class: "form-control form-control-sm text-center border border-secondary",
+                      placeholder: "例:12345678" %>
               </td>
             </tr>
 
@@ -112,7 +109,7 @@
 
       <div style="min-width: 600px;">
 
-        <span class="fs-5 text-center" style="margin-left: 20px;" >2.追加情報</span>   
+        <span class="fs-5 text-center" style="margin-left: 20px;" >2.ユーザ情報</span>   
         <table class="table table-bordered table-sm w-100">
           <thead>
             <tr style="text-align: center;">
@@ -126,16 +123,18 @@
               <th scope="col">購入メーカ</th>
 
               <td style="text-align: center;">
-                <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="DJI" aria-label="購入メーカ" 
-                style="width: 100%; display: inline-block;">
+                <%= f.text_field :owner_manufacturer,
+                      class: "form-control form-control-sm text-center border border-secondary",
+                      placeholder: "例:DJI" %>
               </td>
             </tr>
 
             <tr style="text-align: center;">
               <th scope="col">購入型式</th>
               <td style="text-align: center;">
-                <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="DJI Mini3" aria-label="購入型式" 
-                style="width: 100%; display: inline-block;">
+                <%= f.text_field :model_purchased,
+                      class: "form-control form-control-sm text-center border border-secondary",
+                      placeholder: "例:DJI Mini3" %>
               </td>
             </tr>
 
@@ -143,16 +142,18 @@
               <th scope="col">機体購入日</th>
 
               <td style="text-align: center;">
-                <input class="form-control form-control-sm text-center border border-secondary" type="date" placeholder="" aria-label="機体購入日" 
-                style="width: 100%; display: inline-block; height: 28px;">
+                <%= f.date_field :owner_date_purchased,
+                      class: "form-control form-control-sm text-center border border-secondary",
+                      style: "height: 28px;" %>
               </td>
             </tr>
 
             <tr style="text-align: center;">
               <th scope="col">登録者</th>
               <td style="text-align: center;">
-                <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="山田太郎" aria-label="登録者" 
-                style="width: 100%; display: inline-block;">
+                <%= f.text_field :owner_name,
+                      class: "form-control form-control-sm text-center border border-secondary",
+                      placeholder: "名前" %>
               </td>
             </tr>
 
@@ -160,16 +161,18 @@
               <th scope="col">リモートID登録番号</th>
 
               <td style="text-align: center;">
-                <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="3456789" aria-label="リモートID登録番号" 
-                style="width: 100%; display: inline-block;">
+                <%= f.text_field :remote_id_registration_number,
+                      class: "form-control form-control-sm text-center border border-secondary",
+                      placeholder: "例:3456789" %>
               </td>
             </tr>
 
             <tr style="text-align: center;">
               <th scope="col">保険会社</th>
               <td style="text-align: center;">
-                <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="損保ジャパン" aria-label="保険会社" 
-                style="width: 100%; display: inline-block;">
+                <%= f.text_field :owner_insurance_company,
+                      class: "form-control form-control-sm text-center border border-secondary",
+                      placeholder: "例:損保ジャパン" %>
               </td>
             </tr>
 
@@ -177,24 +180,27 @@
               <th scope="col">保険証券番号</th>
 
               <td style="text-align: center;">
-                <input class="form-control form-control-sm text-center border border-secondary" type="text" placeholder="112050" aria-label="保険証券番号" 
-                style="width: 100%; display: inline-block;">
+                <%= f.text_field :owner_policy_number,
+                      class: "form-control form-control-sm text-center border border-secondary",
+                      placeholder: "例:112050" %>
               </td>
             </tr>
 
             <tr style="text-align: center;">
               <th scope="col">保険加入日</th>
               <td style="text-align: center;">
-                <input class="form-control form-control-sm text-center border border-secondary" type="date" placeholder="" aria-label="保険加入日" 
-                style="width: 100%; display: inline-block; height: 28px;">
+                <%= f.date_field :owner_insurance_start_date,
+                      class: "form-control form-control-sm text-center border border-secondary",
+                      style: "height: 28px;" %>
               </td>
             </tr>
 
             <tr style="text-align: center;">
               <th scope="col">保険満了日</th>
               <td style="text-align: center;">
-                <input class="form-control form-control-sm text-center border border-secondary" type="date" placeholder="" aria-label="保険満了日" 
-                style="width: 100%; display: inline-block; height: 28px;">
+                <%= f.date_field :owner_insurance_expiration_date,
+                      class: "form-control form-control-sm text-center border border-secondary",
+                      style: "height: 28px;" %>
               </td>
 
             </tr>
@@ -205,5 +211,6 @@
 
     <!-- box3貼り付け部 終了-->
     </div>
+    <% end %>
   </div>
 </turbo-frame>

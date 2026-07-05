@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Render dynamic PWA files from app/views/pwa/*
@@ -14,14 +13,11 @@ Rails.application.routes.draw do
   post "login", to: "user_sessions#create"
   delete "logout", to: "user_sessions#destroy"
 
-  resources :aircrafts, only: %i[index]
-  resources :flight_logs, only: %i[index]
-  resources :flight_records, only: %i[index]
-  resources :safety_incidents, only: %i[index]
-  resources :daily_inspections, only: %i[index]
-  resources :daily_inspection_items, only: %i[index]
-  resources :inspection_maintenances, only: %i[index]
-  resources :inspection_maintenance_items, only: %i[index]
+  resources :aircrafts, only: %i[index show new create]
+  resources :flight_logs, only: %i[index show new create]
+
+  resources :daily_inspections, only: %i[index show new create]
+  resources :inspection_maintenances, only: %i[index show new create]
 
   get "aircraft_list_index", to: "static_pages#aircraft_list_index"
   get "flight_log_index", to: "static_pages#flight_log_index"
@@ -31,18 +27,26 @@ Rails.application.routes.draw do
   get "aircraft_show", to: "static_pages#aircraft_show"
   get "aircraft_new", to: "static_pages#aircraft_new"
   get "aircraft_edit", to: "static_pages#aircraft_edit"
+  patch "aircraft_update", to: "static_pages#aircraft_update"
+  delete "aircraft_destroy", to: "static_pages#aircraft_destroy"
 
   get "flight_log_show", to: "static_pages#flight_log_show"
   get "flight_log_new", to: "static_pages#flight_log_new"
-  get "flight_log_edit",  to: "static_pages#flight_log_edit"
+  get "flight_log_edit/:id", to: "static_pages#flight_log_edit", as: "flight_log_edit"
+  patch "flight_log_update/:id", to: "static_pages#flight_log_update", as: "flight_log_update"
+  delete "flight_log_destroy", to: "static_pages#flight_log_destroy"
 
   get "daily_inspection_show", to: "static_pages#daily_inspection_show"
   get "daily_inspection_new", to: "static_pages#daily_inspection_new"
-  get "daily_inspection_edit", to: "static_pages#daily_inspection_edit"
+  get "daily_inspection_edit/:id", to: "static_pages#daily_inspection_edit", as: "daily_inspection_edit"
+  patch "daily_inspection_update/:id", to: "static_pages#daily_inspection_update", as: "daily_inspection_update"
+  delete "daily_inspection_destroy", to: "static_pages#daily_inspection_destroy"
 
   get "inspection_maintenance_show", to: "static_pages#inspection_maintenance_show"
   get "inspection_maintenance_new", to: "static_pages#inspection_maintenance_new"
-  get "inspection_maintenance_edit", to: "static_pages#inspection_maintenance_edit"
+  get "inspection_maintenance_edit/:id", to: "static_pages#inspection_maintenance_edit", as: "inspection_maintenance_edit"
+  patch "inspection_maintenance_update/:id", to: "static_pages#inspection_maintenance_update", as: "inspection_maintenance_update"
+  delete "inspection_maintenance_destroy", to: "static_pages#inspection_maintenance_destroy"
 
   get "delete_confirm_index", to: "static_pages#delete_confirm_index"
 end

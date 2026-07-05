@@ -10,28 +10,26 @@
         <ul class="main-nav font-english">
           <li><span class="fs-3" style="margin-right: 10px;">機体詳細</span></li>
 
-          <li><span class="fs-4" style="margin-right: 20px;">ID: 1</span></li>
+          <li><span class="fs-4" style="margin-right: 20px;">機体ID: <%= @aircraft.id %> </span></li>
 
           <li>
-            <%= button_to "編集", aircraft_edit_path, method: :get,
+            <%= button_to "編集", aircraft_edit_path(@aircraft.id), method: :get,
               class: "btn btn-success btn-sm ms-3",
               form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
           </li>
           <li>
             <button type="button" class="btn btn-danger btn-sm ms-3"
-              onclick="window.open('<%= delete_confirm_index_path %>', '_blank', 'width=600,height=500,scrollbars=yes,resizable=yes')">削除
+              onclick="window.open('<%= delete_confirm_index_path(id: @aircraft.id, type: :aircraft) %>', '_blank', 'width=600,height=500,scrollbars=yes,resizable=yes')">削除
             </button>
           </li>
         </ul>
     </div>
  
     <div class="box3 overflow-x-auto box3--flex">
-
     <!-- box3貼り付け部 -->
-
       <div style="min-width: 600px;">
  
-        <span class="fs-5 text-center " style="margin-left: 20px;" >1.基本情報</span>   
+        <span class="fs-5 text-center " style="margin-left: 20px;" >1.DIPS情報</span>   
         <table class="table table-bordered table-sm w-100">
           <thead>
             <tr style="text-align: center;">
@@ -40,49 +38,72 @@
             </tr>
           </thead>
 
-          <tbody class="table-group-divider">
+        <!-- 機体詳細 2026.6/25 dbデータ表示 -->  
+
+        <tbody class="table-group-divider">
             <tr style="text-align: left;">
-              <th scope="col">登録番号(DIPS)</th>
-              <th scope="col">JUxxxxxxxxx</th>
+              <th scope="col">登録番号</th>
+              <th scope="col"> <%= @aircraft.dips_registration_number %>        </th>
             </tr>
 
-            <tr style="text-align: left;">
+            <tr style="text-align: left;"> 
               <th scope="col">種類</th>
-              <th scope="col">回転翼航空機(マルチローター)</th>
+              <th scope="col">
+              <%= { "1" => "回転翼航空機(マルチローター)",
+                    "2" => "回転翼航空機(ヘリコプター)",
+                    "3" => "飛行機",
+                    "4" => "パワードリフト" }[@aircraft.dips_type] %>
+              </th>
             </tr>
 
             <tr style="text-align: left;">
               <th scope="col">型式</th>
-              <th scope="col">なし(型式認証なし)</th>
+              <th scope="col">
+                <% if @aircraft.dips_model == "1" %>
+                    なし(型式認証なし)
+                <% elsif @aircraft.dips_model == "2" %>
+                    <%= @aircraft.dips_model_other %>
+                <% end %>
+              </th>
             </tr>
 
             <tr style="text-align: left;">
               <th scope="col">型式認証番号</th>
-              <th scope="col">なし(型式認証なし)</th>
+              <th scope="col">
+                <% if @aircraft.dips_type_approval_number == "1" %>
+                  なし(型式認証なし)
+                <% elsif @aircraft.dips_type_approval_number == "2" %>
+                <%= @aircraft.dips_type_approval_number_other %>
+                <% end %>
+              </th>
             </tr>
 
             <tr style="text-align: left;">
               <th scope="col">機体認証の区分及び機体認証番号</th>
-              <th scope="col">なし(型式認証なし)</th>
-
+              <th scope="col">
+                <% if @aircraft.dips_aircraft_registration_category == "1" %>
+                  なし(型式認証なし)
+                <% elsif @aircraft.dips_aircraft_registration_category == "2" %>
+                  <%= @aircraft.dips_aircraft_registration_category_other %>
+                <% end %>
+              </th>
             </tr>
 
             <tr style="text-align: left;">
               <th scope="col">設計製造者</th>
-              <th scope="col">DJI</th>
+              <th scope="col"> <%= @aircraft.dips_designer_and_manufacturer %>  </th>
             </tr>
 
             <tr style="text-align: left;">
               <th scope="col">シリアル番号</th>
-              <th scope="col">xxxxxxxxx</th>
+              <th scope="col"> <%= @aircraft.dips_serial_number %>              </th>
             </tr>
-
           </tbody>
         </table>
       </div>
 
       <div style="min-width: 600px;">
-        <span class="fs-5 text-center" style="margin-left: 20px;" >2.追加情報</span>   
+        <span class="fs-5 text-center" style="margin-left: 20px;" >2.ユーザ情報</span>   
         <table class="table table-bordered table-sm w-100">
           <thead>
             <tr style="text-align: center;">
@@ -94,47 +115,48 @@
           <tbody class="table-group-divider">
             <tr style="text-align: left;">
               <th scope="col">購入メーカ</th>
-              <th scope="col">DJI</th>
+              <th scope="col"> <%= @aircraft.owner_manufacturer %>              </th>
             </tr>
 
             <tr style="text-align: left;">
               <th scope="col">購入型式</th>
-              <th scope="col">DJI Mini3</th>
+              <th scope="col"> <%= @aircraft.model_purchased %>                 </th>
             </tr>
 
             <tr style="text-align: left;">
               <th scope="col">機体購入日</th>
-              <th scope="col">2026/05/20</th>
+              <th scope="col"> <%= @aircraft.owner_date_purchased %>            </th>
             </tr>
 
             <tr style="text-align: left;">
-              <th scope="col">登録者</th>
-              <th scope="col">山田太郎</th>
+              <th scope="col">機体所有者</th>
+              <th scope="col"> <%= @aircraft.owner_name %>                      </th>
             </tr>
 
             <tr style="text-align: left;">
               <th scope="col">リモートID登録番号</th>
-              <th scope="col">XXXXXXX</th>
+              <th scope="col"> <%= @aircraft.remote_id_registration_number %>   </th>
             </tr>
 
             <tr style="text-align: left;">
               <th scope="col">保険会社</th>
-              <th scope="col">XXXXX</th>
+
+              <th scope="col"> <%= @aircraft.owner_insurance_company %>         </th>
             </tr>
 
             <tr style="text-align: left;">
               <th scope="col">保険証券番号</th>
-              <th scope="col">XXXXXXXX</th>
+              <th scope="col"> <%= @aircraft.owner_policy_number %>             </th>
             </tr>
 
             <tr style="text-align: left;">
               <th scope="col">保険加入日</th>
-              <th scope="col">2026/05/24</th>
+              <th scope="col"> <%= @aircraft.owner_insurance_start_date %>      </th>
             </tr>
 
             <tr style="text-align: left;">
               <th scope="col">保険満了日</th>
-              <th scope="col">2027/05/23</th>
+              <th scope="col"> <%= @aircraft.owner_insurance_expiration_date %> </th>
             </tr>
 
           </tbody>

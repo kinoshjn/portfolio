@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_06_20_095513) do
+ActiveRecord::Schema[7.2].define(version: 2026_07_01_231908) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -34,6 +34,9 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_20_095513) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "dips_model_other"
+    t.string "dips_type_approval_number_other"
+    t.string "dips_aircraft_registration_category_other"
     t.index ["user_id"], name: "index_aircrafts_on_user_id"
   end
 
@@ -77,8 +80,8 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_20_095513) do
     t.string "pilot_name", null: false
     t.time "takeoff_time", null: false
     t.time "landing_time", null: false
-    t.time "flight_time"
-    t.time "total_flight_time"
+    t.integer "flight_time"
+    t.integer "total_flight_time"
     t.string "takeoff_location", null: false
     t.string "landing_location", null: false
     t.string "flight_summary", null: false
@@ -91,7 +94,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_20_095513) do
 
   create_table "inspection_maintenance_items", force: :cascade do |t|
     t.date "item_date", null: false
-    t.time "item_total_flight_time"
+    t.integer "item_total_flight_time"
     t.string "item_maintenance_details", null: false
     t.string "item_reson_implementation", null: false
     t.string "item_location", null: false
@@ -113,9 +116,9 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_20_095513) do
 
   create_table "safety_incidents", force: :cascade do |t|
     t.string "details_issues", null: false
-    t.date "details_date_resolution", null: false
-    t.string "details_processing", null: false
-    t.string "details_verifier", null: false
+    t.date "details_date_resolution"
+    t.string "details_processing"
+    t.string "details_verifier"
     t.bigint "flight_record_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

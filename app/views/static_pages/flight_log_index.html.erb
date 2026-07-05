@@ -6,32 +6,31 @@
     </div>
 
     <div class="box2 overflow-x-auto">
-    <!-- box2貼り付け部 -->
-        <ul class="main-nav font-english">
-          <li><span class="fs-3" style="margin-right: 150px;">飛行日誌一覧</span></li>
-          <li>
-            <label class="fs-5">開始日</label> 
-            <input type="date" id="startDate">
-          </li>
-          <li>
-            <label class="fs-5" style="margin-left: 10px;">終了日</label>
-            <input type="date" id="endDate" style="margin-right: 20px;">
-          </li>
-          <li>
-            <button type="button" class="btn btn-secondary btn-sm">検索</button>
-          </li>
+     <!-- box2貼り付け部 -->
+      <%= search_form_for @q do |f| %>
+      <ul class="main-nav font-english">
+        <li><span class="fs-3" style="margin-right: 20px;">飛行日誌一覧</span></li>
+        <li>
+          <%= f.label :flight_date_gteq, "開始日", class: "fs-5" %>
+          <%= f.date_field :flight_date_gteq %>
+        </li>
+        <li>
+          <%= f.label :flight_date_lteq, "終了日", class: "fs-5", style: "margin-left: 10px;" %>
+          <%= f.date_field :flight_date_lteq, style: "margin-right: 20px;" %>
+        </li>
+        <li>
+          <%= f.submit "絞込み", class: "btn btn-secondary btn-sm" %>
+        </li>
+      </ul>
+      <% end %>
 
-          <li>
-            <%= button_to "新規作成", flight_log_new_path, method: :get,
-              class: "btn btn-primary btn-sm ms-3",
-              form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
-          </li>
-
-          <li>
-            <%= render 'shared/aircraft_menu' %> 
-          </li>
-
-        </ul>
+      <ul class="main-nav font-english">
+        <li>
+          <%= button_to "新規作成", flight_log_new_path, method: :get,
+            class: "btn btn-primary btn-sm ms-3",
+            form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
+        </li>
+      </ul>
     </div>
 
     <div class="box3 overflow-x-auto box3--plain">
@@ -43,7 +42,7 @@
       <table class="table table-bordered table-sm">
         <thead>
           <tr class="text-center">
-            <th scope="col">ID</th>
+            <th scope="col">飛行日誌ID</th>
             <th scope="col">飛行日</th>
             <th scope="col">飛行機体</th>
             <th scope="col">操縦者</th>
@@ -53,8 +52,9 @@
         </thead>
 
       <tbody class="table-group-divider text-center">
-        <% @flight_logs.each do |flight_log| %> 
-          <% flight_log.flight_records.each do |flight_record| %>
+        <% @flight_logs.each do |flight_log| %>
+          <% flight_record = flight_log.flight_records.first %>
+          <% next unless flight_record.present? %>
             <tr>
               <th scope="row">  <%= flight_log.id %>                        </th>
               <td>              <%= flight_log.flight_date %>               </td>
@@ -64,7 +64,7 @@
               <td class="text-start"> <%= flight_record.takeoff_location %> </td>
 
               <td class="d-flex gap-3 justify-content-left">
-                <%= button_to "詳細", flight_log_show_path(flight_log.id), method: :get,
+                <%= button_to "詳細", flight_log_path(flight_log.id), method: :get,
                   class: "btn btn-info btn-sm ms-3",
                   form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
 
@@ -72,12 +72,11 @@
                   class: "btn btn-success btn-sm ms-3",
                   form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
 
-               <button type="button" class="btn btn-danger btn-sm ms-3"
-                  onclick="window.open('<%= delete_confirm_index_path(flight_log.id) %>', '_blank', 'width=600,height=500,scrollbars=yes,resizable=yes')">削除
+                <button type="button" class="btn btn-danger btn-sm ms-3"
+                  onclick="window.open('<%= delete_confirm_index_path(id: flight_log.id, type: :flight_log) %>', '_blank', 'width=600,height=500,scrollbars=yes,resizable=yes')">削除
                 </button>
               </td>
             </tr>
-        <% end %>
        <% end %>
       </tbody>
     </table>

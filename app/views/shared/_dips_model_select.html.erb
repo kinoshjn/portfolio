@@ -1,0 +1,50 @@
+<tr style="text-align: center;">
+  <th scope="col">型式</th>
+  <td style="text-align: center;">
+    <div style="display: flex; align-items: center;">
+      <%= f.select :dips_model,
+            options_for_select(
+              [["型式選択", ""], ["なし(型式認証なし)", "1"], ["その他", "2"]],
+              f.object.dips_model
+            ),
+            {},
+            { id: "dips_model_select", class: "form-select form-select-sm border border-secondary text-center" } %>
+      <div id="dips_model_input_wrapper" style="<%= f.object.dips_model == '2' ? 'display: flex;' : 'display: none;' %> width: 100%; align-items: center;">
+        <%= f.text_field :dips_model_other,
+              id: "dips_model_input",
+              class: "form-control form-control-sm border border-secondary text-center",
+              placeholder: "型式を入力",
+              style: "width: calc(100% - 30px); display: inline-block;" %>
+        <span id="dips_model_reset" style="cursor: pointer; font-size: 12px;">▽</span>
+      </div>
+    </div>
+  </td>
+</tr>
+
+<script>
+  (function() {
+    const select = document.getElementById('dips_model_select');
+    const input = document.getElementById('dips_model_input');
+    const wrapper = document.getElementById('dips_model_input_wrapper');
+    const reset = document.getElementById('dips_model_reset');
+
+    if (select.value === '2') {
+      select.style.display = 'none';
+    }
+
+    select.addEventListener('change', function() {
+      if (this.value === '2') {
+        select.style.display = 'none';
+        wrapper.style.display = 'flex';
+        input.focus();
+      }
+    });
+
+    reset.addEventListener('click', function() {
+      wrapper.style.display = 'none';
+      input.value = '';
+      select.style.display = 'block';
+      select.value = '';
+    });
+  })();
+</script>

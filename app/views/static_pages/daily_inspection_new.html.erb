@@ -11,229 +11,128 @@
           <li><span class="fs-3" style="margin-right: 10px;">日常点検作成</span></li>
           <li><span class="fs-4" style="margin-right: 20px; visibility: hidden;">ID: 1</span></li>
           <li>
-            <button type="button" class="btn btn-primary">作成する</button>
+            <button type="submit" form="daily_inspection_new_form" class="btn btn-primary">作成する</button>
           </li>
           <li>
-            <button type="button" class="btn btn-secondary" style="margin-left: 100px;">前の画面に戻る</button>
+            <%= button_to "前の画面に戻る", daily_inspection_index_path , method: :get,
+              class: "btn btn-secondary",style: "margin-left: 100px;",
+              form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
           </li>
         </ul>
     </div>
+
+    <%= form_with model: @daily_inspection, url: daily_inspections_path, local: true, html: { id: "daily_inspection_new_form" } do |f| %>
 
     <div class="box3 overflow-x-auto box3--plain">
     <!-- box3貼り付け部 -->
       <table class="table table-bordered table-sm" >
         <thead>
           <tr class="text-center">
-            <th scope="col"; style="width: 150px; height: auto;" >項目</th>
-            <th scope="col"; style="width: 400px; height: auto;">確認内容</th>
-            <th scope="col"; style="width: 150px; height: auto;">結果</th>
+            <th scope="col" style="width: 150px; height: auto;">項目</th>
+            <th scope="col" style="width: 400px; height: auto;">確認内容</th>
+            <th scope="col" style="width: 150px; height: auto;">結果</th>
             <th scope="col">備考</th>
           </tr>
         </thead>
 
-        <tbody class="table-group-divider text-left">
-          <tr>
-            <th scope="row">機体全般</th>
-            <td>機器の取り付け状態（ネジ、コネクタ、ケーブル等）</td>
-            <td>
-              <select class="form-select form-select-sm border  border-secondary    text-center" aria-label="機体全般結果">
-                <option selected>機体全般結果</option>
-                <option value="1">合格</option>
-                <option value="2">不合格</option>
-              </select>
-            </td>
-
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="" aria-label="備考" 
-              style="width: 100%; display: inline-block;">
-            </td>
-          </tr>
-
-          <tr>
-            <th scope="row">プロペラ</th>
-            <td>外観、損傷、ゆがみ</td>
-            <td>
-              <select class="form-select form-select-sm border  border-secondary    text-center" aria-label="プロペラ結果">
-                <option selected>プロペラ結果</option>
-                <option value="1">合格</option>
-                <option value="2">不合格</option>
-              </select>
-            </td>
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="" aria-label="備考" 
-              style="width: 100%; display: inline-block;">
-            </td>
-          </tr>
-
-          <tr>
-            <th scope="row">フレーム</th>
-            <td>外観、損傷、ゆがみ</td>
-            <td>
-              <select class="form-select form-select-sm border  border-secondary    text-center" aria-label="フレーム結果">
-                <option selected>フレーム結果</option>
-                <option value="1">合格</option>
-                <option value="2">不合格</option>
-              </select>
-            </td>
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="" aria-label="備考" 
-              style="width: 100%; display: inline-block;">
-            </td>
-          </tr>
-
-          <tr>
-            <th scope="row">通信系統</th>
-            <td>機体と操縦装置の通信品質の健全性</td>
-            <td>
-              <select class="form-select form-select-sm border  border-secondary    text-center" aria-label="通信系統結果">
-                <option selected>通信系統結果</option>
-                <option value="1">合格</option>
-                <option value="2">不合格</option>
-              </select>
-            </td>
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="" aria-label="備考" 
-              style="width: 100%; display: inline-block;">
-            </td>
-          </tr>
-
-          <tr>
-            <th scope="row">推進系統</th>
-            <td>モーター又は発動機の健全性</td>
-            <td>
-              <select class="form-select form-select-sm border  border-secondary    text-center" aria-label="推進系統結果">
-                <option selected>推進系統結果</option>
-                <option value="1">合格</option>
-                <option value="2">不合格</option>
-              </select>
-            </td>
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="" aria-label="備考" 
-              style="width: 100%; display: inline-block;">
-            </td>
-          </tr>
-
-          <tr>
-            <th scope="row">電源系統</th>
-            <td>機体及び操縦装置の電源の健全性</td>
-            <td>
-              <select class="form-select form-select-sm border  border-secondary    text-center" aria-label="電源系統結果">
-                <option selected>電源系統結果</option>
-                <option value="1">合格</option>
-                <option value="2">不合格</option>
-              </select>
-            </td>
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="" aria-label="備考" 
-              style="width: 100%; display: inline-block;">
-            </td>
-          </tr>
-
-          <tr>
-            <th scope="row">自動制御系統</th>
-            <td>飛行制御装置の健全性</td>
-            <td>
-              <select class="form-select form-select-sm border  border-secondary    text-center" aria-label="自動制御結果">
-                <option selected>自動制御結果</option>
-                <option value="1">合格</option>
-                <option value="2">不合格</option>
-              </select>
-            </td>
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="" aria-label="備考" 
-              style="width: 100%; display: inline-block;">
-            </td>
-          </tr>
-
-          <tr>
-            <th scope="row">操作装置</th>
-            <td>外観、スティックの健全性、スイッチの健全性</td>
-            <td>
-              <select class="form-select form-select-sm border  border-secondary    text-center" aria-label="操作装置結果">
-                <option selected>操作装置結果</option>
-                <option value="1">合格</option>
-                <option value="2">不合格</option>
-              </select>
-            </td>
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="" aria-label="備考" 
-              style="width: 100%; display: inline-block;">
-            </td>
-          </tr>
-
-          <tr>
-            <th scope="row">バッテリー・燃料</th>
-            <td>バッテリーの充電状況、残燃料表示機能の健全性</td>
-
-            <td>
-              <select class="form-select form-select-sm border  border-secondary    text-center" aria-label="バッテリー系結果">
-                <option selected>バッテリー系結果</option>
-                <option value="1">合格</option>
-                <option value="2">不合格</option>
-              </select>
-            </td>
-            <td style="text-align: center;">
-              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="" aria-label="備考" 
-              style="width: 100%; display: inline-block;">
-            </td>
-          </tr>
-
-       </tbody>
+        <tbody class="table-group-divider text-left" id="daily_inspection_items_body">
+        </tbody>
       </table>
 
       <table class="table table-bordered table-sm" >
         <thead>
           <tr class="text-center">
-            <th scope="col"; style="width: 100px; height: auto;" >項目</th>
-            <th scope="col"; style="width: 400px; height: auto;">内容</th>
+            <th scope="col" style="width: 100px; height: auto;">項目</th>
+            <th scope="col" style="width: 400px; height: auto;">内容</th>
           </tr>
         </thead>
 
         <tbody class="table-group-divider text-left">
           <tr>
             <th scope="row">飛行機体</th>
-
-
             <td>
-              <select class="form-select form-select-sm border  border-secondary    text-left" aria-label="機体選択">
-                <option selected>機体選択</option>
-                <option value="1">DJI Mini3</option>
-              </select>
+              <span class="fs-6"><%= current_user.aircraft&.model_purchased %></span>
+              <%= f.hidden_field :aircraft_id, value: current_user.aircraft&.id %>
             </td>
           </tr>
           <tr>
             <th scope="row">無人飛行機の登録番号</th>
-            <td></td>
+            <td><%= current_user.aircraft&.dips_registration_number %></td>
           </tr>
           <tr>
             <th scope="row">点検日</th>
-            <td style="text-align: center;">    
-              <input class="form-control form-control-sm text-left border border-secondary" type="date" value="" aria-label="点検日" style="width: 100%; height: 31px; display: inline-block;">
+            <td style="text-align: center;">
+              <%= f.date_field :inspection_date,
+                    class: "form-control form-control-sm text-left border border-secondary",
+                    style: "width: 100%; height: 31px; display: inline-block;" %>
             </td>
           </tr>
           <tr>
             <th scope="row">点検場所</th>
             <td style="text-align: center;">
-              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="住所" aria-label="点検場所" 
-              style="width: 100%; display: inline-block;">
+              <%= f.text_field :inspection_location,
+                    class: "form-control form-control-sm text-left border border-secondary",
+                    placeholder: "住所", style: "width: 100%; display: inline-block;" %>
             </td>
           </tr>
           <tr>
             <th scope="row">点検者</th>
             <td style="text-align: center;">
-              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="名前" aria-label="点検者" 
-              style="width: 100%; display: inline-block;">
+              <%= f.text_field :inspector,
+                    class: "form-control form-control-sm text-left border border-secondary",
+                    placeholder: "名前", style: "width: 100%; display: inline-block;" %>
             </td>
           </tr>
           <tr>
             <th scope="row">特記事項</th>
             <td style="text-align: center;">
-              <input class="form-control form-control-sm text-left border border-secondary" type="text" placeholder="" aria-label="特記事項" 
-              style="width: 100%; display: inline-block;">
+              <%= f.text_field :special_notes,
+                    class: "form-control form-control-sm text-left border border-secondary",
+                    style: "width: 100%; display: inline-block;" %>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
+    <% end %>
+
+    <script>
+    (function() {
+      const items = [
+        { name: "機体全般", note: "機器の取り付け状態（ネジ、コネクタ、ケーブル等）" },
+        { name: "プロペラ", note: "外観、損傷、ゆがみ" },
+        { name: "フレーム", note: "外観、損傷、ゆがみ" },
+        { name: "通信系統", note: "機体と操縦装置の通信品質の健全性" },
+        { name: "推進系統", note: "モーター又は発動機の健全性" },
+        { name: "電源系統", note: "機体及び操縦装置の電源の健全性" },
+        { name: "自動制御系統", note: "飛行制御装置の健全性" },
+        { name: "操作装置", note: "外観、スティックの健全性、スイッチの健全性" },
+        { name: "バッテリー・燃料", note: "バッテリーの充電状況、残燃料表示機能の健全性" }
+      ];
+
+      const tbody = document.getElementById('daily_inspection_items_body');
+
+      items.forEach(function(item, index) {
+        const row = `
+          <tr>
+            <th scope="row">${item.name}</th>
+            <td>${item.note}</td>
+            <td>
+              <input type="hidden" name="daily_inspection[daily_inspection_items_attributes][${index}][item_name]" value="${item.name}">
+              <select class="form-select form-select-sm border border-secondary text-center" name="daily_inspection[daily_inspection_items_attributes][${index}][result]">
+                <option value="">選択</option>
+                <option value="1">合格</option>
+                <option value="2">不合格</option>
+              </select>
+            </td>
+            <td style="text-align: center;">
+              <input class="form-control form-control-sm text-left border border-secondary" type="text" name="daily_inspection[daily_inspection_items_attributes][${index}][note]" style="width: 100%; display: inline-block;">
+            </td>
+          </tr>`;
+        tbody.insertAdjacentHTML('beforeend', row);
+      });
+    })();
+    </script>
+
   </div>
 </turbo-frame>

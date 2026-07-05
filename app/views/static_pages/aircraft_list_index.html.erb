@@ -1,5 +1,4 @@
 <turbo-frame id="main_content"> 
-
  <div class="wrapper">
 
     <div class="box1 overflow-x-auto">
@@ -8,19 +7,14 @@
 
     <div class="box2 overflow-x-auto">
     <!-- box2貼り付け部 -->
+        <% if flash[:danger] %>
+          <div class="alert alert-danger">
+            <%= flash[:danger] %>
+          </div>
+        <% end %>
+
         <ul class="main-nav font-english">
-          <li><span class="fs-3" style="margin-right: 150px;">機体一覧</span></li>
-          <li>
-            <label class="fs-5">開始日</label> 
-            <input type="date" id="startDate">
-          </li>
-          <li>
-            <label class="fs-5" style="margin-left: 10px;">終了日</label>
-            <input type="date" id="endDate" style="margin-right: 20px;">
-          </li>
-          <li>
-            <button type="button" class="btn btn-secondary btn-sm">検索</button>
-          </li>
+          <li><span class="fs-3" style="margin-right: 20px;">機体一覧</span></li>
           <li>
             <%= button_to "新規作成", aircraft_new_path, method: :get,
               class: "btn btn-primary btn-sm ms-3",
@@ -39,7 +33,7 @@
             <table class="table table-bordered table-sm">
               <thead>
                 <tr class="text-center">
-                  <th scope="col">ID</th>
+                  <th scope="col">機体ID</th>
                   <th scope="col">メーカ</th>
                   <th scope="col">飛行機体</th>
                   <th scope="col">機体登録者</th>
@@ -57,7 +51,7 @@
                   <td>  <%= aircraft.owner_date_purchased %>  </td>
                   <td class="d-flex gap-3 justify-content-left">
 
-                    <%= button_to "詳細", aircraft_show_path(aircraft.id), method: :get,
+                    <%= button_to "詳細", aircraft_path(aircraft.id), method: :get,
                       class: "btn btn-info btn-sm ms-3",
                       form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
 
@@ -66,8 +60,9 @@
                       form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
 
                     <button type="button" class="btn btn-danger btn-sm ms-3"
-                      onclick="window.open('<%= delete_confirm_index_path(aircraft.id) %>', '_blank', 'width=600,height=500,scrollbars=yes,resizable=yes')">削除
+                      onclick="window.open('<%= delete_confirm_index_path(id: aircraft.id, type: :aircraft) %>', '_blank', 'width=600,height=500,scrollbars=yes,resizable=yes')">削除
                     </button>
+
                   </td>
                 </tr>
               </tbody>
