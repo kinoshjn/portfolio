@@ -7,26 +7,30 @@
 
     <div class="box2 overflow-x-auto">
     <!-- box2貼り付け部 -->
-        <ul class="main-nav font-english">
-          <li><span class="fs-3" style="margin-right: 20px;">日常点検一覧</span></li>
-          <li>
-            <label class="fs-5">開始日</label> 
-            <input type="date" id="startDate">
-          </li>
-          <li>
-            <label class="fs-5" style="margin-left: 10px;">終了日</label>
-            <input type="date" id="endDate" style="margin-right: 20px;">
-          </li>
-          <li>
-            <button type="button" class="btn btn-secondary btn-sm">絞込み</button>
-          </li>
+      <%= search_form_for @q do |f| %>
+      <ul class="main-nav font-english">
+        <li><span class="fs-3" style="margin-right: 20px;">日常点検一覧</span></li>
+        <li>
+          <%= f.label :inspection_date_gteq, "開始日", class: "fs-5" %>
+          <%= f.date_field :inspection_date_gteq %>
+        </li>
+        <li>
+          <%= f.label :inspection_date_lteq, "終了日", class: "fs-5", style: "margin-left: 10px;" %>
+          <%= f.date_field :inspection_date_lteq, style: "margin-right: 20px;" %>
+        </li>
+        <li>
+          <%= f.submit "絞込み", class: "btn btn-secondary btn-sm" %>
+        </li>
+      </ul>
+      <% end %>
 
-          <li>
-            <%= button_to "新規作成", daily_inspection_new_path, method: :get,
-              class: "btn btn-primary btn-sm ms-3",
-              form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
-          </li>
-        </ul>
+      <ul class="main-nav font-english">
+        <li>
+          <%= button_to "新規作成", flight_log_new_path, method: :get,
+            class: "btn btn-primary btn-sm ms-3",
+            form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
+        </li>
+      </ul>
     </div>
 
     <div class="box3 overflow-x-auto box3--plain">

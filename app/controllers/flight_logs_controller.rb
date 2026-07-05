@@ -2,6 +2,10 @@ class FlightLogsController < ApplicationController
   before_action :require_login
 
   def index
+    @aircrafts = [ current_user.aircraft ].compact
+    logs = current_user.aircraft.present? ? current_user.aircraft.flight_logs : FlightLog.none
+    @q = logs.ransack(params[:q])
+    @flight_logs = @q.result
     render "static_pages/flight_log_index"
   end
 

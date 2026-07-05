@@ -6,4 +6,8 @@ class DailyInspection < ApplicationRecord
   belongs_to :aircraft
   has_many :daily_inspection_items, dependent: :destroy
   accepts_nested_attributes_for :daily_inspection_items
+
+  def self.ransackable_attributes(auth_object = nil)
+    [ "aircraft_id", "created_at", "inspection_date", "id", "updated_at" ]
+  end
 end

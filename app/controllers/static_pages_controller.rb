@@ -33,9 +33,19 @@ class StaticPagesController < ApplicationController
     end
   end
 
+  #   2026.7/5  検索機能実装前
+  #  def flight_log_index
+  #    @aircrafts = [ current_user.aircraft ].compact
+  #    @flight_logs = current_user.aircraft.present? ? current_user.aircraft.flight_logs : []
+  #  end
+
   def flight_log_index
     @aircrafts = [ current_user.aircraft ].compact
-    @flight_logs = current_user.aircraft.present? ? current_user.aircraft.flight_logs : []
+
+    logs = current_user.aircraft.present? ? current_user.aircraft.flight_logs : FlightLog.none
+
+    @q = logs.ransack(params[:q])
+    @flight_logs = @q.result
   end
 
   def flight_log_show
@@ -85,10 +95,17 @@ class StaticPagesController < ApplicationController
     render html: "<script>window.opener.location.reload(); window.close();</script>".html_safe, layout: false
   end
 
+  #   2026.7/5  検索機能実装前
+  #  def daily_inspection_index
+  #    @aircrafts = [ current_user.aircraft ].compact
+  #    @daily_inspections = current_user.aircraft.present? ? current_user.aircraft.daily_inspections : []
+  #  end
 
   def daily_inspection_index
     @aircrafts = [ current_user.aircraft ].compact
-    @daily_inspections = current_user.aircraft.present? ? current_user.aircraft.daily_inspections : []
+    logs = current_user.aircraft.present? ? current_user.aircraft.daily_inspections  : DailyInspection.none
+    @q = logs.ransack(params[:q])
+    @daily_inspections = @q.result
   end
 
   def daily_inspection_show

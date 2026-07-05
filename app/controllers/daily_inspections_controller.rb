@@ -1,8 +1,17 @@
 class DailyInspectionsController < ApplicationController
   before_action :require_login
 
+
+  #   2026.7/5  検索機能実装前
+  #  def index
+  #    render "static_pages/daily_inspection_index"
+  #  end
+
   def index
-    #    @daily_inspections = Daily_inspection.includes(:aircraft)
+    @aircrafts = [ current_user.aircraft ].compact
+    logs = current_user.aircraft.present? ? current_user.aircraft.daily_inspections  : DailyInspection.none
+    @q = logs.ransack(params[:q])
+    @daily_inspections = @q.result
     render "static_pages/daily_inspection_index"
   end
 
