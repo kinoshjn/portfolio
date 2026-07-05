@@ -13,8 +13,8 @@
           <button type="submit" form="flight_log_edit_form" class="btn btn-primary">更新する</button>
         </li>
         <li>
-          <%= button_to "編集", flight_log_edit_path(@flight_log.id), method: :get,
-            class: "btn btn-secondary", style: "margin-left: 100px;",
+          <%= button_to "前の画面に戻る", flight_log_index_path, method: :get,
+            class: "btn btn-secondary",style: "margin-left: 100px;",
             form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
         </li>
       </ul>
