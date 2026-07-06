@@ -7,6 +7,12 @@
 
     <div class="box2 overflow-x-auto" style="display: flex; align-items: center;">
     <!-- box2貼り付け部 -->
+      <% if flash[:danger] %>
+        <div class="alert alert-danger">
+          <%= flash[:danger] %>
+        </div>
+      <% end %>
+
       <%= search_form_for @q do |f| %>
       <ul class="main-nav font-english">
         <li><span class="fs-3" style="margin-right: 20px;">日常点検一覧</span></li>
@@ -26,7 +32,7 @@
 
       <ul class="main-nav font-english">
         <li>
-          <%= button_to "新規作成", flight_log_new_path, method: :get,
+          <%= button_to "新規作成", daily_inspection_new_path, method: :get,
             class: "btn btn-primary btn-sm ms-3",
             form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
         </li>

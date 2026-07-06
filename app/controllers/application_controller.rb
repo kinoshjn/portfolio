@@ -29,11 +29,19 @@ class ApplicationController < ActionController::Base
     redirect_to login_path unless logged_in?
   end
 
+  #  def calculate_total_flight_time(item_date)
+  #    total = 0
+  #    current_user.aircraft.flight_logs.where("flight_date <= ?", item_date).each do |flight_log|
+  #      last_record = flight_log.flight_records.order(:id).last
+  #      total += last_record&.total_flight_time.to_i
+  #    end
+  #    total
+  #  end
+
   def calculate_total_flight_time(item_date)
     total = 0
-    current_user.aircraft.flight_logs.where("flight_date <= ?", item_date).each do |flight_log|
-      last_record = flight_log.flight_records.order(:id).last
-      total += last_record&.total_flight_time.to_i
+    current_user.aircraft.flight_logs.where("flight_date <= ?", item_date).includes(:flight_records).each do |flight_log|
+      total += flight_log.flight_records.sum(&:flight_time)
     end
     total
   end

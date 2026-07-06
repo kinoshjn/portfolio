@@ -20,6 +20,17 @@
       </ul>
     </div>
 
+    <!-- アラート表示 -->
+    <% if @flight_log.errors.any? %>
+      <div class="alert alert-danger" style="margin-left: -800px; max-width: 700px;">
+        <ul class="mb-0">
+          <% @flight_log.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+            <% end %>
+        </ul>
+      </div>
+    <% end %>
+
     <%= form_with model: @flight_log, url: flight_logs_path, local: true, html: { id: "flight_log_new_form" } do |f| %>
 
     <div class="box3 overflow-x-auto box3--plain">

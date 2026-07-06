@@ -3,6 +3,19 @@
 
     <div class="box1 overflow-x-auto">
       <%= render 'shared/side_menu' %> 
+
+    <!-- アラート表示 -->
+    <% if @flight_log.errors.any? %>
+      <div class="alert alert-danger" style="margin-left: -800px; max-width: 700px;">
+        <ul class="mb-0">
+          <% @flight_log.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+            <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+
     </div>
 
     <div class="box2" style="overflow-x: auto;">
@@ -83,7 +96,7 @@
     <%# 既存データをJavaScriptに渡す %>
     <script>
     (function() {
-      const existingRecords = <%= raw @flight_log.flight_records.map { |fr|
+      const existingRecords = <%= raw @flight_log.flight_records.order(:id).map { |fr|
         {
           id: fr.id,
           pilot_name: fr.pilot_name,

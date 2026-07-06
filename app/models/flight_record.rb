@@ -25,19 +25,24 @@ class FlightRecord < ApplicationRecord
     end
   end
 
+  #  def calculate_times
+  #    return unless takeoff_time.present? && landing_time.present?
+
+  #    # 今回の飛行時間（分）
+  #    self.flight_time = ((landing_time - takeoff_time) / 60).to_i
+
+  #    # 同じFlightLog内の最後のFlightRecordを取得（自分はまだ保存されていない）
+  #    last_record = flight_log.flight_records.order(:created_at).last
+
+  #    # 前回までの累積飛行時間
+  #    prev_total = last_record&.total_flight_time.to_i
+
+  #    # 累積飛行時間
+  #    self.total_flight_time = prev_total + flight_time
+  #  end
+
   def calculate_times
     return unless takeoff_time.present? && landing_time.present?
-
-    # 今回の飛行時間（分）
     self.flight_time = ((landing_time - takeoff_time) / 60).to_i
-
-    # 同じFlightLog内の最後のFlightRecordを取得（自分はまだ保存されていない）
-    last_record = flight_log.flight_records.order(:created_at).last
-
-    # 前回までの累積飛行時間
-    prev_total = last_record&.total_flight_time.to_i
-
-    # 累積飛行時間
-    self.total_flight_time = prev_total + flight_time
   end
 end

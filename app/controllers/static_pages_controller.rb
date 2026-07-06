@@ -57,12 +57,13 @@ class StaticPagesController < ApplicationController
     if current_user.aircraft.blank?
       flash.now[:danger] = "先に機体登録してください。(サイドメニュー押すと戻ります)"
       @aircrafts = [ current_user.aircraft ].compact
+      @q = FlightLog.none.ransack(params[:q])
+      @flight_logs = @q.result
       render "static_pages/flight_log_index", status: :ok
       return
     end
-    @aircrafts = [ current_user.aircraft ].compact
-    @flight_log = current_user.aircraft.flight_logs.build
-    @flight_log.flight_records.build
+      @aircrafts = [ current_user.aircraft ].compact
+      @flight_log = current_user.aircraft.flight_logs.build
   end
 
   def flight_log_edit
@@ -117,6 +118,8 @@ class StaticPagesController < ApplicationController
     if current_user.aircraft.blank?
       flash.now[:danger] = "先に機体登録してください。(サイドメニュー押すと戻ります)"
       @aircrafts = [ current_user.aircraft ].compact
+      @q = DailyInspection.none.ransack(params[:q])
+      @daily_inspections = @q.result
       render "static_pages/daily_inspection_index", status: :ok
       return
     end
