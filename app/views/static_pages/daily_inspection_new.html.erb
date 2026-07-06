@@ -2,8 +2,20 @@
   <div class="wrapper">
 
     <div class="box1 overflow-x-auto">
-      <%= render 'shared/side_menu' %> 
-    </div>
+      <%= render 'shared/side_menu' %>
+
+    <!-- アラート表示 -->
+    <% if @daily_inspection.errors.any? %>
+      <div class="alert alert-danger" style="max-width: 1200px;">
+        <ul class="mb-0">
+          <% @daily_inspection.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+   </div>
 
     <div class="box2 overflow-x-auto">
     <!-- box2貼り付け部 -->
@@ -19,6 +31,8 @@
               form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
           </li>
         </ul>
+
+
     </div>
 
     <%= form_with model: @daily_inspection, url: daily_inspections_path, local: true, html: { id: "daily_inspection_new_form" } do |f| %>

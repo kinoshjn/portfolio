@@ -3,6 +3,18 @@
   <div class="wrapper">
     <div class="box1 overflow-x-auto">
       <%= render 'shared/side_menu' %> 
+
+    <!-- アラート表示 -->
+    <% if @daily_inspection.errors.any? %>
+      <div class="alert alert-danger" style="max-width: 800px;">
+        <ul class="mb-0">
+          <% @daily_inspection.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
     </div>
 
     <div class="box2 overflow-x-auto">
@@ -19,11 +31,13 @@
               form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
           </li>
         </ul>
+
     </div>
 
     <%= form_with model: @daily_inspection, url: daily_inspection_update_path(@daily_inspection.id), method: :patch, local: true, html: { id: "daily_inspection_edit_form" } do |f| %>
 
     <div class="box3 overflow-x-auto box3--plain">
+
       <table class="table table-bordered table-sm" >
         <thead>
           <tr class="text-center">

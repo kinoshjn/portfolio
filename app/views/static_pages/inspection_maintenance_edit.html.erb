@@ -2,7 +2,19 @@
   <div class="wrapper">
 
     <div class="box1 overflow-x-auto">
-      <%= render 'shared/side_menu' %> 
+      <%= render 'shared/side_menu' %>
+
+    <!-- アラート表示 -->
+    <% if @inspection_maintenance.errors.any? %>
+      <div class="alert alert-danger" style="max-width: 1200px;">
+        <ul class="mb-0">
+          <% @inspection_maintenance.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
     </div>
 
     <div class="box2 overflow-x-auto">

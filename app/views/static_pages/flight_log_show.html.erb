@@ -1,11 +1,11 @@
 <turbo-frame id="main_content"> 
-
   <div class="wrapper">
+
     <div class="box1 overflow-x-auto">
       <%= render 'shared/side_menu' %> 
     </div>
 
-    <div class="box2" style="overflow-x: auto;">
+    <div class="box2 overflow-x-auto">
     <!-- box2貼り付け部 -->
         <ul class="main-nav font-english">
           <li><span class="fs-3" style="margin-right: 10px;">飛行日誌詳細</span></li>
@@ -20,23 +20,26 @@
               onclick="window.open('<%= delete_confirm_index_path(id: @flight_log.id, type: :flight_log) %>', '_blank', 'width=600,height=500,scrollbars=yes,resizable=yes')">削除
             </button>
           </li>
+          <li>
+            <%= button_to "前の画面に戻る", flight_log_index_path, method: :get,
+              class: "btn btn-secondary",style: "margin-left: 100px;",
+              form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
+          </li>
         </ul>
     </div>
 
     <div class="box3 overflow-x-auto box3--plain">
     <!-- box3貼り付け部 -->
 
-
- <!-- <table class="table table-sm"> -->
-    <div class="d-flex flex-wrap gap-3 mb-1">
-      <h5>飛行日: <%= @flight_log.flight_date  %> </h5>
-      <h5>飛行機体: <%= @flight_log.aircraft.model_purchased %> </h5>        
-      <h5>無人飛行機の登録番号: <%= @flight_log.aircraft.dips_registration_number %> </h5>
-    </div>
+      <div class="mb-2">
+        <span class="fs-5">飛行日: <%= @flight_log.flight_date %></span>
+        <span class="fs-5" style="margin-left: 20px;">飛行機体: <%= @flight_log.aircraft.model_purchased %></span>
+        <span class="fs-5" style="margin-left: 20px;">無人飛行機の登録番号: <%= @flight_log.aircraft.dips_registration_number %></span>
+      </div>
 
       <table class="table table-bordered table-sm">
         <thead>
-          <tr style="text-align: center;">
+          <tr class="text-center">
             <th scope="col">RecordID</th>
             <th scope="col">操縦者</th>
             <th scope="col">離陸時刻</th>
@@ -51,27 +54,28 @@
         </thead>
 
         <tbody class="table-group-divider">
-
-        <% @flight_log.flight_records.each do |flight_record| %>
-          <tr>
-            <th scope="row" style="text-align: center;">  <%= flight_record.id %>                   </th>
-            <td>  <%= flight_record.pilot_name %>                       </td>
-            <td style="text-align: center;">  <%= flight_record.takeoff_time.strftime("%H:%M") %>   </td>
-            <td style="text-align: center;">  <%= flight_record.landing_time.strftime("%H:%M") %>   </td>
-            <td style="text-align: center;">  <%= flight_record.flight_time %>分                    </td>
-            <td style="text-align: center;">  <%= flight_record.total_flight_time %>分              </td>
-            <td>  <%= flight_record.takeoff_location %>                       </td>
-            <td>  <%= flight_record.landing_location %>                       </td>
-            <td style="text-align: center;">  <%= flight_record.flight_summary %>                   </td>
-            <td style="text-align: center;">  <%= flight_record.has_safety_incident ? "あり" : "なし" %> </td>
-          </tr>
-        <% end %>
+          <% cumulative = 0 %>
+          <% @flight_log.flight_records.order(:id).each do |flight_record| %>
+            <% cumulative += flight_record.flight_time.to_i %>
+            <tr>
+              <th scope="row">  <%= flight_record.id %>                         </th>
+              <td>              <%= flight_record.pilot_name %>                 </td>
+              <td>              <%= flight_record.takeoff_time.strftime("%H:%M") %>   </td>
+              <td>              <%= flight_record.landing_time.strftime("%H:%M") %>   </td>
+              <td>              <%= flight_record.flight_time %>分                    </td>
+              <td>              <%= cumulative %>分              </td>
+              <td>              <%= flight_record.takeoff_location %>            </td>
+              <td>              <%= flight_record.landing_location %>            </td>
+              <td>              <%= flight_record.flight_summary %>              </td>
+              <td>              <%= flight_record.has_safety_incident ? "あり" : "なし" %>  </td>
+            </tr>
+          <% end %>
         </tbody>
       </table>
 
       <table class="table table-bordered table-sm">
         <thead>
-          <tr style="text-align: center;">
+          <tr class="text-center">
             <th scope="col">RecordID</th>
             <th scope="col">不具合事項</th>
             <th scope="col">処置日</th>
@@ -81,23 +85,21 @@
         </thead>
 
         <tbody class="table-group-divider">
-
-        <% @flight_log.flight_records.each do |flight_record| %>
-          <% if flight_record.has_safety_incident && flight_record.safety_incident.present? %>
-            <% incident = flight_record.safety_incident %>
-            <tr>
-              <th scope="row" style="text-align: center;"><%= flight_record.id %></th>
-              <td style="text-align: center;"><%= incident.details_issues %></td>
-              <td style="text-align: center;"><%= incident.details_date_resolution&.strftime("%Y/%-m/%-d") %></td>
-              <td style="text-align: center;"><%= incident.details_processing %></td>
-              <td style="text-align: center;"><%= incident.details_verifier %></td>
-            </tr>
+          <% @flight_log.flight_records.order(:id).each do |flight_record| %>
+            <% if flight_record.has_safety_incident && flight_record.safety_incident.present? %>
+              <% incident = flight_record.safety_incident %>
+              <tr>
+                <th scope="row" style="text-align: center;"><%= flight_record.id %></th>
+                <td style="text-align: center;"><%= incident.details_issues %></td>
+                <td style="text-align: center;"><%= incident.details_date_resolution&.strftime("%Y/%-m/%-d") %></td>
+                <td style="text-align: center;"><%= incident.details_processing %></td>
+                <td style="text-align: center;"><%= incident.details_verifier %></td>
+              </tr>
+            <% end %>
           <% end %>
-        <% end %>
         </tbody>
       </table>
 
-    <!-- box3貼り付け部 終了  -->
     </div>
   </div>
 </turbo-frame>

@@ -11,16 +11,22 @@
           <li><span class="fs-3" style="margin-right: 10px;">点検装備詳細</span></li>
           <li><span class="fs-4" style="margin-right: 20px;">点検装備ID: <%= @inspection_maintenance.id %> </span></li>
           <li>
-            <%= button_to "編集", inspection_maintenance_edit_path, method: :get,
+            <%= button_to "編集", inspection_maintenance_edit_path(@inspection_maintenance.id), method: :get,
               class: "btn btn-success btn-sm ms-3",
               form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
           </li>
-
           <li>
             <button type="button" class="btn btn-danger btn-sm ms-3"
               onclick="window.open('<%= delete_confirm_index_path(id: @inspection_maintenance.id, type: :inspection_maintenance) %>', '_blank', 'width=600,height=500,scrollbars=yes,resizable=yes')">削除
             </button>
           </li>
+
+          <li>
+            <%= button_to "前の画面に戻る",     inspection_maintenance_index_path    , method: :get,
+              class: "btn btn-secondary btn-sm ms-3",style: "margin-left: 100px;",
+              form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
+          </li>
+
         </ul>
     </div>
 

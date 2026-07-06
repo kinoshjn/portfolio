@@ -20,6 +20,14 @@
                 onclick="window.open('<%= delete_confirm_index_path(id: @daily_inspection.id, type: :daily_inspection) %>', '_blank', 'width=600,height=500,scrollbars=yes,resizable=yes')">削除
               </button>
           </li>
+
+          <li>
+            <%= button_to "前の画面に戻る", daily_inspection_index_path , method: :get,
+              class: "btn btn-secondary btn-sm ms-3",style: "margin-left: 100px;",
+              form: { class: "d-inline", data: { turbo_frame: "main_content" } } %>
+          </li>
+
+
         </ul>
     </div>
 
