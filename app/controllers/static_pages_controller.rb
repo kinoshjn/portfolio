@@ -220,6 +220,15 @@ class StaticPagesController < ApplicationController
     render html: "<script>window.opener.location.reload(); window.close();</script>".html_safe, layout: false
   end
 
+  # 2026.7.8  使い方説明
+  def how_to_use
+  end
+
+  # 206.7.9   使い方説明に画像追加用
+  def how_to_use_images_add
+    render layout: false
+  end
+
   private
 
   def aircraft_params

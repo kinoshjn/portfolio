@@ -1,0 +1,172 @@
+<turbo-frame id="main_content"> 
+  <div class="wrapper">
+
+    <div class="box1 overflow-x-auto">
+      <%= render 'shared/side_menu' %> 
+    </div>
+
+    <div class="box2 overflow-x-auto">
+      <h3>使い方説明</h3>
+    </div>
+
+    <div class="box3 overflow-x-auto box3--how_to_use">
+      <table class="table table-bordered border-primary" style="max-width: 1080px;">
+        <thead>
+          <h5>アプリ管理手順例</h5>
+          <tr>
+            <th scope="col">項目</th>
+            <th scope="col">説明</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">STEP1</th>
+            <td>サイドメニュー『機体一覧』から『新規作成ボタン』を押して機体登録をしてください. (機体は1台のみ登録可能です)</td>
+          </tr>
+          <tr>
+            <th scope="row">STEP2</th>
+            <td>サイドメニュー『日常点検一覧』から『新規作成ボタン』を押して、飛行実施する前に機体状況の機体の点検を行い入力してください。</td>
+          </tr>
+          <tr>
+            <th scope="row">STEP3</th>
+            <td>サイドメニュー『飛行日誌一覧』から『新規作成ボタン』を押して、飛行時の情報を入力してください。 </td>
+          </tr>
+          <tr>
+            <th scope="row">STEP4</th>
+            <td>次回飛行はSTEP2とSTEP3の登録だけとなります。</td>
+          </tr>
+          <tr>
+            <th scope="row">STEP5</th>
+            <td>修理及び定期整備検査実施時に、『点検整備一覧』の『新規作成ボタン』を押して作成し、必要情報を記入してください。
+                『点検整備一覧』は登録機体に対して1つ作成可能です。
+                修正や定期整備検査の記入が必要になった場合は『編集ボタン』を押し、『行追加ボタン』で項目追加して記入してください。
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table class="table table-bordered border-primary" style="max-width: 1080px;">
+        <thead>
+          <h5>各操作ボタン説明</h5>
+          <tr>
+            <th scope="col">項目</th>
+            <th scope="col">説明</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1.機体一覧</th>
+            <td>ドローンなどの機体を管理するためのもの。dips情報もこちらで管理</td>
+          </tr>
+          <tr>
+            <th scope="row">2.飛行日誌一覧</th>
+            <td>登録機体に対して飛行記録を管理するためのもの(日単位)。<br>
+                詳細ボタンにて1フライトの飛行時間と総飛行時間(日単位)の確認ができます。
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">3.日常点検一覧</th>
+            <td>登録機体に対して飛行前検査を管理するためのもの(日単位)</td>
+          </tr>
+          <tr>
+            <th scope="row">4.点検整備一覧</th>
+            <td>登録機体に対して総合検査や修理履歴を管理するためのもの(全期間)。<br>
+                詳細ボタンにて実施日以前の 総飛行時間(全期間)を確認できます。
+            </td>
+          </tr>
+
+          <tr>
+            <th scope="row">5.1.新規作成ボタン</th>
+            <td>新たにデータを作成することができます。</td>
+          </tr>
+          <tr>
+            <th scope="row">5.2.詳細ボタン</th>
+            <td>作成データの詳細を確認することができます。</td>
+          </tr>
+          <tr>
+            <th scope="row">5.3.編集ボタン</th>
+            <td>作成したデータに対して編集することができます。</td>
+          </tr>
+          <tr>
+            <th scope="row">5.4.削除ボタン</th>
+            <td>作成したデータに対して削除することができます。<br>
+                機体一覧で削除した場合は、飛行日誌、日常点検、点検整備のデータが一括削除されます。<br>
+                削除後は機体一覧ページ画面が表示されます。
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div style="text-align: center;">
+    <%# 表示ボタン1 %>
+    <%= link_to '機体操作動画', how_to_use_images_add_path, 
+              data: { turbo_frame: 'scroll_video_area1' }, 
+              onclick: "
+                const area2 = document.getElementById('scroll_video_area2'); area2.innerHTML=''; area2.style.display='none';
+                const area3 = document.getElementById('scroll_video_area3'); area3.innerHTML=''; area3.style.display='none';
+                const area4 = document.getElementById('scroll_video_area4'); area4.innerHTML=''; area4.style.display='none';
+                document.getElementById('scroll_video_area1').style.display='block';
+              " %>
+
+    <span>/</span>
+
+    <%# 表示ボタン2 %>
+    <%= link_to '飛行日誌操作動画', how_to_use_images_add_path, 
+              data: { turbo_frame: 'scroll_video_area2' }, 
+              onclick: "
+                const area1 = document.getElementById('scroll_video_area1'); area1.innerHTML=''; area1.style.display='none';
+                const area3 = document.getElementById('scroll_video_area3'); area3.innerHTML=''; area3.style.display='none';
+                const area4 = document.getElementById('scroll_video_area4'); area4.innerHTML=''; area4.style.display='none';
+                document.getElementById('scroll_video_area2').style.display='block';
+              " %>
+    <span>/</span>
+
+    <%# 表示ボタン3 %>
+    <%= link_to '日常点検操作動画', how_to_use_images_add_path, 
+              data: { turbo_frame: 'scroll_video_area3' }, 
+              onclick: "
+                const area1 = document.getElementById('scroll_video_area1'); area1.innerHTML=''; area1.style.display='none';
+                const area2 = document.getElementById('scroll_video_area2'); area2.innerHTML=''; area2.style.display='none';
+                const area4 = document.getElementById('scroll_video_area4'); area4.innerHTML=''; area4.style.display='none';
+                document.getElementById('scroll_video_area3').style.display='block';
+              " %>
+    <span>/</span>
+
+    <%# 表示ボタン4 %>
+    <%= link_to '点検装備操作動画', how_to_use_images_add_path, 
+              data: { turbo_frame: 'scroll_video_area4' }, 
+              onclick: "
+                const area1 = document.getElementById('scroll_video_area1'); area1.innerHTML=''; area1.style.display='none';
+                const area2 = document.getElementById('scroll_video_area2'); area2.innerHTML=''; area2.style.display='none';
+                const area3 = document.getElementById('scroll_video_area3'); area3.innerHTML=''; area3.style.display='none';
+                document.getElementById('scroll_video_area4').style.display='block';
+              " %>
+    <span>/</span>
+
+    <%# 非表示ボタン %>
+    <span style="margin-left: 40px;">
+    <%= link_to '画面非表示', '#', 
+        onclick: "
+            const area1 = document.getElementById('scroll_video_area1'); area1.innerHTML=''; area1.style.display='none';
+            const area2 = document.getElementById('scroll_video_area2'); area2.innerHTML=''; area2.style.display='none';
+            const area3 = document.getElementById('scroll_video_area3'); area3.innerHTML=''; area3.style.display='none';
+            const area4 = document.getElementById('scroll_video_area4'); area4.innerHTML=''; area4.style.display='none';
+            return false;
+              " %>
+    </span>
+  </div>
+
+  <%# 動画だけが差し込まれる空の枠（最初は非表示） %>
+  <turbo-frame id="scroll_video_area1" style="display: none;">
+  </turbo-frame>
+  <turbo-frame id="scroll_video_area2" style="display: none;">
+  </turbo-frame>
+  <turbo-frame id="scroll_video_area3" style="display: none;">
+  </turbo-frame>
+  <turbo-frame id="scroll_video_area4" style="display: none;">
+  </turbo-frame>
+
+</turbo-frame>

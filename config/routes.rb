@@ -49,4 +49,8 @@ Rails.application.routes.draw do
   delete "inspection_maintenance_destroy", to: "static_pages#inspection_maintenance_destroy"
 
   get "delete_confirm_index", to: "static_pages#delete_confirm_index"
+
+  # 2026.7/8  使い方説明
+  get "how_to_use", to: "static_pages#how_to_use"
+  get "how_to_use_images_add", to: "static_pages#how_to_use_images_add"
 end
