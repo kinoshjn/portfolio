@@ -53,4 +53,13 @@ Rails.application.routes.draw do
   # 2026.7/8  使い方説明
   get "how_to_use", to: "static_pages#how_to_use"
   get "how_to_use_images_add", to: "static_pages#how_to_use_images_add"
+
+  # 2026.7/11 プライベートポリシー
+  get "privacy_policy", to: "static_pages#privacy_policy"
+
+  # 2026.7/11 利用規約(Terms of Use)
+  get "terms_of_use", to: "static_pages#terms_of_use"
+
+  # 2026.7/11 問い合わせ(Inquiries)
+  get "inquiries", to: "static_pages#inquiries"
 end

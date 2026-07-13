@@ -1,8 +1,8 @@
     <footer>
       <ul class="footer-nav font-english">
-        <li><a>利用規約</a></li>
-        <li><a>プライバシーポリシー</a></li>
-        <li><a>問い合わせ</a></li>
+        <li><%= link_to "利用規約", terms_of_use_path, data: { turbo_frame: "main_content" } %></li> 
+        <li><%= link_to "プライベートポリシー", privacy_policy_path, data: { turbo_frame: "main_content" } %></li> 
+        <li><%= link_to "問い合わせ", inquiries_path, data: { turbo_frame: "main_content" } %></li> 
         <li><a href="https://github.com/kinoshjn" target="_blank" rel="noopener noreferrer">GitHub</a></li>
         <li><a>&copy; 2026 kino project</a></li>
       </ul>

@@ -83,6 +83,18 @@
       gap: 1rem;
     }
 
+/*  2026.7/11 表に透かしがない(レイヤ塗りつぶしだがinputは可能) 
+  .box3--how_to_use {
+    position: relative;
+    background-color: #eef;
+    background-image: url('/images/Drone.jpg');
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: 1080px;
+    }
+*/
+
+/*  2026.7/11 修正前(inputフォーム入力できない問題回避あり) */
     .box3--how_to_use {
       position: relative;
       background-color: #eef;
@@ -100,7 +112,7 @@
       z-index: 0;
     }
 
-    /* 2026.5.20 date枠線が消えるの問題対応  */
+        /* 2026.5.20 date枠線が消えるの問題対応  */
     input[type="date"],
     input[type="search"] {
     border: 1px solid #ccc;

@@ -224,9 +224,21 @@ class StaticPagesController < ApplicationController
   def how_to_use
   end
 
-  # 206.7.9   使い方説明に画像追加用
+  # 2026.7.9  使い方説明に画像追加用
   def how_to_use_images_add
     render layout: false
+  end
+
+  # 2026.7.11 プライベートポリシー追記
+  def privacy_policy
+  end
+
+  # 2026.7/11 利用規約(Terms of Use)
+  def terms_of_use
+  end
+
+  # 2026.7/11 問い合わせ(Inquiries)
+  def  inquiries
   end
 
   private
