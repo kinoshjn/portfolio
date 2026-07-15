@@ -12,26 +12,16 @@
 
       <!-- 問い合わせフォーム -->
 
-        <form class="col-lg-8 mb-3">
+        <%= form_with url: inquiries_create_path, method: :post do |f| %>
           <div class="mb-3">
-            <label for="exampleInputName1" class="form-label">名前</label>
-            <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
-
-          </div>
-
-          <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">メールアドレス</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <%= f.label :content, "問い合わせ内容", class: "form-label" %>
+            <%= f.text_area :content, class: "form-control", rows: 8 %>
           </div>
 
           <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">問い合わせ内容</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="8"></textarea>
+            <%= f.submit "内容を送信", class: "btn btn-primary" %>
           </div>
-          <div>
-            <button type="submit" class="btn btn-primary" >内容を送信</button>
-          </div>
-        </form>
+        <% end %> 
 
     </div>
   </div>

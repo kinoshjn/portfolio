@@ -37,6 +37,18 @@ Rails.application.configure do
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 
+#  2026.7/15追加
+config.action_mailer.delivery_method = :smtp
+config.action_mailer.smtp_settings = {
+  address: "smtp.resend.com",
+  port: 465,
+  user_name: "resend",
+  password: ENV["RESEND_API_KEY"],
+  authentication: "plain",
+  ssl: true
+}
+
+
   # Disable caching for Action Mailer templates even if Action Controller
   # caching is enabled.
   config.action_mailer.perform_caching = false

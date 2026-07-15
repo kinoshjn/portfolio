@@ -44,6 +44,9 @@ gem "faker"
 
 gem "ransack", "~> 4.3"
 
+# 2026.7/15 メール送信gem追加
+gem "dotenv-rails", groups: %i[development test]
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"

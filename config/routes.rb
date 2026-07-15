@@ -62,4 +62,7 @@ Rails.application.routes.draw do
 
   # 2026.7/11 問い合わせ(Inquiries)
   get "inquiries", to: "static_pages#inquiries"
+
+  get "inquiries_new", to: "inquiries#new"
+  post "inquiries_create", to: "inquiries#create"
 end
