@@ -1,0 +1,21 @@
+<main class="form-login_reset">
+
+  <%= form_with url: password_reset_path(@token), method: :patch, local: true, data: { turbo_frame: "_top" } do |f| %>
+
+    <h3 class="h3 mb-3 fw-normal text-center">新しいパスワード再設定</h3>
+
+    <div class="form-floating mb-3">
+      <%= f.password_field :"user[password]", class: "form-control #{'is-invalid' if @user.errors[:password].any?}",
+        placeholder: "Password", id: "floatingPassword" %>
+        <label for="floatingPassword">新しいパスワード</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <%= f.password_field :"user[password_confirmation]", class: "form-control #{'is-invalid' if @user.errors[:password_confirmation].any?}",
+      placeholder: "Password", id: "floatingPassword_confirmation" %>
+      <label for="floatingPassword_confirmation">パスワード確認</label>
+    </div>
+
+    <%= f.submit "パスワード変更", class: "mb-3 w-100 btn btn-lg btn-primary" %>
+  <% end %>
+</main>

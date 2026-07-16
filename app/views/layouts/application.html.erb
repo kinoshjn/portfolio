@@ -68,8 +68,8 @@
             <%= message %>
           </div>
         <% end %>
-
-          <%= render 'shared/login_menu' %>
+          <!-- 2026.7/16修正 render固定をyield差し込みに変更    -->
+          <%= yield %>
         </turbo-frame>
       </div>
     <% end %>

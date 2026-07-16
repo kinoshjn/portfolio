@@ -17,6 +17,17 @@ body {
   border-radius: 10px;       /* 角を丸くする */
   box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* 影をつけて浮き上がらせる */
 }
+
+.form-login_reset{
+  width: 100%;
+  width: 290px;
+  padding: 15px;
+  background: white;         
+  border-radius: 10px;       /* 角を丸くする */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* 影をつけて浮き上がらせる */
+}
+
+
 /*  ユーザ登録  */
 .user-nav {
     display: flex;         /* 横並びにする */

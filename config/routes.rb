@@ -65,4 +65,7 @@ Rails.application.routes.draw do
 
   get "inquiries_new", to: "inquiries#new"
   post "inquiries_create", to: "inquiries#create"
+
+  # 2026.7/16 パスワードリセット機能
+  resources :password_resets, only: [ :new, :create, :edit, :update ]
 end

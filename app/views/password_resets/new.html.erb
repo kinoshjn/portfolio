@@ -1,0 +1,22 @@
+<main class="form-login_reset">
+
+  <%= form_with url: password_resets_path, method: :post, local: true, data: { turbo_frame: "_top" } do |f| %>
+
+    <h3 class="h3 mb-3 fw-normal text-center">パスワードリセット申請</h3>
+
+    <div class="form-floating mb-3">
+      <%= f.email_field :email, class: "form-control", placeholder: "name@example.com", id: "floatingInput" %>
+        <label for="floatingInput">ユーザ(user@example.com)</label>
+    </div>
+
+    <%= f.submit "送信", class: "mb-3 w-100 btn btn-lg btn-primary" %>
+
+  <div class="mb-3 text-center">
+    <%= link_to "前の画面に戻る", login_path, data: { turbo_frame: "_top" } %>
+  </div>
+
+    <p class="text-credit text-center">&copy; 2026 kino project</p>
+
+  <% end %>
+
+</main>

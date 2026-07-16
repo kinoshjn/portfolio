@@ -5,6 +5,9 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates :user_name, presence: true
 
+  # 2026.7/16追記 パスワードリセット機能追加
+  validates :reset_password_token, uniqueness: true, allow_nil: true
+
   has_one :aircraft, dependent: :destroy
 
   # ユーザログイン数計測用  2026.6/26修正
@@ -14,6 +17,16 @@ class User < ApplicationRecord
       login_count: login_count.to_i + 1,
       last_login_date: Date.today
     )
+  end
+
+  # 2026.7/16追記 パスワードリセット機能
+  def generate_reset_password_token!
+    reset_password_token = SecureRandom.hex(16)
+    while User.exists?(reset_password_token:)
+      reset_password_token = SecureRandom.hex(16)
+    end
+    self.reset_password_token = reset_password_token
+    update!(reset_password_token_expires_at: 1.hour.from_now)
   end
 
   # ユーザログイン数によって画像変更 2026.6/27追記
